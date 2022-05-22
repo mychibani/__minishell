@@ -106,11 +106,11 @@ $(NAME)		:	$(OBJS_FILES)
 
 clean:
 			@echo "Deleting ${_RED}${_BOLD}objects files${_END}..."
-			@${RM} ${OBJS_FILES} ${OBJ_BONUS}
+			@${RM} ${OBJS_FILES} ${DEPS_FILES}
 
 fclean:		clean
 			@echo "Deleting ${_RED}${_BOLD}libraries${_END}..."
-			@${RM} ${NAME}
+			@${RM} ${NAME} 
 
 
 re :		fclean all
