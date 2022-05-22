@@ -42,15 +42,18 @@ SRCS_FILES =	char/ft_isdigit.c			\
 				fd/ft_putnbr_fd.c			\
 				fd/ft_putendl_fd.c			\
 				fd/ft_putstr_fd.c			\
-				fd/gnl.c
+				fd/gnl.c				\
+				printf/ft_conv_fct.c			\
+				printf/ft_treat_format.c		\
+				printf/ft_printf.c
 
 OBJS_FILES 		=		${SRCS:.c=.o}
 
+DEPS_FILES		=		${SRCS:.c=.d}
+
 HEADER_INC		=	-I $(HEADER_PATH)
 
-HEADER_PATH		= 	includes
-
-HEADER_FILES	=	libft.h
+HEADER_FILES	=	libft.h 
 
 SRCS_PATH 		=		.
 
@@ -63,27 +66,55 @@ RM				=	rm -rf
 
 NAME			=	libft.a
 
-HEADER			=	$(addprefix $(HEADER_PATH)/, $(HEADER_FILES))
+INCS                    =       -I ./includes
+
 
 SRCS			=	$(addprefix $(SRCS_PATH)/, $(SRCS_FILES))
 
+_END=$'\e[0m
+_BOLD=$'\e[1m
+_UNDER=$'\e[4m
+_REV=$'\e[7m
+_GREY=$'\e[30m
+_RED=$'\e[0;31m
+_GREEN=$'\e[32m
+_YELLOW=$'\e[33m
+_BLUE=$'\e[34m
+_PURPLE=$'\e[35m
+_CYAN=$'\e[36m
+_WHITE=$'\e[37m
+
+_IGREY=$'\e[40m
+_IRED=$'\e[41m
+_IGREEN=$'\e[42m
+_IYELLOW=$'\e[43m
+_IBLUE=$'\e[44m
+_IPURPLE=$'\e[45m
+_ICYAN=$'\e[46m
+_IWHITE=$'\e[47m
 
 all		:	$(NAME)
 
 
-%.o		:	%.c
-			$(CC) $(FLAGS) -o $@ -c $< $(HEADER_INC)
-
+.c.o		:
+			@echo "Compiling ${_GREEN}${_BOLD}$<${_END}..."
+			@$(CC) $(FLAGS) ${INCS} -MMD -c $< -o $@ ${INCS}
 
 $(NAME)		:	$(OBJS_FILES)
-			ar rc $(NAME) $(OBJS_FILES)
+			@echo "${_YELLOW}${_BOLD}Library Done!${_END}"
+			@ar rc $(NAME) $(OBJS_FILES)
 
 clean:
-			${RM} ${OBJS_FILES} ${OBJ_BONUS}
+			@echo "Deleting ${_RED}${_BOLD}objects files${_END}..."
+			@${RM} ${OBJS_FILES} ${OBJ_BONUS}
 
 fclean:		clean
-			${RM} ${NAME}
+			@echo "Deleting ${_RED}${_BOLD}libraries${_END}..."
+			@${RM} ${NAME}
+
 
 re :		fclean all
+
+-include ${DEPS_FILES}
 
 .PHONY:		all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 17:21:26 by ychibani          #+#    #+#             */
-/*   Updated: 2022/03/22 10:56:00 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/05/22 17:24:49 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 # include <stddef.h>
 # include <fcntl.h>
-# include <stdlib.h>
+# include <stdio.h>
+# define M "0123456789abcdef"
+# define D "0123456789"
+# define R "0123456789ABCDEF"
 
 # ifndef BUFFER_READ
 #  define BUFFER_READ 1
@@ -29,6 +33,20 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+typedef struct t_struct
+{
+	char	conversion;
+	int		ret;
+
+}	t_struct;
+
+int			ft_printf(const char *format_str, ...);
+void		ft_treat_format(t_struct *content, va_list format);
+void		ft_putchar(char c, t_struct *content);
+void		ft_putstr(char *str, t_struct *content);
+void		ft_base(unsigned long long nb, char *base, t_struct *content);
+void		ft_putnbr(int n, t_struct *content);
+void		ft_print_memory(void *nb, t_struct *content);
 void		*ft_memset(void *b, int c, size_t len);
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 void		ft_bzero(void *s, size_t n);
