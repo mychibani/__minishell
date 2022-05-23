@@ -6,17 +6,21 @@
 #    By: jroux-fo <jroux-fo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/05/22 19:13:57 by ychibani         ###   ########.fr        #
+#    Updated: 2022/05/23 14:15:35 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_FILES		=	srcs/parser/main.c
+SRCS_FILES		=	srcs/executor/builtin/cd/change_dir.c  \
+					srcs/minishell.c
 
 
 HEADER_FILES		=	libft.h					\
-				define.h				\
-				fonctions.h				\
-				includes.h
+						define.h				\
+						fonctions.h				\
+						includes.h				\
+						minishell.h				\
+						enum.h					\
+						minishell.h				\
 
 
 NAME			= 	minishell
@@ -29,11 +33,11 @@ INCS			=	-I ./includes -I libft/includes/
 
 LIBFT			=	libft/libft.a
 
-CC			=	gcc
+CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra
+# CFLAGS			=  	-Wall -Werror -Wextra -lreadline 
 
-RM			=	rm -rf
+RM				=	rm -rf
 
 _END=$'\e[0m
 _BOLD=$'\e[1m
@@ -77,9 +81,7 @@ clean:
 
 fclean:			clean
 				@echo "Deleting ${_RED}${_BOLD}minishell${_END}..."
-				@${RM} ${OBJS_MAIN} ${OBJS_PIPEX} ${OBJS_PARSING} ${OBJS_UTILS} ${OBJS_INIT} ${OBJS_CLEAN} ${OBJS_HERE_DOC} ${NAME} ${PIPEX_BONUS}
-				@echo "Deleting ${_RED}${_BOLD}libft librairy${_END}..."
-				@${MAKE} -C libft fclean >/dev/null
+				@${RM} ${OBJS_FILES}
 
 re:				fclean all
 

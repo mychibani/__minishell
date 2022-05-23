@@ -6,23 +6,13 @@
 /*   By: jroux-fo <jroux-fo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:10:11 by jroux-fo          #+#    #+#             */
-/*   Updated: 2022/05/19 18:45:02 by jroux-fo         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:11:21 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
+int	g_status;
 
 void	ft_garbage(t_list **bin)
 {
@@ -37,44 +27,6 @@ void	ft_garbage(t_list **bin)
 	}
 	*bin = NULL;
 }
-
-////// utils pour bin
-
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*newcell;
-
-	newcell = malloc(sizeof(t_list));
-	if (!newcell)
-		return (NULL);
-	newcell->content = content;
-	newcell->next = NULL;
-	return (newcell);
-}
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-void	ft_lstadd_back(t_list **alst, t_list *new)
-{
-	t_list	*temp;
-
-	if (!*alst)
-	{
-		*alst = new;
-		return ;
-	}
-	temp = ft_lstlast(*alst);
-	temp->next = new;
-}
-
-////// utils pour bin
 
 ////// utils pour token
 
@@ -112,43 +64,6 @@ void	ft_lstadd_back_token(t_token **alst, t_token *new)
 	}
 	temp = ft_lstlast_token(*alst);
 	temp->next = new;
-}
-
-////// utils pour token
-
-char	*ft_strdup(const char *s1)
-{
-	char	*dest;
-	int		i;
-
-	i = 0;
-	while (s1[i])
-		i++;
-	dest = malloc(sizeof(char) * i + 1);
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] - s2[i] != 0)
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
 }
 
 void	ft_preparse(int argc, char **argv, char **env)
@@ -277,7 +192,7 @@ void	ft_parse(t_token **token, t_list **bin, char *str)
 			i = i + ft_parse_word(token, bin, str + i);
 		i++;
 	}
-	ft_print(*token);
+	ft_print_token(*token);
 	printf("fin du parsing\n");
 }
 
@@ -372,44 +287,43 @@ void	ft_simplify(t_token **token, t_list **bin)
 // 	return ;
 // }
 
-void	ft_prompt(t_token **token, t_list **bin)
-{
-	char *str;
+// void	ft_prompt(t_token **token, t_list **bin)
+// {
+// 	char *str;
 	
-	str = readline("\033[95mminishell$\033[0m ");
-	while (ft_strcmp(str, "exit") && str != NULL)
-	{
-		// printf("la string ->%s<-\n", str);
-		// if (str[0] != '\0')
-		// 	add_history(str);
+// 	str = NULL;
+// 	// str = readline("\033[95mminishell$\033[0m ");
+// 	while (ft_strcmp(str, "exit") && str != NULL)
+// 	{
+// 		// printf("la string ->%s<-\n", str);
+// 		// if (str[0] != '\0')
+// 		// 	add_history(str);
 
-		//parsing pur et dur (division des elements en tokens)
-		ft_parse(token, bin, str);
-		//simplification des tokens
-		ft_simplify(token, bin);
-		ft_print(*token);
+// 		//parsing pur et dur (division des elements en tokens)
+// 		ft_parse(token, bin, str);
+// 		//simplification des tokens
+// 		ft_simplify(token, bin);
+// 		ft_print_token(*token);
 
-		// envoie des infos a Yassine
-		ft_garbage(bin);
-		ft_clean_token(token);
-		free (str);
-		str = readline("\033[95mminishell$\033[0m ");
-	}
-	free (str);
-}
+// 		// envoie des infos a Yassine
+// 		ft_garbage(bin);
+// 		ft_clean_token(token);
+// 		free (str);
+// 		str = readline("\033[95mminishell$\033[0m ");
+// 	}
+// 	free (str);
+// }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_list	*bin;
-	t_token	*token;
 
 	ft_preparse(argc, argv, env);
 	bin = NULL;
-	token = NULL;
 
+	ft_printf("%d\n", ft_strlen(argv[0]));
 	// signal(SIGINT, ft_catch);
 	
-	ft_prompt(&token, &bin);
 
 	ft_garbage(&bin);
 	exit(0);
