@@ -6,11 +6,13 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/09/08 15:01:32 by ychibani         ###   ########.fr        #
+#    Updated: 2022/09/08 15:23:13 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_FILES		=		srcs/minishell/minishell.c				\
+						srcs/minishell/parsing.c				\
+						srcs/executor/signals/signal.c			\
 
 NAME			= 	minishell
 

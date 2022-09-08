@@ -1,39 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/08 15:23:20 by ychibani         ###   ########.fr       */
+/*   Created: 2022/09/08 15:04:32 by ychibani          #+#    #+#             */
+/*   Updated: 2022/09/08 15:21:37 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_es;
+extern int g_es;
 
-int main(int ac, char **av, char **env)
+void	hd_signal(int sig)
 {
-	char *line;
-	(void)av;
-	(void)env;
-	if (ac > 1)
-		return (ft_putstr_fd("usage <./minishell>\n", 2), 2);
-	while (1)
+	(void)sig;
+	close(0);
+	g_es = 0;
+}
+
+void	treat_signal(int sig)
+{
+	(void)sig;
+	g_es = 130;
+}
+
+void	__signal(int sig)
+{
+	if (sig == SIGINT)
 	{
-		init_signals();
-		line = readline("minishell ~ ");
-		add_history(line);
-		if (line == NULL)
-			break ;
-		get_user_input(line);
-		signal(SIGINT, ctrld_signal);
-		g_es = 0;
-		free(line);
+		g_es = 130;
+		ft_putstr_fd("\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
-	printf("exit\n");
-	exit(g_es);
-	return (1);
+}
+
+void	ctrld_signal(int sig)
+{
+	(void)sig;
+	g_es = 0;
+}
+
+void	init_signals(void)
+{
+		signal(SIGINT, __signal);
+		signal(SIGQUIT, SIG_IGN);
 }
