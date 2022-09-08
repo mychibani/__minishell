@@ -3,25 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jroux-fo <jroux-fo@student.42.fr>          +#+  +:+       +#+         #
+#    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/05/23 14:15:35 by ychibani         ###   ########.fr        #
+#    Updated: 2022/09/08 15:01:32 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_FILES		=	srcs/executor/builtin/cd/change_dir.c  \
-					srcs/minishell.c
-
-
-HEADER_FILES		=	libft.h					\
-						define.h				\
-						fonctions.h				\
-						includes.h				\
-						minishell.h				\
-						enum.h					\
-						minishell.h				\
-
+SRCS_FILES		=		srcs/minishell/minishell.c				\
 
 NAME			= 	minishell
 
@@ -35,7 +24,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-# CFLAGS			=  	-Wall -Werror -Wextra -lreadline 
+CFLAGS			=  	-Wall -Werror -Wextra
 
 RM				=	rm -rf
 
@@ -65,13 +54,13 @@ all:		${NAME}
 
 .c.o:
 				@echo "Compiling ${_YELLOW}${_BOLD}$<${_END}..."
-				@${CC} ${CFLAGS} ${INCS} -MMD -c $< -o $@ ${INCS}
+				@${CC} ${CFLAGS} ${INCS} -MMD -c $< -o $@ -lreadline
 
 ${NAME}:		${OBJS_FILES}
 				@echo "Compiling ${_GREEN}${_BOLD}libft${_END}..."
 				@${MAKE} -C libft >/dev/null
 				@echo "Compiling ${_CYAN}${_BOLD}minishell${_END}..."
-				@${CC} ${CFLAGS} ${INCS} ${OBJS_FILES} -o ${NAME} ${LIBFT}
+				@${CC} ${CFLAGS} ${INCS} ${OBJS_FILES} -o ${NAME} ${LIBFT} -lreadline
 
 clean:
 				@echo "Deleting ${_RED}${_BOLD}binary files${_END}..."
@@ -81,10 +70,15 @@ clean:
 
 fclean:			clean
 				@echo "Deleting ${_RED}${_BOLD}minishell${_END}..."
-				@${RM} ${OBJS_FILES}
+				@${RM} ${OBJS_FILES} ${NAME}
 
 re:				fclean all
 
+git:		
+			git add .
+			git commit -m "$m"
+			git push -f origin master
+
 -include ${DEPS_FILES}
 
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re

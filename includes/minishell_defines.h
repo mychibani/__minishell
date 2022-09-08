@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 16:33:15 by ychibani          #+#    #+#             */
-/*   Updated: 2021/11/24 08:24:14 by ychibani         ###   ########.fr       */
+/*   Created: 2022/08/31 17:40:03 by ychibani          #+#    #+#             */
+/*   Updated: 2022/08/31 17:41:20 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef DEFINE_H
+# define DEFINE_H
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
-{
-	t_list	*elem;
 
-	if (!*alst)
-	{
-		*alst = new;
-		return ;
-	}
-	elem = ft_lstlast(*alst);
-	elem->next = new;
-}
+# ifndef _SUCCESS_
+#  define _SUCCESS_
+# endif
+
+#endif

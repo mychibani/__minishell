@@ -25,7 +25,7 @@ SRCS_FILES =	char/ft_isdigit.c			\
 				stdlib/ft_itoa.c			\
 				lists/ft_lstiter.c			\
 				lists/ft_lstsize.c			\
-				lists/ft_lstadd_front.c	\
+				lists/ft_lstadd_front.c		\
 				lists/ft_lstadd_back.c		\
 				lists/ft_lstnew.c			\
 				lists/ft_lstlast.c			\
@@ -42,18 +42,16 @@ SRCS_FILES =	char/ft_isdigit.c			\
 				fd/ft_putnbr_fd.c			\
 				fd/ft_putendl_fd.c			\
 				fd/ft_putstr_fd.c			\
-				fd/gnl.c				\
-				printf/ft_conv_fct.c			\
-				printf/ft_treat_format.c		\
-				printf/ft_printf.c
+				fd/gnl.c					\
+				printf/ft_conv_fct.c		\
+				printf/ft_treat_format.c	\
+				printf/ft_printf.c			\
 
 OBJS_FILES 		=		${SRCS:.c=.o}
 
 DEPS_FILES		=		${SRCS:.c=.d}
 
 HEADER_INC		=	-I $(HEADER_PATH)
-
-HEADER_FILES	=	libft.h 
 
 SRCS_PATH 		=		.
 
@@ -66,7 +64,7 @@ RM				=	rm -rf
 
 NAME			=	libft.a
 
-INCS                    =       -I ./includes
+INCS            =   -I ./includes
 
 
 SRCS			=	$(addprefix $(SRCS_PATH)/, $(SRCS_FILES))

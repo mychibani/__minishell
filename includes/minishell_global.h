@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   minishell_global.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 17:20:53 by ychibani          #+#    #+#             */
-/*   Updated: 2021/11/23 13:46:39 by ychibani         ###   ########.fr       */
+/*   Created: 2022/09/06 17:42:42 by ychibani          #+#    #+#             */
+/*   Updated: 2022/09/06 17:43:43 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
-{
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
-}
+#ifndef MINISHELL_GLOBAL_H
+# define MINISHELL_GLOBAL_H
+
+int	g_exit_status = 0;
+
+#endif
