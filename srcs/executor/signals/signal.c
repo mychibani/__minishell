@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:04:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/08 15:21:37 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/10 18:05:35 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	__signal(int sig)
 	if (sig == SIGINT)
 	{
 		g_es = 130;
-		ft_putstr_fd("\n", 1);
+		__putstr_fd("\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();

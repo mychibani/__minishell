@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/08 15:24:23 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/10 18:02:10 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	change_directory(char *path);
 **		Parsing
 */
 
-void	get_user_input(char *user_input);
+void	treat_usr_inputs(char *user_input, t_program_data *data, t_user_input *ui);
 
 /*
 **		Signals

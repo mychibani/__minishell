@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   __itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	ft_intlen(int nb)
+static int	__intlen(int nb)
 {
 	int	i;
 
@@ -29,13 +29,13 @@ static int	ft_intlen(int nb)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+char	*__itoa(int n)
 {
 	char	*final_str;
 	int		size;
 	long	nb;
 
-	size = ft_intlen(n);
+	size = __intlen(n);
 	nb = (long)n;
 	final_str = (char *)malloc(sizeof(char) * size + 1);
 	if (!(final_str))

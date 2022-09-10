@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   minishell_defines.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:40:03 by ychibani          #+#    #+#             */
-/*   Updated: 2022/08/31 17:41:20 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:35:30 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#ifndef MINISHELL_DEFINES_H
+# define MINISHELL_DEFINES_H
 
+# ifndef MALLOC_ERROR
+#  define MALLOC_ERROR -2
+# endif
 
-# ifndef _SUCCESS_
-#  define _SUCCESS_
+# ifndef SYNTAX_ERROR
+#  define SYNTAX_ERROR -3
 # endif
 
 #endif

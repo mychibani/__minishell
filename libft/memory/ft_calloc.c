@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   __atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: root <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	*__calloc(size_t count, size_t size)
 {
 	void	*tab;
 	int		len_tot;
@@ -25,6 +25,6 @@ void	*ft_calloc(size_t count, size_t size)
 	tab = (void *)malloc(len_tot);
 	if (!tab)
 		return (NULL);
-	ft_bzero((unsigned char *)tab, len_tot);
+	__bzero((unsigned char *)tab, len_tot);
 	return (tab);
 }

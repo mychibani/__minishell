@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 16:27:38 by ychibani          #+#    #+#             */
-/*   Updated: 2021/11/23 09:19:53 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/10 13:07:36 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+int	__in_ascii(int c)
 {
 	if (c >= 0 && c <= 127)
 		return (1);

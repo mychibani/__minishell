@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   __strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*__strchr(const char *s, int c)
 {
 	int	i;
 	int	end;
 
 	i = 0;
-	end = ft_strlen(s);
+	end = __strlen(s);
 	while (i <= end)
 	{
 		if ((unsigned char)s[i] == (unsigned char)c)

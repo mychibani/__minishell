@@ -27,7 +27,7 @@ char	*_get_line(char *str)
 	i = 0;
 	if (!str)
 		return (NULL);
-	final_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	final_str = (char *)malloc(sizeof(char) * (__strlen(str) + 1));
 	if (!(final_str))
 		return (0);
 	while (str[i])
@@ -73,7 +73,7 @@ char	*_get_save(char *save)
 		return (free(save), NULL);
 	if (save[i])
 		i++;
-	new_save = (char *)malloc(sizeof(char) * (ft_strlen(save + i) + 1));
+	new_save = (char *)malloc(sizeof(char) * (__strlen(save + i) + 1));
 	if (!new_save)
 		return (0);
 	while (save[i])

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   __strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	ft_is_charset(char *sep, char c)
+static int	__is_charset(char *sep, char c)
 {
 	int	i;
 
@@ -26,25 +26,25 @@ static int	ft_is_charset(char *sep, char c)
 	return (0);
 }
 
-static int	ft_calculate_str(char *str, char *sep)
+static int	__calculate_str(char *str, char *sep)
 {
 	int	i;
 	int	j;
 	int	len;
 
 	i = 0;
-	j = ft_strlen(str) - 1;
+	j = __strlen(str) - 1;
 	len = 0;
-	while (ft_is_charset(sep, str[i]) && str[i++])
+	while (__is_charset(sep, str[i]) && str[i++])
 		len++;
 	if (!str[i])
-		return (ft_strlen(str) - (len));
-	while (ft_is_charset(sep, str[j]) && str[j--])
+		return (__strlen(str) - (len));
+	while (__is_charset(sep, str[j]) && str[j--])
 		len++;
-	return ((ft_strlen(str) - len));
+	return ((__strlen(str) - len));
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*__strtrim(char const *s1, char const *set)
 {
 	int		i;
 	int		j;
@@ -55,13 +55,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j = 0;
 	if (!s1)
 		return (0);
-	size = ft_calculate_str((char *)s1, (char *)set);
+	size = __calculate_str((char *)s1, (char *)set);
 	if (!set)
-		return (ft_strdup(s1));
+		return (__strdup(s1));
 	final_str = (char *)malloc(sizeof(char) * size + 1);
 	if (!(final_str))
 		return (0);
-	while (s1[i] && ft_is_charset((char *)set, s1[i]))
+	while (s1[i] && __is_charset((char *)set, s1[i]))
 		i++;
 	while (j < size)
 	{

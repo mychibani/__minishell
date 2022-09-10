@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   __split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static char	*ft_free_tab(char **tab, int *index)
+static char	*__free_tab(char **tab, int *index)
 {
 	while (*index >= 0)
 	{
@@ -23,14 +23,14 @@ static char	*ft_free_tab(char **tab, int *index)
 	return (NULL);
 }
 
-static int	ft_is_charset(char s, char c)
+static int	__is_charset(char s, char c)
 {
 	if (s == c)
 		return (1);
 	return (0);
 }
 
-static int	ft_compute_tab_size(char *s, char c)
+static int	__compute_tab_size(char *s, char c)
 {
 	int	i;
 	int	size;
@@ -39,31 +39,31 @@ static int	ft_compute_tab_size(char *s, char c)
 	size = 0;
 	while (s[i])
 	{
-		if (!ft_is_charset(s[i], c))
+		if (!__is_charset(s[i], c))
 		{
-			while (!ft_is_charset(s[i], c) && s[i])
+			while (!__is_charset(s[i], c) && s[i])
 				i++;
 			size++;
 		}
-		while (ft_is_charset(s[i], c) && s[i])
+		while (__is_charset(s[i], c) && s[i])
 			i++;
 	}
 	return (size);
 }
 
-static char	*ft_strdup_spe(char *s, char c, char **tab, int *index)
+static char	*__strdup_spe(char *s, char c, char **tab, int *index)
 {
 	int		i;
 	char	*final_str;
 
 	i = 0;
-	while (!ft_is_charset(s[i], c) && s[i])
+	while (!__is_charset(s[i], c) && s[i])
 		i++;
 	final_str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!(final_str))
-		return (ft_free_tab(tab, index));
+		return (__free_tab(tab, index));
 	i = 0;
-	while (!ft_is_charset(s[i], c) && s[i])
+	while (!__is_charset(s[i], c) && s[i])
 	{
 		final_str[i] = s[i];
 		i++;
@@ -72,7 +72,7 @@ static char	*ft_strdup_spe(char *s, char c, char **tab, int *index)
 	return (final_str);
 }
 
-char	**ft_split(char const *s, char c)
+char	**__split(char const *s, char c)
 {
 	int		i;
 	int		j;
@@ -83,17 +83,17 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	if (!s)
 		return (0);
-	size = ft_compute_tab_size((char *)s, c);
+	size = __compute_tab_size((char *)s, c);
 	final_tab = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!(final_tab))
 		return (0);
 	final_tab[0] = 0;
 	while (j < size)
 	{
-		while (s[i] && ft_is_charset(s[i], c))
+		while (s[i] && __is_charset(s[i], c))
 			i++;
-		final_tab[j++] = ft_strdup_spe((char *)s + i, c, final_tab, &j);
-		while (s[i] && !ft_is_charset(s[i], c))
+		final_tab[j++] = __strdup_spe((char *)s + i, c, final_tab, &j);
+		while (s[i] && !__is_charset(s[i], c))
 			i++;
 	}
 	final_tab[j] = 0;

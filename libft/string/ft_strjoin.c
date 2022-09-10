@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   __strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,10 +21,10 @@ char	*_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	if (!s1)
-		s1 = ft_strdup("");
+		s1 = __strdup("");
 	if (!s2)
 		return (NULL);
-	final_line = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	final_line = malloc(sizeof(char) * (__strlen(s1) + __strlen(s2) + 1));
 	if (!final_line)
 		return (0);
 	while (s1[i])

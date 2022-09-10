@@ -6,12 +6,12 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/09/08 15:23:13 by ychibani         ###   ########.fr        #
+#    Updated: 2022/09/10 18:10:02 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_FILES		=		srcs/minishell/minishell.c				\
-						srcs/minishell/parsing.c				\
+						srcs/parser/parsing.c				\
 						srcs/executor/signals/signal.c			\
 
 NAME			= 	minishell
@@ -81,6 +81,6 @@ git:
 			git commit -m "$m"
 			git push -f origin master
 
--include ${DEPS_FILES}
+-include	${DEPS_FILES}
 
 .PHONY:			all clean fclean re

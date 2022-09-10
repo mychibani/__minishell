@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:40:51 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/08 15:13:37 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:29:57 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
+# include "minishell_enums.h"
 # include "minishell_defines.h"
 # include "minishell_structs.h"
-# include "minishell_enums.h"
-# include "minishell_global.h"
 # include "minishell_fonctions.h"
 
 

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   __atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: root <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,7 +24,7 @@ static int	limit(unsigned long long *result, int *sign)
 	return (*result * *sign);
 }
 
-int	ft_atoi(const char *str)
+int	__atoi(const char *str)
 {
 	int					i;
 	unsigned long long	res;

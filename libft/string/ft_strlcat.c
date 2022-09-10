@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   __strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	ft_strnlen(char *str, size_t size)
+static int	__strnlen(char *str, size_t size)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ static int	ft_strnlen(char *str, size_t size)
 	return (i);
 }
 
-size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
+size_t	__strlcat(char *dst, char *src, size_t dstsize)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -30,11 +30,11 @@ size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 
 	i = 0;
 	j = 0;
-	len_tot = ft_strlen(src) + ft_strnlen(dst, dstsize);
+	len_tot = __strlen(src) + __strnlen(dst, dstsize);
 	if (!dstsize)
-		return (ft_strlen(src));
-	if (ft_strlen(dst) > dstsize)
-		return (ft_strlen(src) + dstsize);
+		return (__strlen(src));
+	if (__strlen(dst) > dstsize)
+		return (__strlen(src) + dstsize);
 	while (dst[i])
 		i++;
 	while (src[j] && i < dstsize - 1)

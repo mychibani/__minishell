@@ -4,10 +4,11 @@
 typedef enum e_type
 {
 	OPERATOR,
+	PIPE,
 	WORD,
-	PONCT,
-	WSPACE,
-	REDIR
+	REDIRECTION,
+	HERE_DOC,
+	INVALID
 
 } e_type;
 
