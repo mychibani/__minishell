@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/10 18:12:27 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/11 14:13:38 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_es;
 
-char	**__free_tab(char **tab)
+static char	**__free_tab(char **tab)
 {
 	int	i;
 
@@ -28,19 +28,17 @@ char	**__free_tab(char **tab)
 	return (NULL);
 }
 
-
-int main(int ac, char **av, char **env)
+static void	__exit(void)
 {
-	t_program_data	data;
-	t_user_input	ui;
-	char			**inputs;
-	char			*line;
-	int				i;
-	(void)av;
-	(void)env;
+	printf("exit\n");
+	exit(g_es);
+}
+int	minishell(t_program_data *data, t_user_input *ui)
+{
+	char	**inputs;
+	char	*line;
+	int		i;
 
-	if (ac > 1)
-		return (__putstr_fd("usage <./minishell>\n", 2), 2);
 	while (1)
 	{
 		init_signals();
@@ -53,14 +51,25 @@ int main(int ac, char **av, char **env)
 		inputs = __split(line, '\n');
 		if (!inputs)
 			return (__putstr_fd("can't split inputs", 2), 2);
-		data.all_inputs = inputs;
+		data->all_inputs = inputs;
 		i = -1;
 		while (inputs[++i])
-			treat_usr_inputs(inputs[i], &data, &ui);
+			treat_usr_inputs(inputs[i], data, ui);
 		__free_tab(inputs);
 		free(line);
 	}
-	printf("exit\n");
-	exit(g_es);
 	return (1);
+}
+
+int main(int ac, char **av, char **env)
+{
+	t_program_data	data;
+	t_user_input	ui;
+	(void)av;
+	(void)env;
+
+	if (ac > 1)
+		return (__putstr_fd("usage <./minishell>\n", 2), 2);
+	minishell(&data, &ui);
+	return (__exit(), _SUCCESS_);
 }

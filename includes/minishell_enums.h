@@ -12,4 +12,13 @@ typedef enum e_type
 
 } e_type;
 
+typedef enum e_state
+{
+	S_QUOTED,
+	D_QUOTED,
+	BACKSLASH,
+	UNQUOTED
+
+} t_state;
+
 #endif
