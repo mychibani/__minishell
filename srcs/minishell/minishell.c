@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/11 14:13:38 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/13 19:46:05 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ static void	__exit(void)
 	printf("exit\n");
 	exit(g_es);
 }
+
+t_user_input *init_user_input_struct(t_user_input *ui)
+{
+	ui->token = NULL;
+	ui->to_tokenize = NULL;
+	ui->ret_hd = 0;
+	ui->ret_token = 0;
+	return (ui);
+}
+
 int	minishell(t_program_data *data, t_user_input *ui)
 {
 	char	**inputs;
@@ -54,7 +64,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 		data->all_inputs = inputs;
 		i = -1;
 		while (inputs[++i])
-			treat_usr_inputs(inputs[i], data, ui);
+			treat_usr_inputs(inputs[i], data, init_user_input_struct(ui));
 		__free_tab(inputs);
 		free(line);
 	}

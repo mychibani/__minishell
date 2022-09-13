@@ -6,12 +6,15 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/09/10 18:10:02 by ychibani         ###   ########.fr        #
+#    Updated: 2022/09/13 14:05:38 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_FILES		=		srcs/minishell/minishell.c				\
 						srcs/parser/parsing.c				\
+						srcs/lexer/tokenizer.c				\
+						srcs/lexer/word_operator_fct.c				\
+						srcs/lexer/tokenizer_utils_fct.c				\
 						srcs/executor/signals/signal.c			\
 
 NAME			= 	minishell
@@ -26,7 +29,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra
+CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address -g3
 
 RM				=	rm -rf
 

@@ -1,25 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __strlen.c                                        :+:      :+:    :+:   */
+/*   tokenizer_utils_fct.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 17:15:25 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/10 12:48:06 by ychibani         ###   ########.fr       */
+/*   Created: 2022/09/12 16:44:56 by ychibani          #+#    #+#             */
+/*   Updated: 2022/09/12 16:45:03 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	__strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
-}
