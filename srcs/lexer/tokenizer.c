@@ -6,50 +6,11 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:21:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/13 19:30:59 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:56:33 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	skip_spaces(char *str, int *i)
-{
-	while (str[*i] == ' ')
-		(*i)++;
-}
-
-int	__is_operator(char c)
-{
-	if (__strchr("&|<>()", c))
-		return (1);
-	return (0);
-}
-
-int	adjust_i(char *str, int i, int state)
-{
-	(void)state;
-	// if (state == UNQUOTED)
-	// {
-	// 	// data->return_value = 2;
-	// 	return (__putstr_fd("Unquoted sequence\n", 2), SYNTAX_ERROR);
-	// }
-	if (__is_operator(str[i]))
-		i--;
-	if (!str[i])
-		i--;
-	return (i);
-}
-
-t_state	return_quoted_state(char c, t_state quote, t_state slash)
-{
-	if (c == 39 && quote == S_QUOTED && !slash)
-		return (UNQUOTED);
-	else if (c == 34 && quote == D_QUOTED && !slash)
-		return (UNQUOTED);
-	else if (quote == UNQUOTED && !slash)
-		quote = (c == 39) * S_QUOTED + (c == 34) * D_QUOTED;
-	return (quote);
-}
 
 int	add_char_token(char c, char **token)
 {
@@ -132,8 +93,6 @@ int	tokenize(char *to_tokenize, t_list **token_list)
 	}
 	return (1);
 }
-
-
 
 /*
 ** 34 = Simple Quote

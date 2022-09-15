@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/13 14:04:19 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:59:02 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,23 @@
 int	change_directory(char *path);
 
 /*
-**		Lexer
+**		Tokenizer Utils
 */
 
-
 t_state	return_quoted_state(char c, t_state state, t_state quoted);
-int		tokenize(char *to_tokenize, t_list **token_list);
-int		add_token(char *token, t_list **begin);
-int		add_char_token(char c, char **token);
+void	skip_spaces(char *str, int *i);
 int		adjust_i(char *str, int i, int state);
+int		__is_operator(char c);
+
+/*
+**		Tokenizer
+*/
+int		tokenize(char *to_tokenize, t_list **token_list);
+int		add_char_token(char c, char **token);
+int		add_token(char *token, t_list **begin);
 int		get_operator(char **token, char *str, int i);
 int		get_word(char **token, char *str, int i);
-int		__is_operator(char c);
+
 /*
 **		Parsing
 */
