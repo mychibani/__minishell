@@ -1,52 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   cleaner_prog.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 15:04:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 17:13:48 by ychibani         ###   ########.fr       */
+/*   Created: 2022/09/18 15:30:48 by ychibani          #+#    #+#             */
+/*   Updated: 2022/09/18 15:46:32 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	g_es;
-
-void	hd_signal(int sig)
+char	**__free_tab(char **tab)
 {
-	(void)sig;
-	close(0);
-	g_es = 0;
-}
+	int	i;
 
-void	treat_signal(int sig)
-{
-	(void)sig;
-	g_es = 130;
-}
-
-void	__signal(int sig)
-{
-	if (sig == SIGINT)
+	i = 0;
+	if (tab)
 	{
-		g_es = 130;
-		__putstr_fd("\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
 	}
-}
-
-void	ctrld_signal(int sig)
-{
-	(void)sig;
-	g_es = 0;
-}
-
-void	init_signals(void)
-{
-	signal(SIGINT, __signal);
-	signal(SIGQUIT, SIG_IGN);
+	tab = NULL;
+	return (NULL);
 }

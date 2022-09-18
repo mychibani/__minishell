@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:21:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/15 10:56:33 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/18 17:16:03 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	add_char_token(char c, char **token)
 
 int	add_token(char *token, t_list **begin)
 {
-	t_list *adding_token;
+	t_list	*adding_token;
 
 	if (!token)
 		return (MALLOC_ERROR);
@@ -60,7 +60,6 @@ int	init_token_if_none(char **token, int *status)
 		if (!*token)
 			return (MALLOC_ERROR);
 		*status = 1;
-		return (1);
 	}
 	return (1);
 }
@@ -70,15 +69,12 @@ int	tokenize(char *to_tokenize, t_list **token_list)
 	char	*new_token;
 	int		i;	
 	int		status;
-	
+
 	i = -1;
 	status = 0;
 	while (to_tokenize[++i])
 	{
 		skip_spaces(to_tokenize, &i);
-		if (to_tokenize[i] == '\n')
-			continue ;
-		// && treat_newline(token_list))
 		if (!init_token_if_none(&new_token, &status))
 			return (free(new_token), __lstclear(token_list, free), i);
 		if (__is_operator(to_tokenize[i]))
@@ -88,7 +84,7 @@ int	tokenize(char *to_tokenize, t_list **token_list)
 		if (i < 0)
 			return (free(new_token), __lstclear(token_list, free), i);
 		if (add_token(new_token, token_list) < 0)
-			return (free(new_token), __lstclear(token_list, free), MALLOC_ERROR);
+			return (free(new_token), __lstclear(token_list, free), -2);
 		status = 0;
 	}
 	return (1);

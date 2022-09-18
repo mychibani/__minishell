@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:40:03 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/11 14:11:01 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/18 15:27:11 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 
 # ifndef SYNTAX_ERROR
 #  define SYNTAX_ERROR -3
+# endif
+
+# ifndef INFINITE
+#  define INFINITE 42
 # endif
 
 #endif

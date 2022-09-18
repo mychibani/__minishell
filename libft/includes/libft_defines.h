@@ -6,12 +6,12 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:34:36 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/04 15:34:40 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/18 17:03:44 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#ifndef LIBFT_DEFINES_H
+# define LIBFT_DEFINES_H
 
 # ifndef M
 #  define M "0123456789abcdef"
@@ -22,7 +22,7 @@
 # endif
 
 # ifndef R
-# define R "0123456789ABCDEF"
+#  define R "0123456789ABCDEF"
 # endif
 
 # ifndef BUFFER_READ

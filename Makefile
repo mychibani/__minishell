@@ -6,16 +6,20 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/09/13 14:05:38 by ychibani         ###   ########.fr        #
+#    Updated: 2022/09/15 11:50:13by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_FILES		=		srcs/minishell/minishell.c				\
+SRCS_FILES		=		srcs/minishell/minishell.c			\
+						srcs/init/init_structs.c			\
 						srcs/parser/parsing.c				\
 						srcs/lexer/tokenizer.c				\
-						srcs/lexer/word_operator_fct.c				\
-						srcs/lexer/tokenizer_utils_fct.c				\
-						srcs/executor/signals/signal.c			\
+						srcs/lexer/word_operator_fct.c		\
+						srcs/lexer/tokenizer_utils_fct.c	\
+						srcs/utils/utils.c					\
+						srcs/clean/cleaner_prog.c			\
+						srcs/clean/clean_exit.c				\
+						srcs/executor/signals/signal.c		\
 
 NAME			= 	minishell
 
@@ -29,7 +33,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS			=  	-Wall -Werror -Wextra -g3 
 
 RM				=	rm -rf
 
@@ -77,7 +81,8 @@ fclean:			clean
 				@echo "Deleting ${_RED}${_BOLD}minishell${_END}..."
 				@${RM} ${OBJS_FILES} ${NAME}
 
-re:				fclean all
+re:				fclean 
+				make all
 
 git:		
 			git add .

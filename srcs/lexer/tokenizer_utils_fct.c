@@ -6,12 +6,11 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:44:56 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/15 10:56:22 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/18 17:14:09 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	__is_operator(char c)
 {
@@ -26,21 +25,17 @@ t_state	return_quoted_state(char c, t_state quote, t_state slash)
 		return (UNQUOTED);
 	else if (c == 34 && quote == D_QUOTED && !slash)
 		return (UNQUOTED);
-	else if (quote == UNQUOTED && !slash)
+	else if (quote == UNQUOTED && !slash && (c == 39 || c == 34))
 		quote = (c == 39) * S_QUOTED + (c == 34) * D_QUOTED;
 	return (quote);
 }
 
 int	adjust_i(char *str, int i, int state)
 {
-	(void)state;
-	// if (state == UNQUOTED)
-	// {
-	// 	// data->return_value = 2;
-	// 	return (__putstr_fd("Unquoted sequence\n", 2), SYNTAX_ERROR);
-	// }
+	if (state != UNQUOTED)
+		return (__putstr_fd("Unquoted sequence\n", 2), SYNTAX_ERROR);
 	if (__is_operator(str[i]))
-		i--;
+		--i;
 	if (!str[i])
 		i--;
 	return (i);

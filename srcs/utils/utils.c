@@ -1,52 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 15:04:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 17:13:48 by ychibani         ###   ########.fr       */
+/*   Created: 2022/09/18 15:36:37 by ychibani          #+#    #+#             */
+/*   Updated: 2022/09/18 17:10:06 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	g_es;
-
-void	hd_signal(int sig)
+void	print_linked_list(t_list *list)
 {
-	(void)sig;
-	close(0);
-	g_es = 0;
-}
-
-void	treat_signal(int sig)
-{
-	(void)sig;
-	g_es = 130;
-}
-
-void	__signal(int sig)
-{
-	if (sig == SIGINT)
+	while (list)
 	{
-		g_es = 130;
-		__putstr_fd("\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		__printf("[%s] ", (char *)list->content);
+		list = list->next;
 	}
+	__printf("\n");
 }
 
-void	ctrld_signal(int sig)
+void	print_data(t_program_data *data)
 {
-	(void)sig;
-	g_es = 0;
-}
-
-void	init_signals(void)
-{
-	signal(SIGINT, __signal);
-	signal(SIGQUIT, SIG_IGN);
+	print_linked_list(data->token);
 }

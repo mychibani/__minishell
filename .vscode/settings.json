@@ -4,7 +4,10 @@
 		"minishell.h": "c",
 		"libft.h": "c",
 		"minishell_global.h": "c",
-		"readline.h": "c"
+		"readline.h": "c",
+		"minishell_structs.h": "c",
+		"minishell_fonctions.h": "c",
+		"minishell_defines.h": "c"
 	},
 	"C_Cpp.dimInactiveRegions": false
 }

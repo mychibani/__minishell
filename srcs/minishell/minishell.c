@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/13 19:46:05 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/18 17:13:00 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,72 +14,47 @@
 
 int	g_es;
 
-static char	**__free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
-}
-
-static void	__exit(void)
-{
-	printf("exit\n");
-	exit(g_es);
-}
-
-t_user_input *init_user_input_struct(t_user_input *ui)
-{
-	ui->token = NULL;
-	ui->to_tokenize = NULL;
-	ui->ret_hd = 0;
-	ui->ret_token = 0;
-	return (ui);
-}
-
 int	minishell(t_program_data *data, t_user_input *ui)
 {
 	char	**inputs;
 	char	*line;
 	int		i;
 
-	while (1)
+	while (INFINITE)
 	{
 		init_signals();
 		line = readline("minishell ~ ");
-		g_es = 0;
-		add_history(line);
 		if (line == NULL)
 			break ;
+		add_history(line);
 		signal(SIGINT, ctrld_signal);
 		inputs = __split(line, '\n');
 		if (!inputs)
-			return (__putstr_fd("can't split inputs", 2), 2);
+			return (__putstr_fd("can't split inputs\n", 2), 2);
 		data->all_inputs = inputs;
 		i = -1;
 		while (inputs[++i])
 			treat_usr_inputs(inputs[i], data, init_user_input_struct(ui));
+		__lstclear(&ui->token, free);
 		__free_tab(inputs);
 		free(line);
+		g_es = 0;
 	}
-	return (1);
+	return (_SUCCESS_);
 }
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_program_data	data;
 	t_user_input	ui;
+
 	(void)av;
 	(void)env;
-
+	__memset(&data, 0, sizeof(data));
+	__memset(&ui, 0, sizeof(ui));
 	if (ac > 1)
 		return (__putstr_fd("usage <./minishell>\n", 2), 2);
 	minishell(&data, &ui);
-	return (__exit(), _SUCCESS_);
+	__exit(&data, &ui, g_es);
+	return (_SUCCESS_);
 }
