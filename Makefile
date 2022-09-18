@@ -13,9 +13,9 @@
 SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/init/init_structs.c			\
 						srcs/parser/parsing.c				\
-						srcs/lexer/tokenizer.c				\
-						srcs/lexer/word_operator_fct.c		\
-						srcs/lexer/tokenizer_utils_fct.c	\
+						srcs/token/tokenizer.c				\
+						srcs/token/word_operator_fct.c		\
+						srcs/token/tokenizer_utils_fct.c	\
 						srcs/lexer/lexer.c					\
 						srcs/utils/utils.c					\
 						srcs/clean/cleaner_prog.c			\
