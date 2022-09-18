@@ -16,6 +16,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/lexer/tokenizer.c				\
 						srcs/lexer/word_operator_fct.c		\
 						srcs/lexer/tokenizer_utils_fct.c	\
+						srcs/lexer/lexer.c					\
 						srcs/utils/utils.c					\
 						srcs/clean/cleaner_prog.c			\
 						srcs/clean/clean_exit.c				\
@@ -33,7 +34,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3 
+CFLAGS			=  	-Wall -Werror -Wextra -g3
 
 RM				=	rm -rf
 

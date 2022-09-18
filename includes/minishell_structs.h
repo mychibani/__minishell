@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 17:06:46 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/18 20:30:52 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ typedef struct s_token
 
 typedef struct s_lexer
 {
-	e_type			type;
-	struct s_lexer	*next;	
+	t_type			type;
 	char			*token;
 	int				hd_type;
 	int				empty;
+	struct s_lexer	*next;	
 }	t_lexer;
 
 typedef struct s_user_input

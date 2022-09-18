@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:44:56 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 17:14:09 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/18 18:21:43 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	__is_operator(char c)
 {
-	if (__strchr("&|<>()", c))
+	if (__strchr("|<>", c))
 		return (1);
 	return (0);
 }
