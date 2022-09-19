@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 19:36:07 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:08:50 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void			__signal(int sig);
 
 char			**__free_tab(char **tab);
 void			__lexer_clear(t_lexer **lst, void (*del)(void*));
+t_lexer			*synthax_checker(t_lexer **lexer, t_program_data *data);
 
 /*
 **		Exit

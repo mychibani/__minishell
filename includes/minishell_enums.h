@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 17:06:56 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 17:08:05 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:18:33 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 typedef enum e_type
 {
-	OPERATOR,
 	PIPE,
 	WORD,
 	REDIRECTION,

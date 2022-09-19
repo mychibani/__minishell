@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:52:55 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 19:38:49 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/19 10:05:20by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	redir_type(char *to_cmp)
 {
-	if (!__strcmp(to_cmp, ">"))
+	if (!__strncmp(to_cmp, ">", 1))
 		return (1);
-	if (!__strcmp(to_cmp, "<"))
+	if (!__strncmp(to_cmp, "<", 1))
 		return (1);
-	if (!__strcmp(to_cmp, ">>"))
+	if (!__strncmp(to_cmp, ">>", 2))
 		return (1);
-	if (!__strcmp(to_cmp, "<<"))
+	if (!__strncmp(to_cmp, "<<", 2))
 		return (2);
 	return (0);
 }

@@ -13,6 +13,7 @@
 SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/init/init_structs.c			\
 						srcs/parser/parsing.c				\
+						srcs/parser/synthax_checker.c		\
 						srcs/token/tokenizer.c				\
 						srcs/token/word_operator_fct.c		\
 						srcs/token/tokenizer_utils_fct.c	\

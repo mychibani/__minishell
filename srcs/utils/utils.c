@@ -57,8 +57,6 @@ void	print_lexer_list(t_lexer *lexer)
 			__printf("Pipe Type\n");
 		if (lexer->type == NEW_LINE)
 			__printf("New Line Type\n");
-		if (lexer->type == OPERATOR)
-			__printf("Operator Type\n");
 		if (lexer->type == WORD)
 			__printf("Word Type\n");
 		if (lexer->type == HERE_DOC)
