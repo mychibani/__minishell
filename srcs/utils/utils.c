@@ -12,21 +12,7 @@
 
 #include "minishell.h"
 
-void	__lexer_clear(t_lexer **lst, void (*del)(void*))
-{
-	t_lexer	*to_delete;
 
-	if (!*lst)
-		return ;
-	while (*lst)
-	{
-		to_delete = *lst;
-		(*del)(to_delete->token);
-		*lst = to_delete->next;
-		free(to_delete);
-	}
-	*lst = NULL;
-}
 
 void	print_linked_list(t_list *list)
 {
@@ -34,16 +20,6 @@ void	print_linked_list(t_list *list)
 	{
 		__printf("[%s] ", (char *)list->content);
 		list = list->next;
-	}
-	__printf("\n");
-}
-
-void	print_token_list(t_token *token)
-{
-	while (token)
-	{
-		__printf("[%s] ", (char *)token->content);
-		token = token->next;
 	}
 	__printf("\n");
 }
@@ -69,6 +45,17 @@ void	print_lexer_list(t_lexer *lexer)
 	}
 	__printf("\n");
 }
+
+void	print_token_list(t_token *token)
+{
+	while (token)
+	{
+		__printf("[%s] ", (char *)token->content);
+		token = token->next;
+	}
+	__printf("\n");
+}
+
 
 void	print_data(t_program_data *data, t_user_input *ui)
 {

@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:33:33 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/20 16:59:55 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:54:12 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,15 @@ t_user_input	*init_user_input_struct(t_user_input *ui)
 	ui->to_tokenize = NULL;
 	ui->ret_hd = 0;
 	ui->ret_token = 0;
+	ui->error_delim = NULL;
+	ui->lexer = NULL;
 	return (ui);
 }
 
 void	__init_structs(t_program_data *data, t_user_input *ui)
 {
+	init_data_struct(data);
 	__memset(&data, 0, sizeof(data));
-	__memset(&ui, 0, sizeof(ui));
+	init_user_input_struct(ui);
+	__memset(&data, 0, sizeof(data));
 }

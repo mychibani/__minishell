@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:43:21 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/21 11:15:25 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:18:01 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	treat_usr_inputs(char *arg, t_program_data *data, t_user_input *user_input)
 		return (__putstr_fd("Lexer Error\n", 2), 2);
 	user_input->error_delim = synthax_checker(&user_input->lexer, data);
 	print_data(data, user_input);
-	// if (!__handle_heredoc(user_input, data))
-		// return (0);
+	if (!__heredoc(user_input, data))
+		return (0);
 	return (_SUCCESS_);
 }

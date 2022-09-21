@@ -18,6 +18,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/token/word_operator_fct.c		\
 						srcs/token/tokenizer_utils_fct.c	\
 						srcs/lexer/lexer.c					\
+						srcs/lexer/lexer_utils.c			\
 						srcs/utils/utils.c					\
 						srcs/clean/cleaner_prog.c			\
 						srcs/clean/clean_exit.c				\
@@ -36,7 +37,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address  -g3 
+CFLAGS			=  	-Wall -Werror -Wextra -g3 
 
 RM				=	rm -rf
 
