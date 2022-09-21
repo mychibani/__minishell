@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 19:40:13 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/21 11:08:04 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 		if (line == NULL)
 			break ;
 		add_history(line);
-		signal(SIGINT, ctrld_signal);
+		// signal(SIGINT, ctrld_signal);
 		inputs = __split(line, '\n');
 		if (!inputs)
 			return (__putstr_fd("can't split inputs\n", 2), 2);
@@ -35,9 +35,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 		i = -1;
 		while (inputs[++i])
 			treat_usr_inputs(inputs[i], data, init_user_input_struct(ui));
-		__lstclear(&ui->token, free);
-		__free_tab(inputs);
-		free(line);
+		__clean_input(ui, inputs, line);
 		g_es = 0;
 	}
 	return (_SUCCESS_);
@@ -50,8 +48,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)av;
 	(void)env;
-	__memset(&data, 0, sizeof(data));
-	__memset(&ui, 0, sizeof(ui));
+	__init_structs(&data, &ui);
 	if (ac > 1)
 		return (__putstr_fd("usage <./minishell>\n", 2), 2);
 	minishell(&data, &ui);

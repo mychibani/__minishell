@@ -22,6 +22,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/clean/cleaner_prog.c			\
 						srcs/clean/clean_exit.c				\
 						srcs/executor/signals/signal.c		\
+						srcs/here_doc/here_doc.c
 
 NAME			= 	minishell
 
@@ -35,7 +36,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3
+CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address  -g3 
 
 RM				=	rm -rf
 

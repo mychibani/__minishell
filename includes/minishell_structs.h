@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/19 16:11:53 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:58:21 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_user_input
 {
 	t_list		*token;
 	t_lexer		*lexer;
-	t_lexer		*first_error;
+	t_lexer		*error_delim;
 	char		*to_tokenize;
 	int			ret_token;
 	int			ret_hd;

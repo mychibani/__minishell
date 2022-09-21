@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/19 16:08:50 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:03:13 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 t_program_data	*init_data_struct(t_program_data *data);
 t_user_input	*init_user_input_struct(t_user_input *ui);
+void			__init_structs(t_program_data *data, t_user_input *ui);
 
 /*
 **		Cd
@@ -50,6 +51,7 @@ int				get_word(char **token, char *str, int i);
 */
 
 int				lexer(t_list *token, t_lexer **lexer);
+t_lexer			*synthax_checker(t_lexer **lexer, t_program_data *data);
 
 /*
 **		Parsing
@@ -74,7 +76,7 @@ void			__signal(int sig);
 
 char			**__free_tab(char **tab);
 void			__lexer_clear(t_lexer **lst, void (*del)(void*));
-t_lexer			*synthax_checker(t_lexer **lexer, t_program_data *data);
+void			__clean_input(t_user_input *ui, char **inputs, char *line);
 
 /*
 **		Exit
