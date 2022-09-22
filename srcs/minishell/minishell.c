@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/21 20:01:35 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/22 10:08:15 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_es;
 
-void ft_readline(char *s, int proc)
+void ft_readline(char *s, int proc, char **heredoc)
 {
 	char	*line;
 	int	i;
@@ -53,7 +53,10 @@ int	ft_test(t_list *start)
 	else
 	{
 		wait(&pid);
-		ft_readline((char *)start->next->content, 0);
+		if (start->next->next)
+			ft_test(start->next);
+		else
+			ft_readline((char *)start->next->content, 0);
 	}
 	return (1);
 }
@@ -100,6 +103,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 		tmp = start;
 		ft_test(tmp);
 		__lstclear(&start, free);
+		free(start);
 	}
 	return (_SUCCESS_);
 }
