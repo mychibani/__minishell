@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/22 10:08:15 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/22 11:06:15 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@ void ft_readline(char *s, int proc, char **heredoc)
 	i = 1;
 	while (i)
 	{
-		line = readline("?> ");
+		line = readline("> ");
 		if (line == NULL)
 			break ;
 		// add_history(line);
 		if (!__strncmp(line, s, __strlen(line)))
 			i = 0;
+		else
+		{
+			*heredoc = _strjoin(*heredoc, line);
+			*heredoc = _strjoin(*heredoc, "\n");
+		}
 		free(line);
 	}
 	if (proc > 0)
@@ -36,28 +41,27 @@ void ft_readline(char *s, int proc, char **heredoc)
 		exit(EXIT_SUCCESS);
 	}
 	else
-		return;
+		return ;
 }
 
-int	ft_test(t_list *start)
+int	ft_test(t_list *start, char **heredoc)
 {
 	pid_t pid;
 	
-	// if (heredoc->next->next)
-	// 	ft_test(heredoc->next, i++);
 	pid = fork();
 	if (pid == 0)
 	{
-		ft_readline((char *)start->content, 1);
+		ft_readline((char *)start->content, 1, heredoc);
 	}
 	else
 	{
 		wait(&pid);
 		if (start->next->next)
-			ft_test(start->next);
+			ft_test(start->next, heredoc);
 		else
-			ft_readline((char *)start->next->content, 0);
+			ft_readline((char *)start->next->content, 0, heredoc);
 	}
+	printf("%s", *heredoc);
 	return (1);
 }
 
@@ -70,6 +74,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 	t_list	*tmp;
 	(void)	*data;
 	(void)	*ui;
+	char	*heredoc;
 
 	while (INFINITE)
 	{
@@ -91,6 +96,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 
 		// TEST POUR HEREDOCS
 		
+		heredoc = NULL;
 		inputs = __split(line, '<');
 		start = malloc(sizeof(t_list *));
 		start = NULL;
@@ -101,7 +107,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 			i++;
 		}
 		tmp = start;
-		ft_test(tmp);
+		ft_test(tmp, &heredoc);
 		__lstclear(&start, free);
 		free(start);
 	}

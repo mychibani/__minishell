@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   synthax_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:56:19 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/20 15:18:11 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/22 10:47:17 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_lexer	*to_not_treat_token(t_lexer *lexer, t_program_data *data)
 	data->synthax_error = SYNTAX_ERROR;
 	return (lexer);
 }
+
 t_lexer	*synthax_checker(t_lexer **lexer, t_program_data *data)
 {
 	t_lexer *travel;
