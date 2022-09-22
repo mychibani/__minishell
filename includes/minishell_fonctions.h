@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/20 17:03:13 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:41:34 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ t_lexer			*synthax_checker(t_lexer **lexer, t_program_data *data);
 
 int				treat_usr_inputs(char *user_input,
 					t_program_data *data, t_user_input *ui);
+
+/*
+**		Heredoc
+*/
+
+int	__heredoc(t_user_input *ui, t_program_data *data);
 
 /*
 **		Signals
