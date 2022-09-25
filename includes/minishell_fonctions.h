@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/22 13:41:34 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:59:35 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,14 @@ int				treat_usr_inputs(char *user_input,
 **		Heredoc
 */
 
-int	__heredoc(t_user_input *ui, t_program_data *data);
+void			treat_eof(char *line, char *eof, t_program_data *data);
+void			init_child_hd(char *eof, t_lexer *start,
+					t_lexer *save, t_program_data *data);
+int				__heredoc(t_user_input *ui, t_program_data *data);
+int				heredoc_join(char *adding_line, char **heredoc);
+int				get_usr_input(char **eof, t_program_data *data);
+int				read_from_stdin(char *eof, char **heredoc, t_program_data *data);
+int				heredoc_join(char *adding_line, char **heredoc);
 
 /*
 **		Signals

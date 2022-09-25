@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 10:09:08 by ychibani          #+#    #+#             */
-/*   Updated: 2022/03/24 12:43:42 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:55:19 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ char	*__gnl(int fd)
 
 	if (BUFFER_READ < 1 || fd < 0)
 		return (0);
+	if (fd == -1 && save)
+	{
+		free(save);
+		save = NULL;
+	}
 	ret = 1;
 	while (ret && !_is_line(save))
 	{
@@ -102,7 +107,7 @@ char	*__gnl(int fd)
 		if (ret <= 0)
 			break ;
 		buffer[ret] = '\0';
-		save = _strjoin(save, buffer);
+		save = __strjoin(save, buffer);
 	}
 	line = _get_line(save);
 	save = _get_save(save);

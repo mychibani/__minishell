@@ -14,13 +14,13 @@
 
 int	redir_type(char *to_cmp)
 {
-	if (!__strncmp(to_cmp, ">", 1))
+	if (!__strcmp(to_cmp, ">"))
 		return (1);
-	if (!__strncmp(to_cmp, "<", 1))
+	if (!__strcmp(to_cmp, "<"))
 		return (1);
-	if (!__strncmp(to_cmp, ">>", 2))
+	if (!__strcmp(to_cmp, ">>"))
 		return (1);
-	if (!__strncmp(to_cmp, "<<", 2))
+	if (!__strcmp(to_cmp, "<<"))
 		return (2);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:49:03 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/21 12:56:49 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:00:23 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ void	__lexer_clear(t_lexer **lst, void (*del)(void*))
 
 	if (!*lst)
 		return ;
+	(void)del;
 	while (*lst)
 	{
 		to_delete = *lst;
-		(*del)(to_delete->token);
+		free((*lst)->token);
 		*lst = to_delete->next;
 		free(to_delete);
 	}

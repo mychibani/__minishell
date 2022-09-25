@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/21 11:08:04 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:54:00 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	main(int ac, char **av, char **env)
 		return (__putstr_fd("usage <./minishell>\n", 2), 2);
 	minishell(&data, &ui);
 	__exit(&data, &ui, g_es);
+	printf("exit\n");
 	return (_SUCCESS_);
 }

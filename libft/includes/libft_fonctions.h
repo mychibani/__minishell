@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 17:02:29 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 17:02:59 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/25 11:32:13 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char		*__strdup(const char *s1);
 char		*__substr(char const *s, unsigned int start, size_t len);
 char		*__strtrim(char const *s1, char const *set);
 char		**__split(char const *s, char c);
-char		*_strjoin(char *s1, char *s2);
+char		*__strjoin(char *s1, char *s2);
 char		*__itoa(int n);
 char		*__strmapi(char const *s, char (*f)(unsigned int, char));
 void		__putchar_fd(char c, int fd);

@@ -23,7 +23,8 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/clean/cleaner_prog.c			\
 						srcs/clean/clean_exit.c				\
 						srcs/executor/signals/signal.c		\
-						srcs/here_doc/here_doc.c
+						srcs/here_doc/here_doc.c			\
+						srcs/here_doc/here_doc_utils.c
 
 NAME			= 	minishell
 
@@ -44,7 +45,7 @@ RM				=	rm -rf
 _END=$'\e[0m
 _BOLD=$'\e[1m
 _UNDER=$'\e[4m
-_REV=$'\e[7m
+_REV=$'\e[7m:
 _GREY=$'\e[30m
 _RED=$'\e[0;31m
 _GREEN=$'\e[32m
@@ -91,7 +92,7 @@ re:				fclean
 git:		
 			git add .
 			git commit -m "$m"
-			git push -f origin master
+			git push origin master
 
 -include	${DEPS_FILES}
 
