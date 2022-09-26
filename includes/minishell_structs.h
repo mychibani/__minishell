@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/21 20:06:59 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/26 18:08:31 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_user_input
 	t_lexer		*lexer;
 	t_lexer		*error_delim;
 	char		*to_tokenize;
+	char		**env;
 	int			ret_token;
 	int			ret_hd;
 }	t_user_input;

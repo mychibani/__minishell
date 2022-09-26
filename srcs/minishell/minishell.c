@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/22 11:06:15 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/22 11:35:53 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,14 @@ int	g_es;
 void ft_readline(char *s, int proc, char **heredoc)
 {
 	char	*line;
-	int	i;
-
-	i = 1;
-	while (i)
+	
+	while (1)
 	{
 		line = readline("> ");
 		if (line == NULL)
 			break ;
-		// add_history(line);
 		if (!__strncmp(line, s, __strlen(line)))
-			i = 0;
+			break ;
 		else
 		{
 			*heredoc = _strjoin(*heredoc, line);
@@ -61,7 +58,6 @@ int	ft_test(t_list *start, char **heredoc)
 		else
 			ft_readline((char *)start->next->content, 0, heredoc);
 	}
-	printf("%s", *heredoc);
 	return (1);
 }
 
@@ -70,11 +66,12 @@ int	minishell(t_program_data *data, t_user_input *ui)
 	char	**inputs;
 	char	*line;
 	int		i;
-	t_list	*start;
-	t_list	*tmp;
 	(void)	*data;
 	(void)	*ui;
-	char	*heredoc;
+	// char	*heredoc;
+	// t_list	*start;
+	// t_list	*tmp;
+
 
 	while (INFINITE)
 	{
@@ -83,33 +80,34 @@ int	minishell(t_program_data *data, t_user_input *ui)
 		if (line == NULL)
 			break ;
 		add_history(line);
-		// inputs = __split(line, '\n');
-		// if (!inputs)
-		// 	return (__putstr_fd("can't split inputs\n", 2), 2);
-		// data->all_inputs = inputs;
-		// i = -1;
-		// while (inputs[++i])
-		// 	treat_usr_inputs(inputs[i], data, init_user_input_struct(ui));
-		// __clean_input(ui, inputs, line);
-		// printf("g_es = %d\n", g_es);
-		// g_es = 0;
+		inputs = __split(line, '\n');
+		if (!inputs)
+			return (__putstr_fd("can't split inputs\n", 2), 2);
+		data->all_inputs = inputs;
+		i = -1;
+		while (inputs[++i])
+			treat_usr_inputs(inputs[i], data, init_user_input_struct(ui));
+		__clean_input(ui, inputs, line);
+		printf("g_es = %d\n", g_es);
+		g_es = 0;
 
 		// TEST POUR HEREDOCS
 		
-		heredoc = NULL;
-		inputs = __split(line, '<');
-		start = malloc(sizeof(t_list *));
-		start = NULL;
-		i = 1;
-		while (inputs[i])
-		{
-			__lstadd_back(&start, __lstnew(inputs[i]));
-			i++;
-		}
-		tmp = start;
-		ft_test(tmp, &heredoc);
-		__lstclear(&start, free);
-		free(start);
+		// heredoc = NULL;
+		// inputs = __split(line, '<');
+		// start = malloc(sizeof(t_list *));
+		// start = NULL;
+		// i = 1;
+		// while (inputs[i])
+		// {
+		// 	__lstadd_back(&start, __lstnew(inputs[i]));
+		// 	i++;
+		// }
+		// tmp = start;
+		// ft_test(tmp, &heredoc);
+		// __lstclear(&start, free);
+		// printf("%s", heredoc);
+		// free(start);
 	}
 	return (_SUCCESS_);
 }
@@ -128,4 +126,3 @@ int	main(int ac, char **av, char **env)
 	__exit(&data, &ui, g_es);
 	return (_SUCCESS_);
 }
-

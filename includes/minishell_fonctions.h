@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/21 20:08:41 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/26 18:27:46 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ void			__init_structs(t_program_data *data, t_user_input *ui, char **env);
 */
 
 int				change_directory(char *path);
+
+/*
+**		echo
+*/
+
+void	ft_echo(t_user_input *ui);
+int	ft_cmd(t_user_input *ui);
+void	ft_env(t_user_input *ui);
+void	ft_pwd(t_user_input *ui);
 
 /*
 **		Tokenizer Utils

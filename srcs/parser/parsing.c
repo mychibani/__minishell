@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:43:21 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/22 10:47:46 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/26 18:10:20 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int	treat_usr_inputs(char *arg, t_program_data *data, t_user_input *user_input)
 	print_data(data, user_input);
 	// if (!__heredoc(user_input, data))
 	// 	return (0);
+	ft_cmd(user_input);
 	return (_SUCCESS_);
 }

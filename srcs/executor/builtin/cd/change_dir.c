@@ -30,7 +30,7 @@ int change_directory(char **args, char *path, char *home)
 
     */
     if (args && args[1] && args[2])
-        return (ft_putstr_fd("minishell: cd: too many argumetns\n",2), 1);
+        return (ft_putstr_fd("minishell: cd: too many arguments\n",2), 1);
     chdir(path);
     perror(path);
     return (2);

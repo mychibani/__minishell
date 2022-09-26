@@ -24,7 +24,6 @@ char	*_strjoin(char *s1, char *s2)
 		s1 = __strdup("");
 	if (!s2)
 		return (NULL);
-	printf("s1 = %s\n", s1);
 	final_line = malloc(sizeof(char) * (__strlen(s1) + __strlen(s2) + 1));
 	if (!final_line)
 		return (0);

@@ -23,7 +23,11 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/clean/cleaner_prog.c			\
 						srcs/clean/clean_exit.c				\
 						srcs/executor/signals/signal.c		\
-						srcs/here_doc/here_doc.c
+						srcs/here_doc/here_doc.c			\
+						srcs/executor/builtin/echo/echo.c	\
+						srcs/executor/exec.c				\
+						srcs/executor/builtin/env/env.c		\
+						srcs/executor/builtin/pwd/pwd.c
 
 NAME			= 	minishell
 

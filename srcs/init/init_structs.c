@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:33:33 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/21 20:07:14 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/26 18:11:44 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	__init_structs(t_program_data *data, t_user_input *ui, char **env)
 	init_data_struct(data, env);
 	// __memset(&data, 0, sizeof(data));
 	init_user_input_struct(ui);
+	ui->env = data->env;
 	__memset(&data, 0, sizeof(data));
 }
