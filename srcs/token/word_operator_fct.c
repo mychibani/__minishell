@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:41:52 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 18:25:21 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/26 11:36:42 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ int	get_word(char **token, char *str, int i)
 	slash = 0;
 	while (str[++i])
 	{
-		if (str[i] == '\\' && str[i + 1] && !slash && can_escape(i, quote_status, str))
-		{
-			slash = BACKSLASH;
-			if (add_char_token(str[i], token) < 0)
-				return (MALLOC_ERROR);
-			continue ;
-		}
 		quote_status = return_quoted_state(str[i], quote_status, slash);
 		if (quote_status == UNQUOTED && slash != BACKSLASH)
 			if (__strchr("\f\t\n\r\v ", str[i]) || __is_operator(str[i]))

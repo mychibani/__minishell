@@ -43,7 +43,7 @@ int	eof_type(char *eof)
 int	end_of_info(char *hd_content, int here_doc_fd, t_lexer *lexer, int eof_type)
 {
 	if (close(here_doc_fd) < 0)
-		printf("PUTE1\n");
+		return (free(hd_content), 0);
 	if (unlink(".hd_file") < 0)
 		return (free(hd_content), 0);
 	free(lexer->next->token);

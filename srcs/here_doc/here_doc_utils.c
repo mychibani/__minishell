@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:56:23 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/25 20:02:21 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/26 10:09:50y ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ int	read_from_stdin(char *eof, char **heredoc, t_program_data *data)
 			break ;
 		}
 		if (!heredoc_join(adding_line, heredoc))
-			return (0);
+			return (free(adding_line), 0);
 		free(adding_line);
 	}	
+	__gnl(-1);
 	return (_SUCCESS_);
 }
 
