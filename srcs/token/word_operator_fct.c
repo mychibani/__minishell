@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word_operator_fct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:41:52 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 18:25:21 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/27 09:43:46 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	get_word(char **token, char *str, int i)
 	slash = 0;
 	while (str[++i])
 	{
-		if (str[i] == '\\' && str[i + 1] && !slash && can_escape(i, quote_status, str))
+		if (str[i] == '\\' && str[i + 1] &&
+				!slash && can_escape(i, quote_status, str))
 		{
 			slash = BACKSLASH;
 			if (add_char_token(str[i], token) < 0)

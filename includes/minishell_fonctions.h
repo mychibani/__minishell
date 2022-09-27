@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/26 18:27:46 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/27 15:30:17 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 
 t_program_data	*init_data_struct(t_program_data *data, char **env);
 t_user_input	*init_user_input_struct(t_user_input *ui);
-void			__init_structs(t_program_data *data, t_user_input *ui, char **env);
+void			__init_structs(t_program_data *data, t_user_input *ui, 
+								char **env);
 
 /*
 **		Cd
@@ -31,10 +32,13 @@ int				change_directory(char *path);
 **		echo
 */
 
-void	ft_echo(t_user_input *ui);
-int	ft_cmd(t_user_input *ui);
-void	ft_env(t_user_input *ui);
-void	ft_pwd(t_user_input *ui);
+char			*ft_echo(t_user_input *ui);
+int				ft_cmd(t_user_input *ui);
+char			**ft_env(t_user_input *ui);
+char			*ft_pwd(t_user_input *ui);
+void			ft_cd(t_user_input *ui);
+void    ft_export(t_user_input *ui);
+void    ft_unset(t_user_input *ui);
 
 /*
 **		Tokenizer Utils

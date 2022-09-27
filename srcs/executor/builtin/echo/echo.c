@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 10:36:31 by caubry            #+#    #+#             */
+/*   Updated: 2022/09/27 10:36:32 by caubry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int check_quote(char *str, int i, char *quote)
@@ -62,7 +74,7 @@ char    *fill_print_echo(t_lexer *lexer)
     return (echo_content);
 }
 
-void	ft_echo(t_user_input *ui)
+char	*ft_echo(t_user_input *ui)
 {
 	int	flg;
     char *print_echo;
@@ -80,5 +92,5 @@ void	ft_echo(t_user_input *ui)
 	if (!flg)
 		print_echo = _strjoin(print_echo, "\n");
     printf("%s", print_echo);
-    free(print_echo);
+    return(print_echo);
 }

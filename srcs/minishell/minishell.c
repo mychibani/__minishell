@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/22 11:35:53 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/27 09:38:15 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 		while (inputs[++i])
 			treat_usr_inputs(inputs[i], data, init_user_input_struct(ui));
 		__clean_input(ui, inputs, line);
-		printf("g_es = %d\n", g_es);
+		// printf("g_es = %d\n", g_es);
 		g_es = 0;
 
 		// TEST POUR HEREDOCS

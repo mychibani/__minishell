@@ -1,7 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pwd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 10:36:41 by caubry            #+#    #+#             */
+/*   Updated: 2022/09/27 10:36:42 by caubry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	ft_pwd(t_user_input *ui)
+char	*ft_pwd(t_user_input *ui)
 {
+    char    *pwd;
     (void) *ui;
-    printf("%s\n", getenv("PWD"));
+
+    pwd = getcwd(NULL, 0);
+    printf("%s\n", pwd);
+    return (pwd);
 }

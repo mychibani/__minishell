@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 15:36:37 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 15:39:36by ychibani         ###   ########.fr       */
+/*   Created: 2022/09/27 09:44:08 by caubry            #+#    #+#             */
+/*   Updated: 2022/09/27 09:44:40 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 void	print_linked_list(t_list *list)
 {
@@ -55,7 +53,6 @@ void	print_token_list(t_token *token)
 	}
 	__printf("\n");
 }
-
 
 void	print_data(t_program_data *data, t_user_input *ui)
 {

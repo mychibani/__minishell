@@ -9,14 +9,14 @@ int	ft_cmd(t_user_input *ui)
 		return (0);
 	if (!(__strcmp(cmd, "echo")))
 		ft_echo(ui);
-    // else if (ft_strncmp(cmd, "cd"))
-    //     ft_cd(cmd);
+    else if (!(__strcmp(cmd, "cd")))
+        ft_cd(ui);
     else if (!(__strcmp(cmd, "pwd")))
         ft_pwd(ui);
-    // else if (ft_strncmp(cmd, "export"))
-    //     ft_export(cmd);
-    // else if (ft_strncmp(cmd, "unset"))
-    //     ft_unset(cmd);
+    else if (!(__strcmp(cmd, "export")))
+        ft_export(ui);
+    else if (!(__strcmp(cmd, "unset")))
+        ft_unset(ui);
     else if (!(__strcmp(cmd, "env")))
         ft_env(ui);
     // else if (ft_strncmp(cmd, "exit"))

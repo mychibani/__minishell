@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 10:36:36 by caubry            #+#    #+#             */
+/*   Updated: 2022/09/27 11:22:53 by caubry           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	ft_env(t_user_input *ui)
+char	**ft_env(t_user_input *ui)
 {
     int i;
-    char **env;
+    char    **env;
 
     i = 0;
     env = ui->env;
@@ -12,4 +24,5 @@ void	ft_env(t_user_input *ui)
         printf("%s\n", env[i]);
         i++;
     }
+    return (env);
 }

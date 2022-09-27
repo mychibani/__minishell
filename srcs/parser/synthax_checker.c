@@ -6,13 +6,13 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:56:19 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/22 10:47:17 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/27 09:51:39 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		__lexer_size(t_lexer *lexer)
+int	__lexer_size(t_lexer *lexer)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ t_lexer	*synthax_error(t_lexer *lexer, t_program_data *data)
 	return (lexer);
 }
 
-t_lexer *check_if_no_word(t_lexer *lexer, t_program_data *data)
+t_lexer	*check_if_no_word(t_lexer *lexer, t_program_data *data)
 {
 	if (lexer && lexer->type == PIPE)
 		return (lexer);
