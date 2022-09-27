@@ -38,7 +38,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3 
+CFLAGS			=  	-Wall -Werror -Wextra -g3
 
 RM				=	rm -rf
 

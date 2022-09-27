@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-
-
 void	print_linked_list(t_list *list)
 {
 	while (list)
@@ -28,19 +26,9 @@ void	print_lexer_list(t_lexer *lexer)
 {
 	while (lexer)
 	{
-		__printf("%s\n", (char *)lexer->token);
-		if (lexer->type == PIPE)
-			__printf("Pipe Type\n");
-		if (lexer->type == NEW_LINE)
-			__printf("New Line Type\n");
-		if (lexer->type == WORD)
-			__printf("Word Type\n");
-		if (lexer->type == HERE_DOC)
-			__printf("Here Doc Type\n");
-		if (lexer->type == REDIRECTION)
-			__printf("Redirection Type\n");
-		if (lexer->type == INVALID)
-			__printf("Unknown Type\n");
+		__printf("[%s]\n", (char *)lexer->token);
+		__printf("[%d]\n", lexer->type);
+		__printf("[%d]\n", lexer->hd_type);
 		lexer = lexer->next;
 	}
 	__printf("\n");

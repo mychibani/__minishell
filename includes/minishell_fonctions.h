@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/25 17:59:35 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/27 13:18:48 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int				treat_usr_inputs(char *user_input,
 */
 
 void			treat_eof(char *line, char *eof, t_program_data *data);
-void			init_child_hd(char *eof, t_lexer *start,
-					t_lexer *save, t_program_data *data);
+void			init_child_hd(char *eof, t_lexer *travel, t_program_data *data, t_lexer *save);
 int				__heredoc(t_user_input *ui, t_program_data *data);
 int				heredoc_join(char *adding_line, char **heredoc);
 int				get_usr_input(char **eof, t_program_data *data);
@@ -88,7 +87,7 @@ void			__signal(int sig);
 */
 
 char			**__free_tab(char **tab);
-void			__lexer_clear(t_lexer **lst, void (*del)(void*));
+void			__lexer_clear(t_lexer **lst);
 void			__clean_input(t_user_input *ui, char **inputs, char *line);
 
 /*
@@ -103,5 +102,6 @@ void			__exit(t_program_data *data, t_user_input *ui, int rv);
 
 void			print_data(t_program_data *data, t_user_input *ui);
 void			print_linked_list(t_list *list);
+void			print_lexer_list(t_lexer *lexer);
 
 #endif

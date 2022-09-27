@@ -24,7 +24,7 @@ int		heredoc_join(char *adding_line, char **heredoc)
 	new_heredoc = NULL;
 	i = -1;
 	j = -1;
-	len = (__strlen(adding_line) + __strlen(*heredoc) + 2);
+	len = (__strlen(adding_line) + __strlen(*heredoc) + 1);
 	if (!*heredoc)
 		*heredoc = __strdup("");
 	new_heredoc = (char *)malloc(sizeof(char) * len);
@@ -37,8 +37,7 @@ int		heredoc_join(char *adding_line, char **heredoc)
 		new_heredoc[i] = adding_line[j];
 		i++;
 	}
-	new_heredoc[i] = '\n';
-	new_heredoc[i + 1] = '\0';
+	new_heredoc[i] = '\0';
 	free(*heredoc);
 	*heredoc = new_heredoc;
 	return (1);
@@ -48,12 +47,16 @@ void	treat_eof(char *line, char *eof, t_program_data *data)
 {
 	if (!line)
 	{
+		data->rv = 130;
 		__putstr_fd(" here-document delimited by end-of-file (wanted `", 2);
 		__putstr_fd(eof, 2);
 		__putstr_fd("')\n", 2);
 		__gnl(-1);
 		free(line);
+		return ;
 	}
+	__gnl(-1);
+	free(line);
 	data->rv = 0;
 }
 
@@ -72,10 +75,9 @@ int	read_from_stdin(char *eof, char **heredoc, t_program_data *data)
 			break ;
 		}
 		if (!heredoc_join(adding_line, heredoc))
-			return (free(adding_line), 0);
+			return (__gnl(-1), 0);
 		free(adding_line);
 	}	
-	__gnl(-1);
 	return (_SUCCESS_);
 }
 
@@ -122,15 +124,17 @@ int	get_usr_input(char **eof, t_program_data *data)
 	return (1);
 }
 
-void	init_child_hd(char *eof, t_lexer *start, t_lexer *save, t_program_data *data)
+void	init_child_hd(char *eof, t_lexer *travel, t_program_data *data, t_lexer *save)
 {
 	g_es = 0;
 	data->rv = 0;
 	signal(SIGINT, hd_signal);
 	signal(SIGQUIT, SIG_IGN);
 	if (!get_usr_input(&eof, data))
-		return (__putstr_fd("Malloc Error in Here_doc\n", 2));
-	save->next->token = eof;
-	__lexer_clear(&start, free);
-	__exit(data, 0, 0);
+		return (__lexer_clear(&save), __putstr_fd("Malloc Error in Here_doc\n", 2));
+	travel->next->token = eof;
+	__lexer_clear(&save);
+	__free_tab(data->all_inputs);
+	data->all_inputs = NULL;
+	exit(data->rv);
 }

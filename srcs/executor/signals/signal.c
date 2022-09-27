@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:04:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 17:13:48 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:39:32 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	hd_signal(int sig)
 {
 	(void)sig;
 	close(0);
-	g_es = 0;
+	g_es = 1;
 }
 
 void	treat_signal(int sig)

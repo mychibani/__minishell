@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/25 19:54:00 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:37:19 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	minishell(t_program_data *data, t_user_input *ui)
 		if (line == NULL)
 			break ;
 		add_history(line);
-		// signal(SIGINT, ctrld_signal);
+		signal(SIGINT, ctrld_signal);
 		inputs = __split(line, '\n');
 		if (!inputs)
 			return (__putstr_fd("can't split inputs\n", 2), 2);
@@ -52,7 +52,7 @@ int	main(int ac, char **av, char **env)
 	if (ac > 1)
 		return (__putstr_fd("usage <./minishell>\n", 2), 2);
 	minishell(&data, &ui);
-	__exit(&data, &ui, g_es);
 	printf("exit\n");
+	__exit(&data, &ui, g_es);
 	return (_SUCCESS_);
 }

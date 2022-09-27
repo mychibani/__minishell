@@ -52,7 +52,7 @@ int	end_of_info(char *hd_content, int here_doc_fd, t_lexer *lexer, int eof_type)
 	return (_SUCCESS_);
 }
 
-int	get_child_info(t_lexer *lexer, char *eof)
+int	get_child_info(t_lexer *lexer, int eof)
 {
 	char	buffer[32];
 	char	*hd_content;
@@ -74,36 +74,36 @@ int	get_child_info(t_lexer *lexer, char *eof)
 		if (!hd_content)
 			return (close(here_doc_fd), unlink(".hd_file"), 0);
 	}
-	return (end_of_info(hd_content, here_doc_fd, lexer, eof_type(eof)));
+	return (end_of_info(hd_content, here_doc_fd, lexer, eof));
 }
 
-int	__handle_here_doc(t_lexer *start, t_lexer *end, t_program_data *data)
+int	__handle_here_doc(t_lexer *travel, t_lexer *end, t_program_data *data)
 {
 	pid_t		pid;
 	char		*eof;
 	t_lexer		*save;
 
-	save = start;
-	while (start != end && start && start->next != end)
+	save = travel;
+	while (travel != end && travel && travel->next != end)
 	{
-		if (start->type == HERE_DOC)
+		if (travel->type == HERE_DOC)
 		{
-			eof = start->next->token;
+			eof = travel->next->token;
 			pid = fork();
 			if (pid < 0)
 				return (0);
 			if (pid == 0)
-				init_child_hd(eof, start, save, data);
+				init_child_hd(eof, travel, data, save);
 			else
 			{
 				if (wait_here_doc(pid, data) == 130)
 					return (130);
-				if (!get_child_info(start, eof))
+				if (!(get_child_info(travel, eof_type(eof))))
 					return (0);
-				start = start->next;
+				travel = travel->next;
 			}
 		}
-		start = start->next;
+		travel = travel->next;
 	}
 	return (1);
 }
@@ -111,10 +111,13 @@ int	__handle_here_doc(t_lexer *start, t_lexer *end, t_program_data *data)
 int	__heredoc(t_user_input *ui, t_program_data *data)
 {
 	ui->ret_hd = __handle_here_doc(ui->lexer, ui->error_delim, data);
-	if (ui->ret_hd == 0)
-		return (__lexer_clear(&ui->lexer, free), __exit(data, ui, 0), 0);
-	else if (ui->ret_hd == 130)
-		return (__lexer_clear(&ui->lexer, free), 0);
+	fprintf(stderr, "avant\n");
+	if (ui->ret_hd == 0) {
+			fprintf(stderr, "pendant\n");
+		return (__lexer_clear(&ui->lexer), 0);}
+	else if (ui->ret_hd == 130) {
+			fprintf(stderr, "apres\n");
+		return (__lexer_clear(&ui->lexer), 0);}
 	else
-		return (_SUCCESS_);
+		return (1);
 }
