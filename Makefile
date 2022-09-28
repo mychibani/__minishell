@@ -30,7 +30,8 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/executor/builtin/pwd/pwd.c		\
 						srcs/executor/builtin/cd/cd.c		\
 						srcs/executor/builtin/export/export.c \
-						srcs/executor/builtin/unset/unset.c
+						srcs/executor/builtin/unset/unset.c	\
+						srcs/executor/builtin/exit/exit.c
 
 
 NAME			= 	minishell
@@ -45,7 +46,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3 
+CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address -g3 
 
 RM				=	rm -rf
 

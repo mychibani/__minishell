@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:31 by caubry            #+#    #+#             */
-/*   Updated: 2022/09/27 10:36:32 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/28 10:15:48 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char    *fill_print_echo(t_lexer *lexer)
     return (echo_content);
 }
 
-char	*ft_echo(t_user_input *ui)
+void    ft_echo(t_user_input *ui)
 {
 	int	flg;
     char *print_echo;
@@ -92,5 +92,6 @@ char	*ft_echo(t_user_input *ui)
 	if (!flg)
 		print_echo = _strjoin(print_echo, "\n");
     printf("%s", print_echo);
-    return(print_echo);
+    free(print_echo);
+    // return(print_echo);
 }
