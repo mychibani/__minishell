@@ -6,18 +6,17 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:41 by caubry            #+#    #+#             */
-/*   Updated: 2022/09/27 10:36:42 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/28 16:15:15 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_pwd(t_user_input *ui)
+void	ft_pwd(void)
 {
-    char    *pwd;
-    (void) *ui;
+	char	*pwd;
 
-    pwd = getcwd(NULL, 0);
-    printf("%s\n", pwd);
-    return (pwd);
+	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
+	free(pwd);
 }
