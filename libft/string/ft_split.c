@@ -97,6 +97,5 @@ char	**__split(char const *s, char c)
 			i++;
 	}
 	final_tab[j] = 0;
-	printf("ici var[0] = %s\n", final_tab[0]);
 	return (final_tab);
 }

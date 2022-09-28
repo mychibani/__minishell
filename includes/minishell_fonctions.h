@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/27 15:30:17 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/28 08:16:15 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int				ft_cmd(t_user_input *ui);
 char			**ft_env(t_user_input *ui);
 char			*ft_pwd(t_user_input *ui);
 void			ft_cd(t_user_input *ui);
-void    ft_export(t_user_input *ui);
+void    ft_export(t_user_input *ui, char *to_set);
 void    ft_unset(t_user_input *ui);
 
 /*

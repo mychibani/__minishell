@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:24:20 by caubry            #+#    #+#             */
-/*   Updated: 2022/09/27 14:47:04 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/28 08:19:36 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char    *ft_changevar(t_user_input *ui, char *name, char *value, int i)
     return (ui->env[i]);
 }
 
-void    ft_export(t_user_input *ui)
+void    ft_export(t_user_input *ui, char *to_set)
 {
     char    **var;
     char    *search;
@@ -51,9 +51,10 @@ void    ft_export(t_user_input *ui)
     
     i = 0;
     exist = 0;
-    var = __split(ui->lexer->next->token, '=');
+    var = __split(to_set, '=');
     tmp = __strdup(var[0]);
     search = _strjoin(tmp, "=");
+    // printf("SEGFAULT LA\n");
     while (ui->env[i] && !exist)
     {
         if (!(__strncmp(ui->env[i], search, __strlen(search))))
