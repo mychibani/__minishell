@@ -88,5 +88,6 @@ int	lexer(t_list *token, t_lexer **lexer)
 		lexer_add_back(lexer, to_add);
 		temp = temp->next;
 	}
+	__lstclear(&token, free);
 	return (_SUCCESS_);
 }

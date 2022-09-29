@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:30:48 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/27 10:45:32 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/29 09:15:00 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ char	**__free_tab(char **tab)
 
 void	__clean_input(t_user_input *ui, char **inputs, char *line)
 {
-	if (ui->token)
-		__lstclear(&ui->token, free);
-	if (ui->lexer)
-		__lexer_clear(&ui->lexer);
+	(void)ui;
 	if (inputs)
 		__free_tab(inputs);
 	free(line);
