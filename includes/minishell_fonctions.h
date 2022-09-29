@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/28 16:15:30 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/29 13:02:54 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ int				ft_cmd(t_user_input *ui);
 char			**ft_env(t_user_input *ui);
 void	ft_pwd(void);
 void			ft_cd(t_user_input *ui);
-void    ft_export(t_user_input *ui, char *to_set);
-void    ft_unset(t_user_input *ui);
-void    ft_free(char **to_free, int i);
-void    ft_exit(t_user_input *ui);
+void	ft_export(t_user_input *ui, char *to_set);
+void	ft_unset(t_user_input *ui);
+void	ft_free(char **to_free, int i);
+void	ft_exit(t_user_input *ui);
+t_env	*ft_split_env(char	**env);
+void	__env_clear(t_env **lst, void (*del)(void*));
 
 /*
 **		Tokenizer Utils

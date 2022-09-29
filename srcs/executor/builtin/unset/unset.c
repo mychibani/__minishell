@@ -6,13 +6,13 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:35:26 by caubry            #+#    #+#             */
-/*   Updated: 2022/09/28 16:28:46 by caubry           ###   ########.fr       */
+/*   Updated: 2022/09/29 10:34:11 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_unsetvar(t_user_input *ui, int i)
+char	**ft_unsetvar(t_user_input *ui, int i)
 {
 	char	**new_env;
 	int		j;
@@ -36,7 +36,7 @@ void	ft_unsetvar(t_user_input *ui, int i)
 	}
 	new_env[i] = NULL;
 	ft_free(ui->env, 0);
-	ui->env = new_env;
+	return(new_env);
 }
 
 void	ft_unset(t_user_input *ui)
@@ -63,7 +63,7 @@ void	ft_unset(t_user_input *ui)
 		}
 		free(search);
 		if (exist)
-			ft_unsetvar(ui, i);
+			ui->env = ft_unsetvar(ui, i);
 		var_to_unset = var_to_unset->next;
 	}
 }

@@ -27,6 +27,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/executor/builtin/echo/echo.c	\
 						srcs/executor/exec.c				\
 						srcs/executor/builtin/env/env.c		\
+						srcs/executor/builtin/env/env_utils.c		\
 						srcs/executor/builtin/pwd/pwd.c		\
 						srcs/executor/builtin/cd/cd.c		\
 						srcs/executor/builtin/export/export.c \
