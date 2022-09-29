@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/20 16:58:21 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:24:35 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_lexer
 	struct s_lexer	*next;	
 }	t_lexer;
 
+
 typedef struct s_user_input
 {
 	t_list		*token;
@@ -46,5 +47,12 @@ typedef struct s_program_data
 	t_list			*token;	
 	char			**all_inputs;
 }	t_program_data;
+
+typedef struct s_cmd
+{
+	int	redir[2];
+	char *cmd;
+	t_program_data *data;
+}	t_cmd;
 
 #endif

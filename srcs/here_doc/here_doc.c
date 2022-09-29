@@ -73,7 +73,6 @@ int	get_child_info(t_lexer *lexer, int eof)
 		if (!hd_content)
 			return (close(here_doc_fd), unlink(".hd_file"), 0);
 	}
-	printf("[%s], %ld", hd_content, __strlen(hd_content));
 	return (end_of_info(hd_content, here_doc_fd, lexer, eof));
 }
 
@@ -111,10 +110,10 @@ int	__handle_here_doc(t_lexer *travel, t_lexer *end, t_program_data *data)
 int	__heredoc(t_user_input *ui, t_program_data *data)
 {
 	ui->ret_hd = __handle_here_doc(ui->lexer, ui->error_delim, data);
-	if (ui->ret_hd == 0) {
-		return (__lexer_clear(&ui->lexer), 0);}
-	else if (ui->ret_hd == 130) {
-		return (__lexer_clear(&ui->lexer), 0);}
+	if (ui->ret_hd == 0)
+		return (__lexer_clear(&ui->lexer), 0);
+	else if (ui->ret_hd == 130)
+		return (__lexer_clear(&ui->lexer), 0);
 	else
 		return (1);
 }
