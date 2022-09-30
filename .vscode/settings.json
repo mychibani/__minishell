@@ -7,7 +7,16 @@
 		"readline.h": "c",
 		"minishell_structs.h": "c",
 		"minishell_fonctions.h": "c",
-		"minishell_defines.h": "c"
+		"minishell_defines.h": "c",
+		"stdlib.h": "c",
+		"fcntl.h": "c",
+		"stdio.h": "c",
+		"stddef.h": "c",
+		"stdarg.h": "c",
+		"__fpos_t.h": "c",
+		"__fpos64_t.h": "c",
+		"__file.h": "c",
+		"types.h": "c"
 	},
 	"C_Cpp.dimInactiveRegions": false
 }

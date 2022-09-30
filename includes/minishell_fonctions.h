@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/27 13:18:48 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:12:19 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 t_program_data	*init_data_struct(t_program_data *data);
 t_user_input	*init_user_input_struct(t_user_input *ui);
 void			__init_structs(t_program_data *data, t_user_input *ui);
+
+/*
+**		Env
+*/
+
+
+int			get_env_var(t_program_data *data, char **env, int size);
+int			get_env_size(char **env);
 
 /*
 **		Cd

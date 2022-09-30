@@ -12,6 +12,7 @@
 
 SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/init/init_structs.c			\
+						srcs/init/env.c						\
 						srcs/parser/parsing.c				\
 						srcs/parser/synthax_checker.c		\
 						srcs/token/tokenizer.c				\
@@ -24,7 +25,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/clean/clean_exit.c				\
 						srcs/executor/signals/signal.c		\
 						srcs/here_doc/here_doc.c			\
-						srcs/here_doc/here_doc_utils.c
+						srcs/here_doc/here_doc_utils.c		\
 
 NAME			= 	minishell
 
@@ -38,7 +39,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3
+CFLAGS			=  	-Wall -Werror -Wextra -g3 -fsanitize=address
 
 RM				=	rm -rf
 
