@@ -26,6 +26,8 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/executor/signals/signal.c		\
 						srcs/here_doc/here_doc.c			\
 						srcs/here_doc/here_doc_utils.c		\
+						srcs/expander/expander.c			\
+						srcs/expander/expander2.c			\
 
 NAME			= 	minishell
 

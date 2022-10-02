@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 15:07:31 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/30 15:14:55 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/02 18:10:12 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_env_var(t_program_data *data, char **env, int size)
 		data->envp[i] = (char **)malloc(sizeof(char *) * 3);
 		data->envp[i][0] = __strdup(env[i]);
 		data->envp[i][1] = __strdup("1");
-		data->envp[i][3] = NULL);
+		data->envp[i][2] = NULL;
 		if (!data->envp[i][0])
 			return (0);
 		i++;

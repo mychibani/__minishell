@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/30 15:12:19 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/02 18:18:56 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,17 @@ void			__signal(int sig);
 char			**__free_tab(char **tab);
 void			__lexer_clear(t_lexer **lst);
 void			__clean_input(t_user_input *ui, char **inputs, char *line);
+
+/*
+**
+*/
+
+
+int		sequence_launcher(t_lexer **seq, t_program_data *data);
+char	*get_testing_wd(char *start_wd, int *offset);
+int		find_key(char *testing_wd, char *env_str, t_program_data *data, int j);
+char	*handle_quotes_in_env(char *str);
+int		get_value(char *testing_wd, char *env_str, char **expanded_wd, char *key_value);
 
 /*
 **		Exit
