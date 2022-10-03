@@ -6,64 +6,50 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:35:26 by caubry            #+#    #+#             */
-/*   Updated: 2022/09/29 10:34:11 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 14:29:09 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**ft_unsetvar(t_user_input *ui, int i)
+int	ft_unsetvar(t_user_input *ui, char *var_to_unset)
 {
-	char	**new_env;
-	int		j;
+	t_env	*previous;
+	t_env	*unset;
 
-	j = 0;
-	while (ui->env[j])
-		j++;
-	new_env = malloc(sizeof(char *) * j);
-	j = 0;
-	while (j != i)
+	unset = *(ui->test_env);
+	while (unset->name != var_to_unset)
 	{
-		new_env[j] = ui->env[j];
-		j++;
+		previous = unset;
+		unset = unset->next;
 	}
-	j++;
-	while (ui->env[j])
-	{
-		new_env[i] = ui->env[j];
-		j++;
-		i++;
-	}
-	new_env[i] = NULL;
-	ft_free(ui->env, 0);
-	return(new_env);
+	previous->next = unset->next;
+	free(unset->name);
+	free(unset->value);
+	free(unset);
+	return (1);
 }
 
 void	ft_unset(t_user_input *ui)
 {
-	char	*var;
-	char	*search;
 	t_lexer	*var_to_unset;
-	int		i;
 	int		exist;
+	t_env	*tmp;
+	char	*search;
 
-	i = 0;
 	exist = 0;
 	var_to_unset = ui->lexer->next;
 	while (var_to_unset && var_to_unset->type == WORD)
 	{
-		var = __strdup(var_to_unset->token);
-		search = _strjoin(var, "=");
-		while (ui->env[i] && !exist)
+		search =var_to_unset->token;
+		tmp = *(ui->test_env);
+		while (tmp && !exist)
 		{
-			if (!(__strncmp(ui->env[i], search, __strlen(search))))
-				exist = i;
+			if (!(__strncmp(tmp->name, search, __strlen(search))))
+				exist = ft_unsetvar(ui, tmp->name);
 			else
-				i++;
+				tmp = tmp->next;
 		}
-		free(search);
-		if (exist)
-			ui->env = ft_unsetvar(ui, i);
 		var_to_unset = var_to_unset->next;
 	}
 }

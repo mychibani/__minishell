@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:52:10 by caubry            #+#    #+#             */
-/*   Updated: 2022/09/28 16:10:58 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 14:14:09 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	ft_cmd(t_user_input *ui)
 		ft_env(ui);
 	else if (!(__strcmp(cmd, "exit")))
 		ft_exit(ui);
-	else if ((ft_execve(_strjoin(__strdup("/usr/bin/"), cmd),
-				ft_prep_arg(ui), ui->env)) == -1)
-		printf("Command '%s' not found\n", cmd);
+	// else if ((ft_execve(_strjoin(__strdup("/usr/bin/"), cmd),
+	// 			ft_prep_arg(ui), ui->test_env)) == -1)
+		// printf("Command '%s' not found\n", cmd);
 	return (1);
 }

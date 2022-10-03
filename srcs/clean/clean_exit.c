@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:33:40 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/29 13:15:04 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 14:07:27 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	__exit(t_program_data *data, t_user_input *ui, int rv)
 	(void)data;
 	if (ui->test_env)
 	{
-		printf("la\n");
-		__env_clear(&ui->test_env, free);
+		__env_clear(ui->test_env, free);
+		free(ui->test_env);
 	}
 	if (ui->token)
 		__lstclear(&ui->token, free);

@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:36 by caubry            #+#    #+#             */
-/*   Updated: 2022/09/29 13:16:55 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 14:12:17 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	__env_clear(t_env **lst, void (*del)(void*))
 {
 	t_env	*to_delete;
-
+	
 	if (!*lst)
 		return ;
 	while (*lst)
@@ -26,20 +26,17 @@ void	__env_clear(t_env **lst, void (*del)(void*))
 		*lst = to_delete->next;
 		free(to_delete);
 	}
-	*lst = NULL;
 }
 
-char	**ft_env(t_user_input *ui)
+void	ft_env(t_user_input *ui)
 {
-	int		i;
-	char	**env;
+	t_env	*env;
 
-	i = 0;
-	env = ui->env;
-	while (env[i])
+	env = *(ui->test_env);
+	while (env)
 	{
-		printf("%s\n", env[i]);
-		i++;
+		printf("%s=%s\n", env->name, env->value);
+		env = env->next;
 	}
-	return (env);
+	return ;
 }
