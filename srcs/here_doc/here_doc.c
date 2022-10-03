@@ -46,8 +46,9 @@ int	end_of_info(char *hd_content, int here_doc_fd, t_lexer *lexer, int eof_type)
 		return (free(hd_content), 0);
 	if (unlink(".hd_file") < 0)
 		return (free(hd_content), 0);
-	(void)eof_type;
-	(void)lexer;
+	free(lexer->next->token);
+	lexer->next->token = hd_content;
+	lexer->next->hd_type = eof_type;
 	return (_SUCCESS_);
 }
 

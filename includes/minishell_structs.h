@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/30 13:58:00 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:25:57 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,12 @@ typedef struct s_program_data
 
 typedef struct s_cmd
 {
-	int	redir[2];
-	char *cmd;
-	t_program_data *data;
+	int				redirection[2];
+	int				index;
+	char			**arg;
+	struct s_msh	*msh;
+	struct s_cmd	*next;
+
 }	t_cmd;
 
 #endif

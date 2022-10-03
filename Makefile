@@ -28,6 +28,8 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/here_doc/here_doc_utils.c		\
 						srcs/expander/expander.c			\
 						srcs/expander/expander2.c			\
+						srcs/expander/dq_expander.c			\
+						srcs/expander/heredoc_expand.c		\
 
 NAME			= 	minishell
 
@@ -41,7 +43,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS			=  	-Wall -Werror -Wextra -g3 
 
 RM				=	rm -rf
 

@@ -136,5 +136,6 @@ void	init_child_hd(char *eof, t_lexer *travel, t_program_data *data, t_lexer *sa
 	__lexer_clear(&save);
 	__free_tab(data->all_inputs);
 	data->all_inputs = NULL;
+	destroy_env(data);
 	exit(data->rv);
 }

@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:33:33 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/21 12:54:12 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/03 10:54:29 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_program_data	*init_data_struct(t_program_data *data)
 	data->all_inputs = NULL;
 	data->token = NULL;
 	data->ui = NULL;
+	data->synthax_error = 0;
 	return (data);
 }
 

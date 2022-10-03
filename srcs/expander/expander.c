@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:15:31 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/02 19:47:07 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:13:25 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,23 @@ void	update_token(char **token, char **new_token)
 	*token = *new_token;
 }
 
+int	dollars_status(char *full_str, char *dollar)
+{
+	int	i;
+	int	quote_status;
+
+	i = 0;
+	quote_status = 0;
+	while (full_str[i] && &full_str[i] != dollar)
+	{
+		quote_status = return_quoted_state(full_str[i], quote_status, 0);
+		i++;
+	}
+	if (quote_status == UNQUOTED || quote_status == D_QUOTED)
+		return (0);
+	return (1);
+}
+
 int	__usual_expansion(char **token, t_program_data *data)
 {
 	char	*str;
@@ -90,7 +107,7 @@ int	__usual_expansion(char **token, t_program_data *data)
 	expanded_wd = __strdup("");
 	while (str[++i])
 	{
-		if ((str[i] == '$') && is_valid_char(str[i + 1]))
+		if ((str[i] == '$') && is_valid_char(str[i + 1]) && !dollars_status(str, &str[i]))
 		{
 			if (parameter_expand(str + i + 1, &expanded_wd, data, &i) == MALLOC_ERROR)
 				return (free(expanded_wd), MALLOC_ERROR);
@@ -99,7 +116,6 @@ int	__usual_expansion(char **token, t_program_data *data)
 			return (free(expanded_wd), MALLOC_ERROR);
 	}
 	update_token(token, &expanded_wd);
-	__printf("%s\n", *token);
 	return (_SUCCESS_);
 }
 
@@ -107,13 +123,13 @@ int	__expand_var(t_lexer *seq, t_program_data *data)
 {
 	while (seq)
 	{
-		// if (seq->token == HERE_DOC)	
-		// {
-		// 	if (!__heredoc_expansion(&seq->next->token, data) && seq->next->hd_type == 1)
-		// 		return (MALLOC_ERROR);
-		// 	seq = seq->next->next;
-		// }else 
-		if (seq->type == WORD)
+		if (seq->type == HERE_DOC)	
+		{
+			if (!__heredoc_expansion(&seq->next->token, data) && seq->next->hd_type == 1)
+				return (MALLOC_ERROR);
+			seq = seq->next->next;
+		}
+		else if (seq->type == WORD)
 		{
 			if (__usual_expansion(&seq->token, data) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
@@ -129,5 +145,6 @@ int	sequence_launcher(t_lexer **seq, t_program_data *data)
 {
 	if (__expand_var(*seq, data) == MALLOC_ERROR)
 		return (0);
+	print_lexer_list(*seq);
 	return (1);
 }

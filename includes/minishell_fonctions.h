@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/02 18:18:56 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:23:14 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void			__init_structs(t_program_data *data, t_user_input *ui);
 **		Env
 */
 
-
-int			get_env_var(t_program_data *data, char **env, int size);
-int			get_env_size(char **env);
+int				get_env_var(t_program_data *data, char **env, int size);
+int				get_env_size(char **env);
 
 /*
 **		Cd
@@ -73,11 +72,13 @@ int				treat_usr_inputs(char *user_input,
 */
 
 void			treat_eof(char *line, char *eof, t_program_data *data);
-void			init_child_hd(char *eof, t_lexer *travel, t_program_data *data, t_lexer *save);
+void			init_child_hd(char *eof, t_lexer *travel,
+					t_program_data *data, t_lexer *save);
 int				__heredoc(t_user_input *ui, t_program_data *data);
 int				heredoc_join(char *adding_line, char **heredoc);
 int				get_usr_input(char **eof, t_program_data *data);
-int				read_from_stdin(char *eof, char **heredoc, t_program_data *data);
+int				read_from_stdin(char *eof, char **heredoc,
+					t_program_data *data);
 int				heredoc_join(char *adding_line, char **heredoc);
 
 /*
@@ -97,17 +98,25 @@ void			__signal(int sig);
 char			**__free_tab(char **tab);
 void			__lexer_clear(t_lexer **lst);
 void			__clean_input(t_user_input *ui, char **inputs, char *line);
+void			destroy_env(t_program_data *data);
 
 /*
 **
 */
 
-
-int		sequence_launcher(t_lexer **seq, t_program_data *data);
-char	*get_testing_wd(char *start_wd, int *offset);
-int		find_key(char *testing_wd, char *env_str, t_program_data *data, int j);
-char	*handle_quotes_in_env(char *str);
-int		get_value(char *testing_wd, char *env_str, char **expanded_wd, char *key_value);
+int				sequence_launcher(t_lexer **seq, t_program_data *data);
+char			*get_testing_wd(char *start_wd, int *offset);
+int				find_key(char *testing_wd, char *env_str,
+					t_program_data *data, int j);
+char			*handle_quotes_in_env(char *str);
+int				get_value(char *testing_wd, char *env_str,
+					char **expanded_wd, char *key_value);
+int				__heredoc_expansion(char **token, t_program_data *data);
+void	update_token(char **token, char **new_token);
+int		parameter_expand(char *str, char **expanded_wd, t_program_data *data, int *offset);
+int	treat_final_rv(char **wd, int *offset, t_program_data *data);
+char *get_key(char *str);
+int	is_valid_char(char c);
 
 /*
 **		Exit

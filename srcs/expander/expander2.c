@@ -6,16 +6,16 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:08:42 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/02 19:41:32 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:32:59 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *get_testing_wd(char *start_wd, int *offset)
+char	*get_testing_wd(char *start_wd, int *offset)
 {
-	int	i;
-	char *testing_wd;
+	int		i;
+	char	*testing_wd;
 
 	i = 0;
 	while (__isalnum(start_wd[i]) || start_wd[i] == '_')
@@ -29,12 +29,13 @@ char *get_testing_wd(char *start_wd, int *offset)
 
 int	find_key(char *testing_wd, char *env_str, t_program_data *data, int j)
 {
-	if (!strcmp(testing_wd, env_str) && data->envp[j][1][0] == '1' && __strchr(data->envp[j][0], '='))
+	if (!strcmp(testing_wd, env_str) && data->envp[j][1][0] == '1' &&
+		__strchr(data->envp[j][0], '='))
 		return (1);
 	return (0);
 }
 
-char *handle_quotes_in_env(char *str)
+char	*handle_quotes_in_env(char *str)
 {
 	int		i;
 	char	*tmp;
@@ -57,9 +58,10 @@ char *handle_quotes_in_env(char *str)
 	return (tmp);
 }
 
-int	get_value(char *testing_wd, char *env_str, char **expanded_wd, char *key_value)
+int	get_value(char *testing_wd, char *env_str,
+			char **expanded_wd, char *key_value)
 {
-	char *final_str;
+	char	*final_str;
 
 	free(testing_wd);
 	free(env_str);
