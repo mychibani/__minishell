@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:21:14 by caubry            #+#    #+#             */
-/*   Updated: 2022/09/28 16:01:27 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 19:21:00 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_cd(t_user_input *ui)
 	test = getcwd(NULL, 0);
 	oldpwd = _strjoin(__strdup("oldpwd="), test);
 	free(test);
-	ft_export(ui, oldpwd);
+	ft_export_arg(ui, oldpwd);
 	if (!path)
 		chdir(getenv("HOME"));
 	else
@@ -45,7 +45,7 @@ void	ft_cd(t_user_input *ui)
 	}
 	test = getcwd(NULL, 0);
 	pwd = _strjoin(__strdup("pwd="), test);
-	ft_export(ui, pwd);
+	ft_export_arg(ui, pwd);
 	free(test);
 	free(pwd);
 	free(oldpwd);

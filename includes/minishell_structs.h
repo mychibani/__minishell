@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/03 13:59:43 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 20:02:28 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_env
 {
 	char			*name;
 	char			*value;
+	int				env;
+	int				order;
 	struct s_env	*next;
 }	t_env;
 

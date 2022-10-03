@@ -6,21 +6,11 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:24:20 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/03 14:21:28 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 20:57:52 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_free(char **to_free, int i)
-{
-	while (to_free[i])
-	{
-		free(to_free[i]);
-		i++;
-	}
-	free(to_free);
-}
 
 // char	**ft_setvar(t_user_input *ui, char *name, char *value)
 // {
@@ -81,16 +71,13 @@ void	ft_free(char **to_free, int i)
 // 	ft_free(var, 1);
 // }
 
-
-
-
 void	ft_changevar(t_env *env, char *var_to_split)
 {
 	char	*name;
 	char	*value;
 	int		length_name;
 	int		length_value;
-	
+
 	free(env->name);
 	free(env->value);
 	length_name = ft_var_length(var_to_split);
@@ -105,25 +92,16 @@ void	ft_changevar(t_env *env, char *var_to_split)
 	env->value = value;
 }
 
-int	ft_var_length(char	*var)
+void	ft_make_export(t_env *search, char *to_set, t_user_input *ui)
 {
-	int	i;
-
-	i = 0;
-	while (var[i] && var[i] != '=')
-		i++;
-	if (!var[i])
-		return (-1);
-	return (i);
-}
-
-void	ft_export(t_user_input *ui, char *to_set)
-{
-	t_env	*search;
-	
-	search = *(ui->test_env);
 	while (search)
 	{
+		if (to_set[ft_var_length(to_set) - 1] == '+'
+			&& !(__strncmp(search->name, to_set, ft_var_length(to_set) - 1)))
+		{
+			ft_concat_var(search, to_set);
+			return ;
+		}
 		if (!(__strncmp(search->name, to_set, ft_var_length(to_set))))
 		{
 			ft_changevar(search, to_set);
@@ -132,4 +110,51 @@ void	ft_export(t_user_input *ui, char *to_set)
 		search = search->next;
 	}
 	__env_lstadd_back(ui->test_env, ft_init_env(to_set));
+}
+
+void	ft_export_no_arg(t_user_input *ui)
+{
+	t_env	*env;
+
+	env = *(ui->test_env);
+	while (env)
+	{
+		if (env->env == 1)
+			printf("%s=%s\n", env->name, env->value);
+		else
+			printf("%s\n", env->name);
+		env = env->next;
+	}
+	return ;
+}
+
+void	ft_export_arg(t_user_input *ui, char *var)
+{
+	t_env	*search;
+	t_lexer	*var_to_set;
+	char	*to_set;
+
+	if (!var)
+		return (ft_export_no_arg(ui));
+	var_to_set = ui->lexer->next;
+	while (var_to_set && var_to_set->type == WORD)
+	{
+		var = var_to_set->token;
+		search = *(ui->test_env);
+		to_set = remove_quote(__strdup(var));
+		if (ft_valid_var(to_set))
+			ft_make_export(search, to_set, ui);
+		else
+			printf("%s : not a valid indentifier\n", to_set);
+		free(to_set);
+		var_to_set = var_to_set->next;
+	}
+}
+
+void	ft_choose_export(t_user_input *ui)
+{
+	if (ui->lexer->next)
+		ft_export_arg(ui, ui->lexer->next->token);
+	else
+		ft_export_no_arg(ui);
 }

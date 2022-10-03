@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:40:29 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/03 14:05:38 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 21:01:55 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	__env_lstadd_back(t_env **alst, t_env *new)
 	elem->next = new;
 }
 
-t_env	*__lst_env_new(char *name, char *value)
+t_env	*__lst_env_new(char *name, char *value, int appear)
 {
 	t_env	*var;
 
@@ -48,6 +48,7 @@ t_env	*__lst_env_new(char *name, char *value)
 		return (NULL);
 	var->name = name;
 	var->value = value;
+	var->env = appear;
 	var->next = NULL;
 	return (var);
 }
@@ -57,6 +58,8 @@ char	*__strncpy(char *dst, const char *src, size_t dstsize)
 	unsigned int	i;
 
 	i = 0;
+	if (!dstsize)
+		dst[i] = '\0';
 	if (dstsize)
 	{
 		while (src[i] && i < dstsize)
@@ -69,43 +72,19 @@ char	*__strncpy(char *dst, const char *src, size_t dstsize)
 	return (dst);
 }
 
-t_env	*ft_init_env(char *var_to_split)
+void	__env_clear(t_env **lst, void (*del)(void*))
 {
-	char	*name;
-	char	*value;
-	t_env	*env;
-	int		length_name;
-	int		length_value;
-
-	length_name = ft_var_length(var_to_split);
-	length_value = __strlen(var_to_split) - length_name - 1;
-	name = malloc(sizeof(char) * length_name + 1);
-	value = malloc(sizeof(char) * length_value + 1);
-	if (!name || !value)
-		return (NULL);
-	name = __strncpy(name, var_to_split, length_name);
-	value = __strncpy(value, var_to_split + length_name + 1, length_value);
-	env = __lst_env_new(name, value);
-	return (env);
-}
-
-t_env	**ft_split_env(char	**env)
-{
-	t_env	**list_env;
-	int	i;
-
-	i = 0;
-	list_env = malloc(sizeof(t_env) * (ft_size(env) + 1));
-	if (!list_env)
-		return (NULL);
-	*list_env = NULL;
-	while (env[i])
+	t_env	*to_delete;
+	
+	if (!*lst)
+		return ;
+	while (*lst)
 	{
-		if (!*list_env)
-			*list_env = ft_init_env(env[i]);
-		else
-			__env_lstadd_back(list_env, ft_init_env(env[i]));
-		i++;
+		to_delete = *lst;
+		(*del)(to_delete->name);
+		if (to_delete->value)
+			(*del)(to_delete->value);
+		*lst = to_delete->next;
+		free(to_delete);
 	}
-	return (list_env);
 }

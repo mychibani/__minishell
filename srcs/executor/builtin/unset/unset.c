@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:35:26 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/03 14:29:09 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 15:58:15 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	ft_unset(t_user_input *ui)
 	t_env	*tmp;
 	char	*search;
 
-	exist = 0;
 	var_to_unset = ui->lexer->next;
 	while (var_to_unset && var_to_unset->type == WORD)
 	{
-		search =var_to_unset->token;
+		search = remove_quote(__strdup(var_to_unset->token));
+		exist = 0;
 		tmp = *(ui->test_env);
 		while (tmp && !exist)
 		{
@@ -50,6 +50,7 @@ void	ft_unset(t_user_input *ui)
 			else
 				tmp = tmp->next;
 		}
+		free(search);
 		var_to_unset = var_to_unset->next;
 	}
 }

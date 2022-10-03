@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:52:10 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/03 14:14:09 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 19:19:46 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_cmd(t_user_input *ui)
 	else if (!(__strcmp(cmd, "pwd")))
 		ft_pwd();
 	else if (!(__strcmp(cmd, "export")))
-		ft_export(ui, ui->lexer->next->token);
+		ft_choose_export(ui);
 	else if (!(__strcmp(cmd, "unset")))
 		ft_unset(ui);
 	else if (!(__strcmp(cmd, "env")))
