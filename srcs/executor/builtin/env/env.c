@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:36 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/03 21:07:59 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 21:12:31 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_env	*ft_init_env(char *var_to_split)
 	char	*name;
 	char	*value;
 	t_env	*env;
-	int	length_name;
+	int		length_name;
 	int		length_value;
 
 	length_name = ft_var_length(var_to_split);
@@ -42,7 +42,7 @@ t_env	*ft_init_env(char *var_to_split)
 t_env	**ft_split_env(char	**env)
 {
 	t_env	**list_env;
-	int	i;
+	int		i;
 
 	i = 0;
 	list_env = malloc(sizeof(t_env) * (ft_size(env) + 1));
@@ -59,7 +59,6 @@ t_env	**ft_split_env(char	**env)
 	}
 	return (list_env);
 }
-
 
 void	ft_env(t_user_input *ui)
 {

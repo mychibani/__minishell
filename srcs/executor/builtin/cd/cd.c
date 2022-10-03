@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:21:14 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/03 19:21:00 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 21:11:33 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_cd(t_user_input *ui)
 	char	*oldpwd;
 	char	*pwd;
 	char	*test;
-	
+
 	path = ui->lexer->next;
 	test = getcwd(NULL, 0);
 	oldpwd = _strjoin(__strdup("oldpwd="), test);

@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:40:29 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/03 21:01:55 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/03 21:13:06 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ft_size(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 		i++;
-	return(i);
+	return (i);
 }
 
 void	__env_lstadd_back(t_env **alst, t_env *new)
@@ -75,7 +75,7 @@ char	*__strncpy(char *dst, const char *src, size_t dstsize)
 void	__env_clear(t_env **lst, void (*del)(void*))
 {
 	t_env	*to_delete;
-	
+
 	if (!*lst)
 		return ;
 	while (*lst)
