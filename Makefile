@@ -30,6 +30,17 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/expander/expander2.c			\
 						srcs/expander/dq_expander.c			\
 						srcs/expander/heredoc_expand.c		\
+						srcs/executor/builtin/echo/echo.c	\
+						srcs/executor/exec.c				\
+						srcs/executor/builtin/env/env.c		\
+						srcs/executor/builtin/env/env_utils.c		\
+						srcs/executor/builtin/pwd/pwd.c		\
+						srcs/executor/builtin/cd/cd.c		\
+						srcs/executor/builtin/export/export.c \
+						srcs/executor/builtin/export/export_utils.c \
+						srcs/executor/builtin/unset/unset.c	\
+						srcs/executor/builtin/exit/exit.c
+
 
 NAME			= 	minishell
 
@@ -50,7 +61,7 @@ RM				=	rm -rf
 _END=$'\e[0m
 _BOLD=$'\e[1m
 _UNDER=$'\e[4m
-_REV=$'\e[7m:
+_REV=$'\e[7m
 _GREY=$'\e[30m
 _RED=$'\e[0;31m
 _GREEN=$'\e[32m

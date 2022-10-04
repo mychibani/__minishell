@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/03 02:39:19 by root              #+#    #+#             */
-/*   Updated: 2022/10/04 13:25:59 by ychibani         ###   ########.fr       */
+/*   Created: 2022/09/27 10:36:41 by caubry            #+#    #+#             */
+/*   Updated: 2022/09/28 16:15:15 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	__isdigit(int c)
+void	ft_pwd(void)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
+	free(pwd);
 }

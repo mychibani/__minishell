@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/03 14:23:14 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:48:16 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 **		Init
 */
 
-t_program_data	*init_data_struct(t_program_data *data);
-t_user_input	*init_user_input_struct(t_user_input *ui);
-void			__init_structs(t_program_data *data, t_user_input *ui);
+// t_program_data	*init_data_struct(t_program_data *data);
+// t_user_input	*init_user_input_struct(t_user_input *ui);
+// void			__init_structs(t_program_data *data, t_user_input *ui);
 
 /*
 **		Env
@@ -33,6 +33,87 @@ int				get_env_size(char **env);
 */
 
 int				change_directory(char *path);
+t_program_data	*init_data_struct(t_program_data *data);
+t_user_input	*init_user_input_struct(t_user_input *ui);
+void			__init_structs(t_program_data *data, t_user_input *ui);
+
+/*
+**		Cd
+*/
+
+int				change_directory(char *path);
+void			ft_cd(t_user_input *ui);
+
+/*
+**		echo
+*/
+
+void	ft_echo(t_user_input *ui);
+char	*remove_quote(char *str);
+
+/*
+**		env
+*/
+
+void	ft_env(t_user_input *ui);
+t_env	*ft_init_env(char *var_to_split);
+t_env	**ft_split_env(char	**env);
+
+/*
+**		env_utils
+*/
+
+void	__env_clear(t_env **lst, void (*del)(void*));
+char	*__strncpy(char *dst, const char *src, size_t dstsize);
+t_env	*__lst_env_new(char *name, char *value, int appear);
+void	__env_lstadd_back(t_env **alst, t_env *new);
+int		ft_size(char **str);
+
+
+/*
+**		exit
+*/
+
+void	ft_exit(t_user_input *ui);
+
+/*
+**		export
+*/
+
+void	ft_choose_export(t_user_input *ui);
+void	ft_export_arg(t_user_input *ui, char *var);
+void	ft_export_no_arg(t_user_input *ui);
+void	ft_make_export(t_env *search, char *to_set, t_user_input *ui);
+void	ft_changevar(t_env *env, char *var_to_split);
+
+/*
+**		export_utils
+*/
+
+void	ft_free(char **to_free, int i);
+int		ft_var_length(char	*var);
+int		ft_valid_var(char *str);
+void	ft_concat_var(t_env *env, char *var_to_split);
+
+
+/*
+**		pwd
+*/
+
+void	ft_pwd(void);
+
+/*
+**		unset
+*/
+
+void	ft_unset(t_user_input *ui);
+
+/*
+**		exec
+*/
+
+int				ft_cmd(t_user_input *ui);
+
 
 /*
 **		Tokenizer Utils

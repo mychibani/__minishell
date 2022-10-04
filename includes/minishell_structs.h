@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/03 13:25:57 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:43:51 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ typedef struct s_token
 	char			*content;
 	struct s_token	*next;
 }	t_token;
+
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+	int				env;
+	int				order;
+	struct s_env	*next;
+}	t_env;
 
 typedef struct s_lexer
 {
@@ -33,6 +42,7 @@ typedef struct s_user_input
 	t_list		*token;
 	t_lexer		*lexer;
 	t_lexer		*error_delim;
+	t_env		**test_env;
 	char		*to_tokenize;
 	int			ret_token;
 	int			ret_hd;

@@ -44,7 +44,6 @@ void	print_token_list(t_token *token)
 	__printf("\n");
 }
 
-
 void	print_data(t_program_data *data, t_user_input *ui)
 {
 	printf("[%s]\n", data->all_inputs[0]);
