@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:31 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/04 13:50:59 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:48:23 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,20 @@ void	ft_echo(t_user_input *ui)
 	int		flg;
 	char	*print_echo;
 	t_lexer	*echo_arg;
+	int		i;
 
 	flg = 0;
+	i = 2;
 	echo_arg = ui->lexer->next;
-	while (echo_arg->token && !__strcmp(echo_arg->token, "-n"))
+	while (echo_arg->token && !__strncmp(echo_arg->token, "-n", 2))
 	{
-		echo_arg = echo_arg->next;
-		flg = 1;
+		while (*(echo_arg->token) + i == 'n')
+			i++;
+		if (!*(echo_arg->token) + i)
+		{
+			echo_arg = echo_arg->next;
+			flg = 1;
+		}
 	}
 	print_echo = fill_print_echo(echo_arg);
 	if (!flg)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fonctions.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 13:48:16 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:08:45 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int				get_env_size(char **env);
 */
 
 int				change_directory(char *path);
-t_program_data	*init_data_struct(t_program_data *data);
+t_program_data	*init_data_struct(t_program_data *data, char **env);
 t_user_input	*init_user_input_struct(t_user_input *ui);
-void			__init_structs(t_program_data *data, t_user_input *ui);
+void	__init_structs(t_program_data *data, t_user_input *ui, char **env);
 
 /*
 **		Cd
@@ -58,6 +58,7 @@ char	*remove_quote(char *str);
 void	ft_env(t_user_input *ui);
 t_env	*ft_init_env(char *var_to_split);
 t_env	**ft_split_env(char	**env);
+char	**ft_collect_env(int *no_env, t_user_input *ui, char **env);
 
 /*
 **		env_utils
@@ -91,8 +92,8 @@ void	ft_changevar(t_env *env, char *var_to_split);
 */
 
 void	ft_free(char **to_free, int i);
-int		ft_var_length(char	*var);
-int		ft_valid_var(char *str);
+int	ft_var_length(char	*var);
+int	ft_valid_var(char *str);
 void	ft_concat_var(t_env *env, char *var_to_split);
 
 
@@ -113,6 +114,10 @@ void	ft_unset(t_user_input *ui);
 */
 
 int				ft_cmd(t_user_input *ui);
+char	**ft_list_to_chr(t_env **env);
+
+
+
 
 
 /*
@@ -178,6 +183,7 @@ void			__signal(int sig);
 
 char			**__free_tab(char **tab);
 void			__lexer_clear(t_lexer **lst);
+void	__lexer_clear2(t_lexer **lst, void (*del)(void*));
 void			__clean_input(t_user_input *ui, char **inputs, char *line);
 void			destroy_env(t_program_data *data);
 

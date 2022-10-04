@@ -6,11 +6,42 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:36 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/03 21:12:31 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/04 15:40:02 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#include "minishell.h"
+
+char	**ft_collect_env(int *no_env, t_user_input *ui, char **env)
+{
+	char	**collect_env;
+	char	*pwd;
+	char	*var_pwd;
+	char	*shlvl;
+	
+	collect_env = env;
+	if (!*env)
+	{
+		*no_env = 1;
+		pwd = getcwd(NULL, 0);
+		var_pwd = __strjoin(__strdup("PWD="), pwd);
+		free(pwd);
+		shlvl = __strdup("SHLVL=1");
+		ui->test_env = malloc(sizeof(t_env) * 5);
+		if (!ui->test_env)
+			return (NULL);
+		*(ui->test_env) = NULL;
+		__env_lstadd_back(ui->test_env, ft_init_env("OLDPWD"));
+		__env_lstadd_back(ui->test_env, ft_init_env(var_pwd));
+		__env_lstadd_back(ui->test_env, ft_init_env(shlvl));
+		__env_lstadd_back(ui->test_env, ft_init_env("_=/usr/bin/env"));
+		free(var_pwd);
+		free(shlvl);
+	}
+	return (collect_env);
+}
 
 t_env	*ft_init_env(char *var_to_split)
 {

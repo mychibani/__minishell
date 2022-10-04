@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:56:39 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/04 13:52:33 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:01:57 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ void	ft_exit(t_user_input *ui)
 		printf("exit : too many arguments\n");
 		return ;
 	}
-	if (ui->token)
-		__lstclear(&ui->token, free);
-	if (ui->lexer)
-		__lexer_clear(&ui->lexer);
+	
+	// if (ui->token)
+	// 	__lstclear(&ui->token, free);
+	// if (ui->lexer)
+	// 	__lexer_clear2(&ui->lexer, free);
 	exit(exit_code);
 }

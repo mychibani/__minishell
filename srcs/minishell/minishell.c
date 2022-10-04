@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 13:48:28 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:45:04 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av, char **env)
 	t_user_input	ui;
 
 	(void)av;
-	__init_structs(&data, &ui);
+	__init_structs(&data, &ui, env);
 	if (ac > 1)
 		return (__putstr_fd("usage <./minishell>\n", 2), 2);
 	if (!get_env_var(&data, env, get_env_size(env)))

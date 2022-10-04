@@ -3,14 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:52:10 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/04 13:51:07 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:00:45 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_size_list(t_env *lst)
+{
+	int	i;
+
+	i = 0;
+	if (!lst)
+		return (i);
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+
+char	**ft_list_to_chr(t_env **env)
+{
+	t_env	*tmp;
+	char	**env_exec;
+	char	*value;
+	int		i;
+
+	tmp = *env;
+	i = 0;
+	env_exec = malloc(sizeof(char *) * (ft_size_list(tmp) + 2));
+	if (!env_exec)
+		return (NULL);
+	env_exec[0] = 0;
+	tmp = *env;
+	while (tmp)
+	{
+		env_exec[i] = __strjoin(__strdup(tmp->name), "=");
+		value = __strdup(tmp->value);
+		env_exec[i] = __strjoin(env_exec[i], value);
+		printf("env_exec = %s\n", env_exec[i]);
+		free(value);
+		i++;
+		tmp = tmp->next;
+	}
+	env[i] = 0;
+	return(env_exec);
+}
 
 int	ft_execve(char *cmd, char **argvec, char **env)
 {
@@ -23,11 +66,15 @@ int	ft_execve(char *cmd, char **argvec, char **env)
 		return (-1);
 	}
 	else if (pid == 0)
-		execve(cmd, argvec, env);
+	{
+		if (!access(cmd, X_OK))
+			execve(cmd, argvec, env);
+		else
+			execve(__strjoin(__strdup("/usr/bin/"), cmd), argvec, env);
+	}
 	else
 		wait(NULL);
 	ft_free(argvec, 0);
-	free(cmd);
 	return (1);
 }
 
@@ -43,10 +90,10 @@ char	**ft_prep_arg(t_user_input *ui)
 	i = 0;
 	while (tmplex && tmplex->type == WORD)
 	{
-	tmparg = __strjoin(tmparg, tmplex->token);
-	tmparg = __strjoin(tmparg, "\n");
-	i++;
-	tmplex = tmplex->next;
+		tmparg = __strjoin(tmparg, tmplex->token);
+		tmparg = __strjoin(tmparg, "\n");
+		i++;
+		tmplex = tmplex->next;
 	}
 	argvec = __split(tmparg, '\n');
 	free(tmparg);
@@ -75,8 +122,7 @@ int	ft_cmd(t_user_input *ui)
 		ft_env(ui);
 	else if (!(__strcmp(cmd, "exit")))
 		ft_exit(ui);
-	// else if ((ft_execve(_strjoin(__strdup("/usr/bin/"), cmd),
-	// 			ft_prep_arg(ui), ui->test_env)) == -1)
-		// printf("Command '%s' not found\n", cmd);
+	else if (ft_execve(cmd, ft_prep_arg(ui), ui->env) == -1)
+		printf("Command '%s' not found\n", cmd);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_structs.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 13:43:51 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:47:56 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_user_input
 	t_lexer		*lexer;
 	t_lexer		*error_delim;
 	t_env		**test_env;
+	char		**env;
 	char		*to_tokenize;
 	int			ret_token;
 	int			ret_hd;
@@ -56,6 +57,7 @@ typedef struct s_program_data
 	t_list			*token;	
 	char			**all_inputs;
 	char			***envp;
+	char			**env;
 }	t_program_data;
 
 typedef struct s_cmd
