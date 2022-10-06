@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 17:02:29 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 13:26:15 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/05 10:23:28 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void		__lstclear(t_list **lst, void (*del)(void *));
 void		__lstiter(t_list *lst, void (*f)(void *));
 t_list		*__lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char		*__gnl(int fd);
+char		**__split_pool(char *str, char *sep);
 
 #endif

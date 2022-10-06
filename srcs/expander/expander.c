@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:15:31 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 14:51:55 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:31:05 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,3 @@ int	__expand_var(t_lexer *seq, t_program_data *data)
 	return (_SUCCESS_);
 }
 
-int	sequence_launcher(t_lexer **seq, t_program_data *data)
-{
-	if (__expand_var(*seq, data) == MALLOC_ERROR)
-		return (0);
-	return (1);
-}

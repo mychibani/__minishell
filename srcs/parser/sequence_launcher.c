@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaner_prog.c                                     :+:      :+:    :+:   */
+/*   sequence_launcher.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 15:30:48 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 09:53:59 by ychibani         ###   ########.fr       */
+/*   Created: 2022/10/06 11:24:27 by ychibani          #+#    #+#             */
+/*   Updated: 2022/10/06 13:08:01 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**__free_tab(char **tab)
+int	sequence_launcher(t_lexer **seq, t_program_data *data)
 {
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return (NULL);
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
-}
-
-void	__clean_input(t_user_input *ui, char **inputs, char *line)
-{
-	(void)ui;
-	if (inputs)
-		__free_tab(inputs);
-	free(line);
+	if (__expand_var(*seq, data) == MALLOC_ERROR)
+		return (0);
+	if (!__error_catcher(seq, data))
+		return (data->rv);
+	if (!__split_token_after_expand(*seq))
+		return (0);
+	if (!lexer_remove_quote(*seq))
+		return (0);
+	return (1);
 }

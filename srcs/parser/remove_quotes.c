@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleaner_prog.c                                     :+:      :+:    :+:   */
+/*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 15:30:48 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 09:53:59 by ychibani         ###   ########.fr       */
+/*   Created: 2022/10/06 11:25:13 by ychibani          #+#    #+#             */
+/*   Updated: 2022/10/06 13:06:38 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**__free_tab(char **tab)
+int	lexer_remove_quote(t_lexer *lexer)
 {
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return (NULL);
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
-}
-
-void	__clean_input(t_user_input *ui, char **inputs, char *line)
-{
-	(void)ui;
-	if (inputs)
-		__free_tab(inputs);
-	free(line);
+	(void)lexer;
+	// while (lexer)
+	// {
+	// 	if (lexer->type == WORD && lexer->hd_type == 0)
+	// 	{
+	// 		if (!quote_remove(&lexer->token))
+	// 			return (0);
+	// 	}
+	// 	lexer = lexer->next;
+	// }
+	return (1);
 }

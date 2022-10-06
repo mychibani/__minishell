@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fonctions.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 16:08:45 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/06 13:07:43 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int				get_env_size(char **env);
 **		Cd
 */
 
-int				change_directory(char *path);
 t_program_data	*init_data_struct(t_program_data *data, char **env);
+int				change_directory(char *path);
 t_user_input	*init_user_input_struct(t_user_input *ui);
-void	__init_structs(t_program_data *data, t_user_input *ui, char **env);
+void			__init_structs(t_program_data *data, t_user_input *ui, char **env);
 
 /*
 **		Cd
@@ -186,9 +186,11 @@ void			__lexer_clear(t_lexer **lst);
 void	__lexer_clear2(t_lexer **lst, void (*del)(void*));
 void			__clean_input(t_user_input *ui, char **inputs, char *line);
 void			destroy_env(t_program_data *data);
+int				__error_catcher(t_lexer **seq, t_program_data *data);
+int				__error_after_expand(t_lexer **seq);
 
 /*
-**
+**	Expand
 */
 
 int				sequence_launcher(t_lexer **seq, t_program_data *data);
@@ -199,11 +201,14 @@ char			*handle_quotes_in_env(char *str);
 int				get_value(char *testing_wd, char *env_str,
 					char **expanded_wd, char *key_value);
 int				__heredoc_expansion(char **token, t_program_data *data);
-void	update_token(char **token, char **new_token);
-int		parameter_expand(char *str, char **expanded_wd, t_program_data *data, int *offset);
-int	treat_final_rv(char **wd, int *offset, t_program_data *data);
-char *get_key(char *str);
-int	is_valid_char(char c);
+void			update_token(char **token, char **new_token);
+int				parameter_expand(char *str, char **expanded_wd, t_program_data *data, int *offset);
+int				treat_final_rv(char **wd, int *offset, t_program_data *data);
+char			*get_key(char *str);
+int				is_valid_char(char c);
+int				lexer_remove_quote(t_lexer *lexer);
+int				__expand_var(t_lexer *seq, t_program_data *data);
+int				__split_token_after_expand(t_lexer *travel);
 
 /*
 **		Exit

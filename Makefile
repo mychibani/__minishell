@@ -6,40 +6,44 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/09/15 11:50:13by ychibani         ###   ########.fr        #
+#    Updated: 2022/10/06 13:03:50 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_FILES		=		srcs/minishell/minishell.c			\
-						srcs/init/init_structs.c			\
-						srcs/init/env.c						\
-						srcs/parser/parsing.c				\
-						srcs/parser/synthax_checker.c		\
-						srcs/token/tokenizer.c				\
-						srcs/token/word_operator_fct.c		\
-						srcs/token/tokenizer_utils_fct.c	\
-						srcs/lexer/lexer.c					\
-						srcs/lexer/lexer_utils.c			\
-						srcs/utils/utils.c					\
-						srcs/clean/cleaner_prog.c			\
-						srcs/clean/clean_exit.c				\
-						srcs/executor/signals/signal.c		\
-						srcs/here_doc/here_doc.c			\
-						srcs/here_doc/here_doc_utils.c		\
-						srcs/expander/expander.c			\
-						srcs/expander/expander2.c			\
-						srcs/expander/dq_expander.c			\
-						srcs/expander/heredoc_expand.c		\
-						srcs/executor/builtin/echo/echo.c	\
-						srcs/executor/exec.c				\
-						srcs/executor/builtin/env/env.c		\
+SRCS_FILES		=		srcs/minishell/minishell.c					\
+						srcs/init/init_structs.c					\
+						srcs/init/env.c								\
+						srcs/parser/parsing.c						\
+						srcs/parser/synthax_checker.c				\
+						srcs/parser/clean_token.c					\
+						srcs/parser/resplit_after_expand.c			\
+						srcs/parser/remove_quotes.c					\
+						srcs/parser/sequence_launcher.c				\
+						srcs/token/tokenizer.c						\
+						srcs/token/word_operator_fct.c				\
+						srcs/token/tokenizer_utils_fct.c			\
+						srcs/lexer/lexer.c							\
+						srcs/lexer/lexer_utils.c					\
+						srcs/utils/utils.c							\
+						srcs/clean/cleaner_prog.c					\
+						srcs/clean/clean_exit.c						\
+						srcs/executor/signals/signal.c				\
+						srcs/here_doc/here_doc.c					\
+						srcs/here_doc/here_doc_utils.c				\
+						srcs/expander/expander.c					\
+						srcs/expander/expander2.c					\
+						srcs/expander/expander_utils.c				\
+						srcs/expander/heredoc_expand.c				\
+						srcs/executor/exec.c						\
+						srcs/executor/builtin/echo/echo.c			\
+						srcs/executor/builtin/env/env.c				\
 						srcs/executor/builtin/env/env_utils.c		\
-						srcs/executor/builtin/pwd/pwd.c		\
-						srcs/executor/builtin/cd/cd.c		\
-						srcs/executor/builtin/export/export.c \
+						srcs/executor/builtin/pwd/pwd.c				\
+						srcs/executor/builtin/cd/cd.c				\
+						srcs/executor/builtin/export/export.c 		\
 						srcs/executor/builtin/export/export_utils.c \
-						srcs/executor/builtin/unset/unset.c	\
-						srcs/executor/builtin/exit/exit.c
+						srcs/executor/builtin/unset/unset.c			\
+						srcs/executor/builtin/exit/exit.c			\
 
 
 NAME			= 	minishell
@@ -108,7 +112,7 @@ re:				fclean
 git:		
 			git add .
 			git commit -m "$m"
-			git push origin master
+			git push --set-upstream origin retokenize	
 
 -include	${DEPS_FILES}
 

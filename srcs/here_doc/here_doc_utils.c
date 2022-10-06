@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-extern int g_es;
+extern int	g_es;
 
 int		heredoc_join(char *adding_line, char **heredoc)
 {
