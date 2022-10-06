@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 10:36:41 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/06 12:54:35 by caubry           ###   ########.fr       */
+/*   Created: 2022/10/06 12:11:13 by caubry            #+#    #+#             */
+/*   Updated: 2022/10/06 12:12:57 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(void)
+int	ft_cdpwd(char *cd)
 {
-	char	*pwd;
+	if (!(__strcmp(cd, "-")))
+		return (1);
+	return (0);
+}
 
-	pwd = getcwd(NULL, 0);
-	// if (!pwd)
-	// {
-	// 	printf()
-	// }
-	printf("%s\n", pwd);
-	free(pwd);
+int	ft_cdhome(char *cd)
+{
+	if (!(__strcmp(cd, "--")))
+		return (1);
+	if (!(__strcmp(cd, "~")))
+		return (1);
+	return (0);
+}
+
+t_env	*ft_find_var(char	*name, t_env **env)
+{
+	t_env	*var;
+
+	var = *env;
+	while (var && __strcmp(var->name, name))
+		var = var->next;
+	if (!var)
+		return (NULL);
+	return (var);
 }

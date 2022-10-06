@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 16:08:45 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/06 12:33:28 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int				get_env_size(char **env);
 **		Cd
 */
 
-int				change_directory(char *path);
 t_program_data	*init_data_struct(t_program_data *data, char **env);
 t_user_input	*init_user_input_struct(t_user_input *ui);
 void	__init_structs(t_program_data *data, t_user_input *ui, char **env);
@@ -43,6 +42,15 @@ void	__init_structs(t_program_data *data, t_user_input *ui, char **env);
 
 int				change_directory(char *path);
 void			ft_cd(t_user_input *ui);
+
+/*
+**		Cd_utils
+*/
+
+t_env	*ft_find_var(char	*name, t_env **env);
+int	ft_cdhome(char *cd);
+int	ft_cdpwd(char *cd);
+
 
 /*
 **		echo

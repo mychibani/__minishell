@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:31 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/04 15:48:23 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/06 12:48:54 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@ int	check_quote(char *str, int i, char *quote)
 		}
 		else
 			*quote = 0;
+		i++;
+	}
+	return (i);
+}
+
+int	edit_quote(char *str, int i, char *quote)
+{
+	if (str[i] && str[i] == *quote)
+	{
+		*quote = 0;
 		i++;
 	}
 	return (i);
@@ -50,11 +60,7 @@ char	*remove_quote(char *str)
 			j++;
 			i++;
 		}
-		if (str[i] && str[i] == quote)
-		{
-			quote = 0;
-			i++;
-		}
+		i = edit_quote(str, i, &quote);
 	}
 	no_quote[j] = '\0';
 	free (str);

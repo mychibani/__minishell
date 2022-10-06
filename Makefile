@@ -36,6 +36,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c			\
 						srcs/executor/builtin/env/env_utils.c		\
 						srcs/executor/builtin/pwd/pwd.c		\
 						srcs/executor/builtin/cd/cd.c		\
+						srcs/executor/builtin/cd/cd_utils.c		\
 						srcs/executor/builtin/export/export.c \
 						srcs/executor/builtin/export/export_utils.c \
 						srcs/executor/builtin/unset/unset.c	\
