@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 13:07:43 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:32:01 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ void			__init_structs(t_program_data *data, t_user_input *ui, char **env);
 
 int				change_directory(char *path);
 void			ft_cd(t_user_input *ui);
+
+/*
+**		Cd_utils
+*/
+
+t_env	*ft_find_var(char	*name, t_env **env);
+int	ft_cdhome(char *cd);
+int	ft_cdpwd(char *cd);
+
 
 /*
 **		echo

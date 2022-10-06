@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:36 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/04 15:40:02 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/06 12:39:31 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**ft_collect_env(int *no_env, t_user_input *ui, char **env)
 	char	*pwd;
 	char	*var_pwd;
 	char	*shlvl;
-	
+
 	collect_env = env;
 	if (!*env)
 	{

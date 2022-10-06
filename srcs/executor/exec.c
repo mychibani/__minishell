@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:52:10 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/04 17:00:45 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/06 12:34:16 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**ft_list_to_chr(t_env **env)
 		tmp = tmp->next;
 	}
 	env[i] = 0;
-	return(env_exec);
+	return (env_exec);
 }
 
 int	ft_execve(char *cmd, char **argvec, char **env)

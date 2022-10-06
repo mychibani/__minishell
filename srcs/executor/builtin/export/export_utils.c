@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:54:01 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/04 13:51:28 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:34:34 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	ft_var_length(char	*var)
 	i = 0;
 	while (var[i] && var[i] != '=')
 		i++;
-	// if (!var[i])
-	// 	return (-1);
 	return (i);
 }
 

@@ -6,7 +6,7 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/10/06 13:03:50 by ychibani         ###   ########.fr        #
+#    Updated: 2022/10/06 13:33:10 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/executor/builtin/env/env_utils.c		\
 						srcs/executor/builtin/pwd/pwd.c				\
 						srcs/executor/builtin/cd/cd.c				\
+						srcs/executor/builtin/cd/cd_utils.c		\
 						srcs/executor/builtin/export/export.c 		\
 						srcs/executor/builtin/export/export_utils.c \
 						srcs/executor/builtin/unset/unset.c			\

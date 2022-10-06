@@ -6,31 +6,61 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:21:14 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/04 15:58:39 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/06 12:49:28 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cdhome(char *cd)
+void	ft_check_home(t_user_input *ui)
 {
-	if (!(__strcmp(cd, "--")))
-		return (1);
-	if (!(__strcmp(cd, "~")))
-		return (1);
-	return (0);
+	int		exist;
+	t_env	*tmp;
+
+	exist = 0;
+	tmp = *(ui->test_env);
+	while (tmp && !exist)
+	{
+		if (!__strncmp(tmp->name, "HOME", 4))
+			exist = 1;
+		tmp = tmp->next;
+	}
+	if (exist)
+		chdir(getenv("HOME"));
+	else
+		printf("cd: HOME not set\n");
 }
 
-t_env	*ft_find_var(char	*name, t_env **env)
+void	ft_check_oldpwd(t_env *tmp)
 {
-	t_env	*var;
+	while (tmp)
+	{
+		if (!__strncmp(tmp->name, "OLDPWD", 6))
+			break ;
+		tmp = tmp->next;
+	}
+	if (tmp && tmp->value)
+	{
+		printf("%s\n", tmp->value);
+		chdir(tmp->value);
+	}
+	else
+		printf("cd: OLDPWD not set\n");
+}
 
-	var = *env;
-	while (var && __strcmp(var->name, name))
-		var = var->next;
-	if (!var)
-		return (NULL);
-	return (var);
+void	ft_apply_cd(t_lexer *path, t_user_input *ui)
+{
+	t_env	*tmp;
+
+	tmp = *(ui->test_env);
+	if (path->next && path->next->type == WORD)
+		return ;
+	if (ft_cdhome(path->token))
+		ft_check_home(ui);
+	else if (ft_cdpwd(path->token))
+		ft_check_oldpwd(tmp);
+	else
+		chdir(path->token);
 }
 
 void	ft_cd(t_user_input *ui)
@@ -41,23 +71,19 @@ void	ft_cd(t_user_input *ui)
 	char	*test;
 
 	path = ui->lexer->next;
+	if (path->next && path->next->type == WORD)
+	{
+		printf("cd: too many arguments\n");
+		return ;
+	}
 	test = getcwd(NULL, 0);
 	oldpwd = __strjoin(__strdup("OLDPWD="), test);
 	free(test);
-	ft_changevar(ft_find_var("OLDPWD", ui->test_env), oldpwd);
 	if (!path)
-		chdir(getenv("HOME"));
+		ft_check_home(ui);
 	else
-	{
-		if (path->next && path->next->type == WORD)
-			return ;
-		if (ft_cdhome(path->token))
-		{
-			free(path->token);
-			path->token = __strdup(getenv("HOME"));
-		}
-		chdir(path->token);
-	}
+		ft_apply_cd(path, ui);
+	ft_changevar(ft_find_var("OLDPWD", ui->test_env), oldpwd);
 	test = getcwd(NULL, 0);
 	pwd = __strjoin(__strdup("PWD="), test);
 	ft_changevar(ft_find_var("PWD", ui->test_env), pwd);
