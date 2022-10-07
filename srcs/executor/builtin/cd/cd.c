@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:21:14 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/06 12:49:28 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/07 11:04:49 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ void	ft_cd(t_user_input *ui)
 	char	*test;
 
 	path = ui->lexer->next;
-	if (path->next && path->next->type == WORD)
+	if (path && path->next && path->next->type == WORD)
 	{
 		printf("cd: too many arguments\n");
 		return ;
 	}
 	test = getcwd(NULL, 0);
+	if (!test)
+		test = __strdup(ft_getpwd(ui));
 	oldpwd = __strjoin(__strdup("OLDPWD="), test);
 	free(test);
 	if (!path)

@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:31 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/06 12:48:54 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/07 11:03:57 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	ft_echo(t_user_input *ui)
 	flg = 0;
 	i = 2;
 	echo_arg = ui->lexer->next;
+	if (!echo_arg)
+		return ;
 	while (echo_arg->token && !__strncmp(echo_arg->token, "-n", 2))
 	{
 		while (*(echo_arg->token) + i == 'n')
