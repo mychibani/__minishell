@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fonctions.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 13:32:01 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:14:13 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,21 @@ void	ft_concat_var(t_env *env, char *var_to_split);
 **		pwd
 */
 
-void	ft_pwd(void);
+char	*ft_getpwd(t_user_input *ui);
+void	ft_pwd(t_user_input *ui);
 
 /*
 **		unset
 */
 
 void	ft_unset(t_user_input *ui);
+
+/*
+**		pipex
+*/
+
+int	ft_pipex(t_user_input *ui);
+
 
 /*
 **		exec

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
+#    By: caubry <caubry@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/10/06 13:33:10 by ychibani         ###   ########.fr        #
+#    Updated: 2022/10/07 16:27:34 by caubry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/executor/builtin/export/export_utils.c \
 						srcs/executor/builtin/unset/unset.c			\
 						srcs/executor/builtin/exit/exit.c			\
+						srcs/executor/pipex/pipex.c
 
 
 NAME			= 	minishell
