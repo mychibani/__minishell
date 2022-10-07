@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 14:47:56 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/07 15:32:05 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,25 @@ typedef struct s_lexer
 	struct s_lexer	*next;	
 }	t_lexer;
 
+typedef struct s_cmd
+{
+	int				redirection[2];
+	int				index;
+	char			**arg;
+	struct s_msh	*msh;
+	struct s_cmd	*next;
+
+}	t_cmd;
+
 typedef struct s_user_input
 {
 	t_list		*token;
 	t_lexer		*lexer;
 	t_lexer		*error_delim;
 	t_env		**test_env;
+	t_cmd		*cmd;
+	int			prev_read;
+	int			outfile;
 	char		**env;
 	char		*to_tokenize;
 	int			ret_token;
@@ -59,15 +72,5 @@ typedef struct s_program_data
 	char			***envp;
 	char			**env;
 }	t_program_data;
-
-typedef struct s_cmd
-{
-	int				redirection[2];
-	int				index;
-	char			**arg;
-	struct s_msh	*msh;
-	struct s_cmd	*next;
-
-}	t_cmd;
 
 #endif

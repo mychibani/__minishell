@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:43:21 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 13:00:13 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/07 15:21:53 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	treat_usr_inputs(char *arg, t_program_data *data, t_user_input *user_input)
 		return (__lexer_clear(&user_input->lexer), -1);
 	if (!sequence_launcher(&user_input->lexer, data))
 		return (__lexer_clear(&user_input->lexer), -1);
-	ft_cmd(user_input);
+	ft_pipex(user_input);
 	__lexer_clear(&user_input->lexer);
 	return (_SUCCESS_);
 }
