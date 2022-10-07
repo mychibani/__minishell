@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+char **unquoted_split(char *str, char *charset)
+{
+
+}
+
+
+
 void	print_linked_list(t_list *list)
 {
 	while (list)

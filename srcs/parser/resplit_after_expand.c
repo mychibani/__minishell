@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   repslit_after_expand.c                             :+:      :+:    :+:   */
+/*   resplit_after_expand.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:26:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 11:26:17 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:55:35 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	split_token(t_lexer *lexer)
 	i = 0;
 	while (splitted_token[i])
 	{
+		__printf("%s\n", splitted_token[i]);
 		if (!insert_token(splitted_token[i], lexer, 0, new_end))
 			return (__free_tab(splitted_token), 0);
 		i++;
