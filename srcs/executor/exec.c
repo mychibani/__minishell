@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:52:10 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/06 12:34:16 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:38:23 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	**ft_list_to_chr(t_env **env)
 int	ft_execve(char *cmd, char **argvec, char **env)
 {
 	pid_t	pid;
+	char	*path;
 
 	pid = fork();
 	if (pid == -1)
@@ -70,7 +71,12 @@ int	ft_execve(char *cmd, char **argvec, char **env)
 		if (!access(cmd, X_OK))
 			execve(cmd, argvec, env);
 		else
-			execve(__strjoin(__strdup("/usr/bin/"), cmd), argvec, env);
+		{
+			path = __strjoin(__strdup("/usr/bin/"), cmd);
+			execve(path, argvec, env);
+			free(path);
+		}
+		exit (EXIT_SUCCESS);
 	}
 	else
 		wait(NULL);
@@ -113,7 +119,7 @@ int	ft_cmd(t_user_input *ui)
 	else if (!(__strcmp(cmd, "cd")))
 		ft_cd(ui);
 	else if (!(__strcmp(cmd, "pwd")))
-		ft_pwd();
+		ft_pwd(ui);
 	else if (!(__strcmp(cmd, "export")))
 		ft_choose_export(ui);
 	else if (!(__strcmp(cmd, "unset")))
