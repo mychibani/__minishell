@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:24:27 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 13:08:01 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:44:25 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	sequence_launcher(t_lexer **seq, t_program_data *data)
 		return (0);
 	if (!__error_catcher(seq, data))
 		return (data->rv);
+	print_lexer_list(*seq);
 	if (!__split_token_after_expand(*seq))
 		return (0);
 	if (!lexer_remove_quote(*seq))
