@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/07 17:14:13 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/08 20:15:32 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,14 @@ void	ft_unset(t_user_input *ui);
 */
 
 int	ft_pipex(t_user_input *ui);
+
+void	clean(t_pipe *data);
+
+/*
+**		children_work
+*/
+
+void	exec_children_work(t_pipe *data, t_user_input *ui);
 
 
 /*

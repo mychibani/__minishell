@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:43:21 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/07 16:32:29 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/08 17:06:20 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	treat_usr_inputs(char *arg, t_program_data *data, t_user_input *user_input)
 	if (!lexer(user_input->token, &user_input->lexer))
 		return (__putstr_fd("Lexer Error\n", 2), 2);
 	user_input->error_delim = synthax_checker(&user_input->lexer, data);
+	if (user_input->error_delim)
+		return (__lexer_clear(&user_input->lexer), 0);
 	if (!__heredoc(user_input, data))
 		return (__lexer_clear(&user_input->lexer), 0);
 	if (data->synthax_error == 2)

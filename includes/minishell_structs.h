@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/07 18:25:32 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/08 20:21:26 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ typedef struct s_lexer
 
 typedef struct s_cmd
 {
-	t_bool		mode;
-	int			outfile;
-	char		*cmd;
-	char		*infile_name;
-	char		*outfile_name;
+	t_bool			mode;
+	int				outfile;
+	char			*cmd;
+	char			**infile_name;
+	char			**outfile_name;
+	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_pipe
@@ -63,6 +64,7 @@ typedef struct s_pipe
 	int			*pid;
 	int			pipe[2];
 	int			prev_read;
+	char		*path;
 	t_cmd		*head;
 	t_cmd		*elem;
 	size_t		ninst;
