@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/08 20:15:32 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/09 22:19:43 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,14 @@ void	ft_unset(t_user_input *ui);
 */
 
 int	ft_pipex(t_user_input *ui);
-
+int	open_infile(char *infile_name, t_pipe *data);
+int	_file_descriptors_duplicators(int _first, int _second);
+int	_close_file_descriptors(int _first, int _second);
+int	open_outfile(char *outfile_name, int mode, t_pipe *data);
 void	clean(t_pipe *data);
+int	ft_execve(char *cmd, char **argvec, char **env);
+char	*find_command_path(t_pipe *data);
+int	ft_cmd_pipe(t_user_input *ui, char **cmd);
 
 /*
 **		children_work

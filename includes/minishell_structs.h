@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/08 20:21:26 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/09 22:14:11 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ typedef struct s_cmd
 {
 	t_bool			mode;
 	int				outfile;
-	char			*cmd;
+	char			**cmd;
 	char			**infile_name;
 	char			**outfile_name;
+	char			**infile_type;
+	char			**outfile_type;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -64,7 +66,7 @@ typedef struct s_pipe
 	int			*pid;
 	int			pipe[2];
 	int			prev_read;
-	char		*path;
+	char		**path;
 	t_cmd		*head;
 	t_cmd		*elem;
 	size_t		ninst;

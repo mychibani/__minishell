@@ -6,7 +6,7 @@
 #    By: caubry <caubry@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/10/08 18:09:22 by caubry           ###   ########.fr        #
+#    Updated: 2022/10/09 14:57:12 by caubry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address -g3 
+CFLAGS			=  	-Wall -Werror -Wextra -g3 
 
 RM				=	rm -rf
 

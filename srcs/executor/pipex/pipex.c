@@ -6,11 +6,17 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 16:30:41 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/08 20:25:43 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/09 22:17:37 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	_error_prompt(char *str)
+{
+	perror(str);
+	exit(EXIT_FAILURE);
+}
 
 char	**get_path(char **envp)
 {
@@ -62,7 +68,7 @@ char	*find_command_path(t_pipe *data)
 	int		i;
 
 	i = 0;
-	*bin = data->elem->cmd;
+	bin = data->elem->cmd;
 	if (!bin[0])
 		return (NULL);
 	if (access(bin[0], F_OK) == 0)
@@ -99,14 +105,14 @@ void	_clean_char_tab(char **tab)
 	free(tab);
 }
 
-void	_clean_exit(t_pipe *data)
-{
-	clean(data);
-	exit(0);
-}
+// void	_clean_exit(t_pipe *data)
+// {
+// 	clean(data);
+// 	exit(0);
+// }
 
-void	free_content(t_cmd **lst)
-{
+// void	free_content(t_cmd **lst)
+// {
 	// t_list	*move;
 
 	// move = *lst;
@@ -118,18 +124,18 @@ void	free_content(t_cmd **lst)
 	// 		_clean_char_tab(move->content);
 	// 	move = move->next;
 	// }
-}
+// }
 
 void	useless_fct(void *elem)
 {
 	(void)elem;
 }
 
-void	clean(t_pipe *data)
-{
-	t_list	*temp;
+// void	clean(t_pipe *data)
+// {
+	// t_list	*temp;
 
-	temp = data->head;
+	// temp = data->head;
 	// if (data->limiter)
 	// 	unlink("/tmp/heredoc.tmp");
 	// if (data->path)
@@ -138,7 +144,7 @@ void	clean(t_pipe *data)
 	// ft_lstclear(&temp, useless_fct);
 	// free(data->pid);
 	// free(data);
-}
+// }
 
 int	_close_file_descriptors(int _first, int _second)
 {
@@ -188,7 +194,7 @@ int	open_outfile(char *outfile_name, int mode, t_pipe *data)
 {
 	int	outfile;
 
-	if (mode == USUAL)
+	if (mode == 0)
 		outfile = open(outfile_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else
 		outfile = open(outfile_name, O_RDWR | O_CREAT | O_APPEND, 0644);
@@ -205,9 +211,9 @@ int	open_outfile(char *outfile_name, int mode, t_pipe *data)
 int	__is_child(pid_t process)
 {
 	if (process == 0)
-		return (_TRUE_);
+		return (1);
 	else
-		return (_FALSE_);
+		return (0);
 }
 
 int	__count_cmd(t_cmd *head)
@@ -225,19 +231,19 @@ int	__count_cmd(t_cmd *head)
 	return (i);
 }
 
-void	_error_prompt(char *str)
-{
-	perror(str);
-	exit(EXIT_FAILURE);
-}
-
 t_cmd	*ft_cmd_new(t_lexer *lexer, t_cmd *new)
 {
 	char	*outfiles;
 	char	*infiles;
+	char	*outfile_type;
+	char	*infile_type;
+	char	*cmd;
 
 	outfiles = NULL;
 	infiles = NULL;
+	outfile_type = NULL;
+	infile_type = NULL;
+	cmd = NULL;
 	while (lexer && lexer->type != PIPE)
 	{
 		if (!__strcmp(lexer->token, ">")
@@ -245,24 +251,33 @@ t_cmd	*ft_cmd_new(t_lexer *lexer, t_cmd *new)
 		{
 			outfiles = __strjoin(outfiles, lexer->next->token);
 			outfiles = __strjoin(outfiles, "\n");
+			outfile_type = __strjoin(outfile_type, lexer->token);
+			outfile_type = __strjoin(outfile_type, "\n");
 			lexer = lexer->next->next;
 		}
-		else if(!__strcmp(lexer->token, "<"))
+		else if(!__strcmp(lexer->token, "<")
+			|| !__strcmp(lexer->token, "<<"))
 		{
 			infiles = __strjoin(infiles, lexer->next->token);
 			infiles = __strjoin(infiles, "\n");
+			infile_type = __strjoin(infile_type, lexer->token);
+			infile_type = __strjoin(infile_type, "\n");
 			lexer = lexer->next->next;
 		}
 		else
 		{
-			if (new->cmd)
-				new->cmd = __strjoin(new->cmd, " ");
-			new->cmd = __strjoin(new->cmd, lexer->token);
+			if (cmd)
+				cmd = __strjoin(cmd, "\n");
+			cmd = __strjoin(cmd, lexer->token);
 			lexer = lexer->next;
 		}
 	}
+	new->cmd = __split(cmd, '\n');
 	new->infile_name = __split(infiles, '\n');
 	new->outfile_name = __split(outfiles, '\n');
+	new->infile_type = __split(infile_type, '\n');
+	new->outfile_type = __split(outfile_type, '\n');
+	new->next = NULL;
 	return (new);
 }
 
@@ -277,30 +292,37 @@ t_cmd	*init_new_cmd(t_cmd *new)
 	return (new);
 }
 
-t_lexer	*ft_split_cmd(t_lexer *lexer, t_cmd **head)
+t_cmd	*ft_split_cmd(t_lexer **lexer, t_cmd *head)
 {
 	t_cmd	*new;
 	t_cmd	*tmp;
+	t_lexer *tmp_lexer;
 
 	new = malloc(sizeof(t_cmd));
+	tmp_lexer = *lexer;
 	if (!(new))
 		return (NULL);
 	new = init_new_cmd(new);
-	new = ft_cmd_new(lexer, new);
-	if (!*head)
-		*head = new;
+	new = ft_cmd_new(tmp_lexer, new);
+	if (!head)
+		head = new;
 	else
 	{
-		tmp = *head;
+		tmp = head;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-	while (lexer && lexer->type != PIPE)
-		lexer = lexer->next;
-	if (!lexer)
-		return (lexer);
-	return (lexer->next);
+	// printf("new->cmd = %s\n", new->cmd[0]);
+	while (tmp_lexer && tmp_lexer->type != PIPE)
+		tmp_lexer = tmp_lexer->next;
+	if (tmp_lexer && tmp_lexer->type == PIPE)
+		*lexer = tmp_lexer->next;
+	else
+		*lexer = tmp_lexer;
+	// if (!lexer)
+	// 	return (lexer);
+	return (head);
 }
 
 t_cmd	*init_cmd_list(t_user_input *ui)
@@ -311,17 +333,49 @@ t_cmd	*init_cmd_list(t_user_input *ui)
 	split_cmd = ui->lexer;
 	head = NULL;
 	while (split_cmd)
-	{
-		split_cmd = ft_split_cmd(split_cmd, &head);
-	}
+		head = ft_split_cmd(&split_cmd, head);
 	return (head);
 }
+
+void	__printfcmd(t_cmd *head)
+{
+	t_cmd *tmp;
+	int i;
+	int j;
+
+	tmp = head;
+	i = 1;
+	while (tmp)
+	{
+		printf("Pipe %d :\n", i);
+		printf("commande = %s\n", tmp->cmd[0]);
+		printf("infiles : ");
+		j = 0;
+		while (tmp->infile_name && tmp->infile_name[j])
+		{
+			printf("< %s ", tmp->infile_name[j]);
+			j++;
+		}
+		printf("\noutfiles : ");
+		j = 0;
+		while (tmp->outfile_name && tmp->outfile_name[j])
+		{
+			printf("> %s ", tmp->outfile_name[j]);
+			j++;
+		}
+		printf("\n");
+		tmp = tmp->next;
+		i++;
+	}
+}
+
 
 void	init_pipe(t_user_input *ui, t_pipe *data)
 {
 	data->elem = init_cmd_list(ui);
 	data->head = data->elem;
-	data->ninst = __count_cmd(data->elem);
+	// __printfcmd(data->head);
+	data->ninst = __count_cmd(data->head);
 	data->index = 0;
 	data->pid = (int *)malloc(sizeof(int) * (data->ninst));
 	data->path = get_path(ui->env);
@@ -360,47 +414,15 @@ int	ft_is_pipe(t_lexer *lexer)
 		return (0);
 }
 
-void	__printfcmd(t_cmd *head)
-{
-	t_cmd *tmp;
-	int i;
-	int j;
-
-	tmp = head;
-	i = 1;
-	while (tmp)
-	{
-		printf("Pipe %d :\n", i);
-		printf("commande = %s\n", tmp->cmd);
-		printf("infiles : ");
-		j = 0;
-		while (tmp->infile_name && tmp->infile_name[j])
-		{
-			printf("< %s ", tmp->infile_name[j]);
-			j++;
-		}
-		printf("\noutfiles : ");
-		j = 0;
-		while (tmp->outfile_name && tmp->outfile_name[j])
-		{
-			printf("> %s ", tmp->outfile_name[j]);
-			j++;
-		}
-		printf("\n");
-		tmp = tmp->next;
-		i++;
-	}
-}
-
 int	pipex(t_pipe *data, t_user_input *ui)
-{	
+{
 	while (data->index < data->ninst)
 	{
 		if (pipe(data->pipe) < 0)
-			return (perror("pipe"), _FAILURE_);
+			return (perror("pipe"), 0);
 		data->pid[data->index] = fork();
 		if (data->pid[data->index] < 0)
-			return (perror("fork "), _FAILURE_);
+			return (perror("fork "), 0);
 		if (__is_child(data->pid[data->index]))
 			exec_children_work(data, ui);
 		if (!__is_child(data->pid[data->index]))
@@ -417,6 +439,23 @@ int	pipex(t_pipe *data, t_user_input *ui)
 	return (_SUCCESS_);
 }
 
+void	_wait(int *pid, t_pipe *data)
+{
+	int	i;
+	int	wstatus;
+	// (void) int	ret;
+
+	// ret = 1;
+	i = 0;
+	while (i < (int)data->ninst)
+		waitpid(pid[i++], &wstatus, 0);
+	close(data->prev_read);
+	// if (WIFEXITED(wstatus))
+	// 	ret = WEXITSTATUS(wstatus);
+	// clean(data);
+	// exit(ret);
+}
+
 int	ft_pipex(t_user_input *ui)
 {
 	ui->pipe = malloc(sizeof(t_pipe));
@@ -426,8 +465,10 @@ int	ft_pipex(t_user_input *ui)
 		return (ft_cmd(ui));
 	if (!ft_init_pipex(ui, ui->pipe))
 		return (STDERR_FILENO);
-	if (!__pipex(ui->pipe, ui))
+	if (!pipex(ui->pipe, ui))
 		return (STDERR_FILENO);
 	// __printfcmd(ui->pipe->head);
-	return (ft_cmd(ui));
+	_wait(ui->pipe->pid, ui->pipe);
+	// return (ft_cmd(ui));
+	return(1);
 }
