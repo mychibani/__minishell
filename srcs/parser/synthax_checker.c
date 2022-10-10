@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 10:56:19 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 13:49:35 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:20:05 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ int		__lexer_size(t_lexer *lexer)
 	return (i);
 }
 
+
 t_lexer	*synthax_error(t_lexer *lexer, t_program_data *data)
 {
+	__putstr_fd("minishell ~ syntax error near unexpected token`", 2);
 	if (lexer)
-	{
-		__putstr_fd("minishell ~ syntax error near unexpected token`", 2);
 		__putstr_fd(lexer->token, 2);
-		__putstr_fd("\'\n", 2);
-	}
+	__putstr_fd("\'\n", 2);
 	data->rv = 2;
 	data->synthax_error = SYNTAX_ERROR;
 	return (lexer);
@@ -42,8 +41,12 @@ t_lexer	*synthax_error(t_lexer *lexer, t_program_data *data)
 
 t_lexer *check_if_no_word(t_lexer *lexer, t_program_data *data)
 {
-	if (lexer && lexer->type == PIPE)
+	if (lexer && (lexer->type == OPERATOR || lexer->type == PIPE))
+	{
+		data->rv = 2;
+		data->synthax_error = SYNTAX_ERROR;
 		return (lexer);
+	}
 	while (lexer)
 	{
 		if (lexer->type == WORD)
@@ -57,17 +60,11 @@ t_lexer *check_if_no_word(t_lexer *lexer, t_program_data *data)
 
 static int	check_lexing(t_lexer *lexing, t_program_data *data)
 {
-	if (lexing->type == PIPE
-		|| lexing->type == REDIRECTION || lexing->type == HERE_DOC)
+	if (lexing->type == PIPE || lexing->type == REDIRECTION || lexing->type == HERE_DOC)
 	{
-		if (!lexing->next
-			|| lexing->next->type == PIPE
-			|| lexing->next->type == REDIRECTION
-			|| lexing->next->type == NEW_LINE)
+		if (!lexing->next || lexing->next->type == REDIRECTION || lexing->next->type == NEW_LINE)
 		{
-			if (lexing->next
-				&& (lexing->next->type == REDIRECTION
-					|| lexing->next->type == HERE_DOC))
+			if (lexing->next && (lexing->next->type == REDIRECTION || lexing->next->type == HERE_DOC))
 				return (1);
 			data->rv = 2;
 			data->synthax_error = SYNTAX_ERROR;
@@ -77,13 +74,11 @@ static int	check_lexing(t_lexer *lexing, t_program_data *data)
 	return (1);
 }
 
-t_lexer	*to_not_treat_token(t_lexer *lexer, t_program_data *data)
+void	to_not_treat_token(t_program_data *data)
 {
-	if (lexer)
-		__putstr_fd("minishell ~ Valid token detected but not handled in minishell\n", 2);
+	__putstr_fd("minishell ~ Valid token detected but not handled in minishell\n", 2);
 	data->rv = 2;
 	data->synthax_error = SYNTAX_ERROR;
-	return (lexer);
 }
 
 t_lexer	*synthax_checker(t_lexer **lexer, t_program_data *data)
@@ -96,7 +91,7 @@ t_lexer	*synthax_checker(t_lexer **lexer, t_program_data *data)
 	while (travel)
 	{
 		if (travel->type == INVALID)
-			return (to_not_treat_token(travel, data));
+			return (to_not_treat_token(data), travel);
 		if (!check_lexing(travel, data))
 			return (synthax_error(travel, data));
 		travel = travel->next;

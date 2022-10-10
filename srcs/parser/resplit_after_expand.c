@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   repslit_after_expand.c                             :+:      :+:    :+:   */
+/*   resplit_after_expand.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:26:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 11:26:17 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:31:52 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	split_token(t_lexer *lexer)
 	to_split = __strtrim(lexer->token, " \f\t\n\v");
 	if (!to_split)
 		return (0);
-	splitted_token = __split_pool(to_split, " \n");
+	splitted_token = unquoted_char_split(to_split, " \n");
 	free(to_split);
 	if (!splitted_token)
 		return (0);

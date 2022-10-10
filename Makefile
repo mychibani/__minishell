@@ -6,7 +6,7 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/10/06 13:33:10 by ychibani         ###   ########.fr        #
+#    Updated: 2022/10/10 17:24:05 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address -g3 
+CFLAGS			=  	-Wall -Werror -Wextra -g3
 
 RM				=	rm -rf
 
@@ -113,7 +113,7 @@ re:				fclean
 git:		
 			git add .
 			git commit -m "$m"
-			git push --set-upstream origin retokenize	
+			git push
 
 -include	${DEPS_FILES}
 

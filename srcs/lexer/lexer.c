@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+int	is_operator_valid(char *cmp)
+{
+	int	size;
+
+	size = __strlen(cmp);
+	if (size == 2 && __is_operator(cmp[0]))
+		return (1);
+	if (size == 2)
+	{
+		if (cmp[0] == cmp[1])
+			return (1);
+	}
+	return (0);
+}
+
 int	redir_type(char *to_cmp)
 {
 	if (!__strcmp(to_cmp, ">"))
@@ -27,16 +42,18 @@ int	redir_type(char *to_cmp)
 
 int	__get_type(char *to_cmp)
 {
-	if (!__strcmp(to_cmp, "|"))
-		return (PIPE);
 	if (!__strcmp(to_cmp, "\n"))
 		return (NEW_LINE);
+	if (!__strcmp(to_cmp, "|"))
+		return (PIPE);
 	if (redir_type(to_cmp) == 1)
 		return (REDIRECTION);
 	if (redir_type(to_cmp) == 2)
 		return (HERE_DOC);
 	if (!__is_operator(to_cmp[0]))
 		return (WORD);
+	if (!is_operator_valid(to_cmp))
+		return (OPERATOR);
 	return (INVALID);
 }
 

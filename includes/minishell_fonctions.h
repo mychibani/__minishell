@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 13:32:01 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:47:15 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,8 @@ int				is_valid_char(char c);
 int				lexer_remove_quote(t_lexer *lexer);
 int				__expand_var(t_lexer *seq, t_program_data *data);
 int				__split_token_after_expand(t_lexer *travel);
+char			**unquoted_char_split(char *s, char *charset);
+int	is_operator_valid(char *cmp);
 
 /*
 **		Exit
