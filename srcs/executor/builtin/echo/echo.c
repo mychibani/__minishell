@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:31 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/07 11:03:57 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/10 15:40:09 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*remove_quote(char *str)
 		i = edit_quote(str, i, &quote);
 	}
 	no_quote[j] = '\0';
-	free (str);
+	// free (str);
 	return (no_quote);
 }
 
@@ -82,6 +82,7 @@ char	*fill_print_echo(t_lexer *lexer)
 			echo_content = __strjoin(echo_content, " ");
 		echo_arg->token = remove_quote(echo_arg->token);
 		echo_content = __strjoin(echo_content, echo_arg->token);
+		free(echo_arg->token);
 		if (!echo_content)
 			return (NULL);
 		echo_arg = echo_arg->next;
@@ -100,9 +101,10 @@ void	ft_echo(t_user_input *ui)
 	flg = 0;
 	i = 2;
 	echo_arg = ui->lexer->next;
+	print_echo = NULL;
 	if (!echo_arg)
-		return ;
-	while (echo_arg->token && !__strncmp(echo_arg->token, "-n", 2))
+		print_echo = __strdup("");
+	while (echo_arg && echo_arg->token && !__strncmp(echo_arg->token, "-n", 2))
 	{
 		while (*(echo_arg->token) + i == 'n')
 			i++;
@@ -112,9 +114,71 @@ void	ft_echo(t_user_input *ui)
 			flg = 1;
 		}
 	}
-	print_echo = fill_print_echo(echo_arg);
+	if (echo_arg)
+		print_echo = fill_print_echo(echo_arg);
+	else
+		print_echo = __strdup("");
 	if (!flg)
 		print_echo = __strjoin(print_echo, "\n");
-	printf("%s", print_echo);
+	__putstr_fd(print_echo, STDOUT_FILENO);
 	free(print_echo);
 }
+
+char	*fill_print_echo_pipe(char **s)
+{
+	char	*echo_content;
+	char	*echo_arg;
+	int		j;
+
+	j = 0;
+	echo_content = NULL;
+	echo_arg = s[j];
+	while (s[j])
+	{
+		if (j > 0)
+			echo_content = __strjoin(echo_content, " ");
+		echo_arg = remove_quote(echo_arg);
+		echo_content = __strjoin(echo_content, echo_arg);
+		free(echo_arg);
+		if (!echo_content)
+			return (NULL);
+		j++;
+		echo_arg = s[j];
+	}
+	return (echo_content);
+}
+
+void	ft_echo_pipe(char **cmd)
+{
+	int		flg;
+	char	*print_echo;
+	char	*echo_arg;
+	int		i;
+	int		j;
+
+	flg = 0;
+	i =	2;
+	j = 1;
+	echo_arg = cmd[j];
+	print_echo = NULL;
+	if (!echo_arg)
+		print_echo = __strdup("");
+	while (echo_arg && !__strncmp(echo_arg, "-n", 2))
+	{
+		while (*(echo_arg) + i == 'n')
+			i++;
+		if (!*(echo_arg) + i)
+		{
+			j++;
+			echo_arg = cmd[j];
+			flg = 1;
+		}
+	}
+	if (echo_arg)
+		print_echo = fill_print_echo_pipe(cmd + j);
+	if (!flg)
+		print_echo = __strjoin(print_echo, "\n");
+	__putstr_fd(print_echo, STDOUT_FILENO);
+	free(print_echo);
+}
+

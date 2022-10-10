@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:52:10 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/09 22:26:19 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/10 13:37:21 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	ft_cmd_pipe(t_user_input *ui, char **cmd)
 	if (!cmd)
 		return (0);
 	if (!(__strcmp(cmd[0], "echo")))
-		ft_echo(ui);
+		ft_echo_pipe(cmd);
 	else if (!(__strcmp(cmd[0], "cd")))
 		ft_cd(ui);
 	else if (!(__strcmp(cmd[0], "pwd")))

@@ -6,7 +6,7 @@
 #    By: caubry <caubry@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/10/09 14:57:12 by caubry           ###   ########.fr        #
+#    Updated: 2022/10/10 17:12:10 by caubry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,13 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/executor/builtin/unset/unset.c			\
 						srcs/executor/builtin/exit/exit.c			\
 						srcs/executor/pipex/pipex.c					\
-						srcs/executor/pipex/children_work.c
+						srcs/executor/pipex/children_work.c			\
+						srcs/executor/pipex/cmd_utils.c			\
+						srcs/executor/pipex/fd_utils.c			\
+						srcs/executor/pipex/init.c			\
+						srcs/executor/pipex/pipex_clean.c			\
+						srcs/executor/pipex/pipex_utils.c			\
+
 
 
 NAME			= 	minishell

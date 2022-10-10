@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:10:02 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/09 22:22:42 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/10 16:08:45 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ void	_execute_command(t_pipe *data, t_user_input *ui)
 			if (data->index == data->ninst - 1)
 			{
 				free(new_command);
-				// clean(data);
+				clean(data);
+				__clean_env(ui->test_env);
 				exit(127);
 			}
 			free(new_command);
-			// clean(data);
+			clean(data);
+			__clean_env(ui->test_env);
 			exit(EXIT_FAILURE);
 		}
 		// ft_cmd(ui);
@@ -39,7 +41,8 @@ void	_execute_command(t_pipe *data, t_user_input *ui)
 		free(new_command);
 		perror(data->elem->cmd[0]);
 	}
-	// clean(data);
+	clean(data);
+	__clean_env(ui->test_env);
 	exit(EXIT_FAILURE);
 }
 
@@ -82,7 +85,7 @@ void	outfile_child_worker(t_pipe *data)
 	close(data->pipe[1]);
 	while (outfile && outfile[i])
 	{
-		data->elem->outfile = open_outfile(data->elem->outfile_name[i], 0, data);
+		data->elem->outfile = open_outfile(data->elem->outfile_name[i], data->elem->outfile_type[i], data);
 		i++;
 	}
 	if (data->elem->infile_name)
@@ -117,4 +120,5 @@ void	exec_children_work(t_pipe *data, t_user_input *ui)
 		_close_file_descriptors(data->pipe[1], data->prev_read);
 	}
 	_execute_command(data, ui);
+	
 }
