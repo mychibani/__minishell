@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:41 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/07 11:06:33 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/11 11:52:47 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_pwd(t_user_input *ui)
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		pwd = __strdup(ft_getpwd(ui));
-	printf("%s\n", pwd);
+	__putstr_fd(pwd, STDOUT_FILENO);
+	__putstr_fd("\n", STDOUT_FILENO);
 	free(pwd);
 }

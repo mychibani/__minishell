@@ -6,7 +6,7 @@
 /*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:36 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/06 12:39:31 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/11 11:46:40 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ void	ft_env(t_user_input *ui)
 	while (env)
 	{
 		if (env->env == 1)
-			printf("%s=%s\n", env->name, env->value);
+		{
+			__putstr_fd(env->name, STDOUT_FILENO);
+			__putstr_fd("=", STDOUT_FILENO);
+			__putstr_fd(env->value, STDOUT_FILENO);
+			__putstr_fd("\n", STDOUT_FILENO);
+		}
 		env = env->next;
 	}
 	return ;
