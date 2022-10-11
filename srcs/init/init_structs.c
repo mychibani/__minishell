@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:33:33 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 15:46:35 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/11 14:11:40 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,12 @@ t_user_input	*init_user_input_struct(t_user_input *ui)
 	return (ui);
 }
 
-// void	__init_structs(t_program_data *data, t_user_input *ui)
-// {
-// 	init_data_struct(data);
-// 	__memset(&data, 0, sizeof(data));
-// 	init_user_input_struct(ui);
-// 	__memset(&data, 0, sizeof(data));
-// }
-
 void	__init_structs(t_program_data *data, t_user_input *ui, char **env)
 {
 	int	no_env;
 
 	no_env = 0;
 	init_data_struct(data, env);
-	// __memset(&data, 0, sizeof(data));
 	init_user_input_struct(ui);
 	ui->env = ft_collect_env(&no_env, ui, data->env);
 	if (!no_env)

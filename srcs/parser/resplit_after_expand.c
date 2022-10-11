@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:26:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/10 15:31:52 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:10:43 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_lexer	*lst_lexer_new_word(char *content)
 {
-	t_lexer *new;
+	t_lexer	*new;
 
 	new = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!new)
@@ -30,7 +30,7 @@ t_lexer	*lst_lexer_new_word(char *content)
 
 int	insert_first_token(t_lexer *lexer, char *token)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = __strdup(token);
 	if (!tmp)
@@ -42,7 +42,7 @@ int	insert_first_token(t_lexer *lexer, char *token)
 
 int	insert_token(char *token, t_lexer *lexer, int start, t_lexer *end)
 {
-	static	int	state = 1;
+	static int	state = 1;
 	t_lexer		*new;
 
 	if (start)
@@ -58,7 +58,7 @@ int	insert_token(char *token, t_lexer *lexer, int start, t_lexer *end)
 	new = lst_lexer_new_word(token);
 	if (!new)
 		return (0);
-	while (lexer->next != end)	
+	while (lexer->next != end)
 		lexer = lexer->next;
 	new->next = lexer->next;
 	lexer->next = new;
@@ -71,7 +71,7 @@ int	split_token(t_lexer *lexer)
 	char		*to_split;
 	char		**splitted_token;
 	int			i;
-	
+
 	to_split = __strtrim(lexer->token, " \f\t\n\v");
 	if (!to_split)
 		return (0);
@@ -100,7 +100,9 @@ int	__split_token_after_expand(t_lexer *travel)
 	while (travel)
 	{
 		if (travel->type == WORD && prev_type != HERE_DOC
-			&& prev_type != REDIRECTION && (travel->token[0] != '"' || travel->token[__strlen(travel->token) - 1] != '"' || __strlen(travel->token) > 1))
+			&& prev_type != REDIRECTION && (travel->token[0] != '"'
+				|| travel->token[__strlen(travel->token) - 1] != '"'
+				|| __strlen(travel->token) > 1))
 			if (!split_token(travel))
 				return (MALLOC_ERROR);
 		prev_type = travel->type;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 10:36:41 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/06 12:54:35 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/11 13:33:30 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ void	ft_pwd(void)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
-	// if (!pwd)
-	// {
-	// 	printf()
-	// }
 	printf("%s\n", pwd);
 	free(pwd);
 }

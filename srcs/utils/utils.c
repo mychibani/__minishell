@@ -6,30 +6,16 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:36:37 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 15:39:36by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:13:19 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_charset(char c, char *charset)
+int	in_quote(char *s, char *to_find)
 {
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (charset[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	is_in_quote(char *s, char *to_find)
-{
-	int	i;
-	t_state q_state;
+	int		i;
+	t_state	q_state;
 
 	q_state = 0;
 	i = 0;
@@ -54,7 +40,8 @@ int	get_strs_size(char *s, char *charset)
 	{
 		if (!is_charset(s[i], charset))
 		{
-			while ((s[i]) && (!is_charset(s[i], charset) || is_in_quote(s, &s[i])))
+			while ((s[i]) && (!is_charset(s[i], charset)
+					|| in_quote(s, &s[i])))
 				i++;
 			size++;
 		}
@@ -77,17 +64,17 @@ char	**strs_malloc(int size)
 
 char	*unquoted_dup(char *s, char *charset)
 {
-	int	i;
+	int		i;
 	char	*final_str;
 
 	i = 0;
-	while (s[i] && (!is_charset(s[i], charset) || is_in_quote(s, &s[i])))
+	while (s[i] && (!is_charset(s[i], charset) || in_quote(s, &s[i])))
 		i++;
 	final_str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!final_str)
 		return (NULL);
 	i = 0;
-	while (s[i] && (!is_charset(s[i], charset) || is_in_quote(s, &s[i])))
+	while (s[i] && (!is_charset(s[i], charset) || in_quote(s, &s[i])))
 	{
 		final_str[i] = s[i];
 		i++;
@@ -109,58 +96,15 @@ char	**unquoted_char_split(char *s, char *charset)
 	strs = strs_malloc(size);
 	while (j < size)
 	{
-		if (s[i])
+		if (s[i] && (!is_charset(s[i], charset) || in_quote(s, &s[i])))
 		{
-			if ((!is_charset(s[i], charset) || is_in_quote(s, &s[i])) && s[i])
-			{
-				strs[j++] = unquoted_dup(s + i, charset);
-				while ((is_in_quote(s, &s[i]) || !is_charset(s[i], charset)) && s[i])
-					i++;
-			}
+			strs[j++] = unquoted_dup(s + i, charset);
+			while ((in_quote(s, &s[i]) || !is_charset(s[i], charset)) && s[i])
+				i++;
 		}
-		while ((is_charset(s[i], charset) || is_in_quote(s, &s[i])) && s[i])
+		while ((is_charset(s[i], charset) || in_quote(s, &s[i])) && s[i])
 			i++;
 	}
 	strs[j] = 0;
 	return (strs);
-}
-
-void	print_linked_list(t_list *list)
-{
-	while (list)
-	{
-		__printf("[%s] ", (char *)list->content);
-		list = list->next;
-	}
-	__printf("\n");
-}
-
-void	print_lexer_list(t_lexer *lexer)
-{
-	while (lexer)
-	{
-		__printf("[%s]\n", lexer->token);
-		__printf("[%d]\n", lexer->type);
-		__printf("[%d]\n", lexer->hd_type);
-		__printf("-                                -");
-		lexer = lexer->next;
-	}
-	__printf("\n");
-	__printf("-----------------------\n");
-}
-
-void	print_token_list(t_token *token)
-{
-	while (token)
-	{
-		__printf("[%s] ", (char *)token->content);
-		token = token->next;
-	}
-	__printf("\n");
-}
-
-void	print_data(t_program_data *data, t_user_input *ui)
-{
-	printf("[%s]\n", data->all_inputs[0]);
-	print_lexer_list(ui->lexer);
 }

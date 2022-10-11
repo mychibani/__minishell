@@ -6,13 +6,13 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:17:05 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 12:59:34 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:58:59 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_is_charset(char	c, char *sep)
+int	is_charset(char c, char *sep)
 {
 	int	i;
 
@@ -32,13 +32,13 @@ static char	*ft_strdup_charset(char	*str, char *sep)
 	char	*final_str;
 
 	i = 0;
-	while (str[i] && !ft_is_charset(str[i], sep))
+	while (str[i] && !is_charset(str[i], sep))
 		i++;
 	final_str = (char *)malloc(sizeof(char) * i + 1);
 	if (!(final_str))
 		return (0);
 	i = 0;
-	while (str[i] && !ft_is_charset(str[i], sep))
+	while (str[i] && !is_charset(str[i], sep))
 	{
 		final_str[i] = str[i];
 		i++;
@@ -58,13 +58,13 @@ static int	ft_compute_size(char *str, char *sep)
 		return (1);
 	while (str[i])
 	{
-		if (!ft_is_charset(str[i], sep) && str[i])
+		if (!is_charset(str[i], sep) && str[i])
 		{
-			while (!ft_is_charset(str[i], sep) && str[i])
+			while (!is_charset(str[i], sep) && str[i])
 				i++;
 			count++;
 		}
-		while (ft_is_charset(str[i], sep) && (str[i]))
+		while (is_charset(str[i], sep) && (str[i]))
 			i++;
 	}
 	return (count);
@@ -96,14 +96,14 @@ char	**__split_pool(char *str, char *sep)
 	{
 		if (str[i])
 		{
-			if (!ft_is_charset(str[i], sep))
+			if (!is_charset(str[i], sep))
 			{
 				final_tab[j++] = ft_strdup_charset(str + i, sep);
-				while (!ft_is_charset(str[i], sep) && str[i])
+				while (!is_charset(str[i], sep) && str[i])
 					i++;
 			}
 		}
-		while (ft_is_charset(str[i], sep) && str[i])
+		while (is_charset(str[i], sep) && str[i])
 			i++;
 	}
 	final_tab[j] = 0;
