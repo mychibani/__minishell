@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:59:04 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 15:23:45by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:02:29 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 int	__error_after_expand(t_lexer **seq)
 {
-	t_lexer *save;
-	t_lexer *prec;
+	t_lexer	*save;
+	t_lexer	*prec;
 
 	save = *seq;
 	prec = NULL;
 	while (save)
 	{
-		if (save->type == REDIRECTION && save->next && (save->next->token)[0] == '\0')
-			return (__putstr_fd("minishell : ambiguous redirect\n", 2), -1);
-		else if (save->type == WORD && prec && (save->token)[0] == '\0' && prec->type != HERE_DOC)
+		if (save->type == REDIRECTION && save->next
+			&& (save->next->token)[0] == '\0')
+			return (__putstr_fd(
+					"minishell : ambiguous redirect\n", 2), -1);
+		else if (save->type == WORD && prec
+			&& (save->token)[0] == '\0' && prec->type != HERE_DOC)
 			save->empty = 1;
 		else if (save->type == WORD && !prec && (save->token)[0] == '\0')
 			save->empty = 1;

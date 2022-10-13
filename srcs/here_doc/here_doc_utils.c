@@ -6,42 +6,13 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:56:23 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/26 10:09:50y ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:24:52 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern int	g_es;
-
-int		heredoc_join(char *adding_line, char **heredoc)
-{
-	char	*new_heredoc;
-	int		i;
-	int		j;
-	int		len;
-
-	new_heredoc = NULL;
-	i = -1;
-	j = -1;
-	len = (__strlen(adding_line) + __strlen(*heredoc) + 1);
-	if (!*heredoc)
-		*heredoc = __strdup("");
-	new_heredoc = (char *)malloc(sizeof(char) * len);
-	if (!new_heredoc)
-		return (free(*heredoc), 0);
-	while ((*heredoc)[++i])
-		new_heredoc[i] = (*heredoc)[i];
-	while (adding_line[++j])
-	{
-		new_heredoc[i] = adding_line[j];
-		i++;
-	}
-	new_heredoc[i] = '\0';
-	free(*heredoc);
-	*heredoc = new_heredoc;
-	return (1);
-}
 
 void	treat_eof(char *line, char *eof, t_program_data *data)
 {
@@ -62,14 +33,15 @@ void	treat_eof(char *line, char *eof, t_program_data *data)
 
 int	read_from_stdin(char *eof, char **heredoc, t_program_data *data)
 {
-	char *adding_line;
+	char	*adding_line;
 
 	adding_line = NULL;
 	while (42)
 	{
 		__putstr_fd("> ", 2);
 		adding_line = __gnl(0);
-		if ((!adding_line) || ((!__strncmp(adding_line, eof, __strlen(eof))) && ((__strlen(adding_line)) == (__strlen(eof) + 1))))
+		if ((!adding_line) || ((!__strncmp(adding_line, eof, __strlen(eof)))
+				&& ((__strlen(adding_line)) == (__strlen(eof) + 1))))
 		{
 			treat_eof(adding_line, eof, data);
 			break ;
@@ -124,18 +96,21 @@ int	get_usr_input(char **eof, t_program_data *data)
 	return (1);
 }
 
-void	init_child_hd(char *eof, t_lexer *travel, t_program_data *data, t_lexer *save)
+void	init_child_hd(char *eof, t_lexer *travel,
+		t_program_data *data, t_lexer *save)
 {
 	g_es = 0;
 	data->rv = 0;
 	signal(SIGINT, hd_signal);
 	signal(SIGQUIT, SIG_IGN);
 	if (!get_usr_input(&eof, data))
-		return (__lexer_clear(&save), __putstr_fd("Malloc Error in Here_doc\n", 2));
+		return (__lexer_clear(&save),
+			__putstr_fd("Malloc Error in Here_doc\n", 2));
 	travel->next->token = eof;
 	__lexer_clear(&save);
 	__free_tab(data->all_inputs);
 	data->all_inputs = NULL;
 	destroy_env(data);
+	__clean_env(data->ui->test_env);
 	exit(data->rv);
 }

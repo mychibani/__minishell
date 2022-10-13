@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/13 16:03:53 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:09:10 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,4 @@ typedef struct s_program_data
 	char			**env;
 }	t_program_data;
 
-<<<<<<< HEAD
-typedef struct s_cmd
-{
-	int				redirection[2];
-	int				index;
-	char			**arg;
-	struct s_data	*msh;
-	struct s_cmd	*next;
-
-}	t_cmd;
-
-=======
->>>>>>> origin/merge_pipe_parsing
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: caubry <caubry@student.42.fr>              +#+  +:+       +#+         #
+#    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/10/10 17:12:10 by caubry           ###   ########.fr        #
+#    Created: 2022/05/04 14:03:48 by ychibani          #+#    #+#              #
+#    Updated: 2022/10/13 16:12:05 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/init/env.c								\
 						srcs/parser/parsing.c						\
 						srcs/parser/synthax_checker.c				\
+						srcs/parser/synthax_checker_utils.c			\
 						srcs/parser/clean_token.c					\
 						srcs/parser/resplit_after_expand.c			\
 						srcs/parser/remove_quotes.c					\
@@ -25,14 +26,17 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/lexer/lexer.c							\
 						srcs/lexer/lexer_utils.c					\
 						srcs/utils/utils.c							\
+						srcs/utils/test_utils.c						\
 						srcs/clean/cleaner_prog.c					\
 						srcs/clean/clean_exit.c						\
 						srcs/executor/signals/signal.c				\
 						srcs/here_doc/here_doc.c					\
 						srcs/here_doc/here_doc_utils.c				\
+						srcs/here_doc/here_doc_utils2.c				\
 						srcs/expander/expander.c					\
 						srcs/expander/expander2.c					\
-						srcs/expander/expander_utils.c				\
+						srcs/expander/expander3.c					\
+						srcs/expander/expander4.c					\
 						srcs/expander/heredoc_expand.c				\
 						srcs/executor/exec.c						\
 						srcs/executor/builtin/echo/echo.c			\
@@ -40,7 +44,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/executor/builtin/env/env_utils.c		\
 						srcs/executor/builtin/pwd/pwd.c				\
 						srcs/executor/builtin/cd/cd.c				\
-						srcs/executor/builtin/cd/cd_utils.c		\
+						srcs/executor/builtin/cd/cd_utils.c			\
 						srcs/executor/builtin/export/export.c 		\
 						srcs/executor/builtin/export/export_utils.c \
 						srcs/executor/builtin/unset/unset.c			\
@@ -67,7 +71,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3 
+CFLAGS			=  	-Wall -Werror -Wextra -g3
 
 RM				=	rm -rf
 
@@ -121,7 +125,7 @@ re:				fclean
 git:		
 			git add .
 			git commit -m "$m"
-			git push --set-upstream origin retokenize	
+			git push
 
 -include	${DEPS_FILES}
 

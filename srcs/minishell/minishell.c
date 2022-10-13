@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/10 17:52:22 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/13 17:07:07 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	minishell(t_program_data *data, t_user_input *ui)
 		__clean_input(ui, inputs, line);
 		g_es = 0;
 	}
-	// _clean_char_tab(data->env);
 	__clean_env(ui->test_env);
 	return (_SUCCESS_);
 }

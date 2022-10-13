@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 17:06:56 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/19 13:18:33 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:46:54 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ typedef enum e_type
 	REDIRECTION,
 	HERE_DOC,
 	INVALID,
-	NEW_LINE
+	NEW_LINE,
+	OPERATOR
 }	t_type;
 
 typedef enum e_state

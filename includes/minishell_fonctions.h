@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fonctions.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/10 17:23:15 by caubry           ###   ########.fr       */
+/*   Updated: 2022/10/13 17:10:44 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 **		Init
 */
 
-// t_program_data	*init_data_struct(t_program_data *data);
-// t_user_input	*init_user_input_struct(t_user_input *ui);
-// void			__init_structs(t_program_data *data, t_user_input *ui);
+t_program_data	*init_data_struct(t_program_data *data, char **env);
+int				change_directory(char *path);
+t_user_input	*init_user_input_struct(t_user_input *ui);
+void			__init_structs(t_program_data *data,
+					t_user_input *ui, char **env);
 
 /*
 **		Env
@@ -32,15 +34,6 @@ int				get_env_size(char **env);
 **		Cd
 */
 
-t_program_data	*init_data_struct(t_program_data *data, char **env);
-int				change_directory(char *path);
-t_user_input	*init_user_input_struct(t_user_input *ui);
-void			__init_structs(t_program_data *data, t_user_input *ui, char **env);
-
-/*
-**		Cd
-*/
-
 int				change_directory(char *path);
 void			ft_cd(t_user_input *ui);
 
@@ -48,10 +41,9 @@ void			ft_cd(t_user_input *ui);
 **		Cd_utils
 */
 
-t_env	*ft_find_var(char	*name, t_env **env);
-int	ft_cdhome(char *cd);
-int	ft_cdpwd(char *cd);
-
+t_env			*ft_find_var(char	*name, t_env **env);
+int				ft_cdhome(char *cd);
+int				ft_cdpwd(char *cd);
 
 /*
 **		echo
@@ -66,47 +58,45 @@ char	*fill_print_echo_pipe(char **s);
 **		env
 */
 
-void	ft_env(t_user_input *ui);
-t_env	*ft_init_env(char *var_to_split);
-t_env	**ft_split_env(char	**env);
-char	**ft_collect_env(int *no_env, t_user_input *ui, char **env);
+void			ft_env(t_user_input *ui);
+t_env			*ft_init_env(char *var_to_split);
+t_env			**ft_split_env(char	**env);
+char			**ft_collect_env(int *no_env, t_user_input *ui, char **env);
 
 /*
 **		env_utils
 */
 
-void	__env_clear(t_env **lst, void (*del)(void*));
-char	*__strncpy(char *dst, const char *src, size_t dstsize);
-t_env	*__lst_env_new(char *name, char *value, int appear);
-void	__env_lstadd_back(t_env **alst, t_env *new);
-int		ft_size(char **str);
-
+void			__env_clear(t_env **lst, void (*del)(void*));
+char			*__strncpy(char *dst, const char *src, size_t dstsize);
+t_env			*__lst_env_new(char *name, char *value, int appear);
+void			__env_lstadd_back(t_env **alst, t_env *new);
+int				ft_size(char **str);
 
 /*
 **		exit
 */
 
-void	ft_exit(t_user_input *ui);
+void			ft_exit(t_user_input *ui);
 
 /*
 **		export
 */
 
-void	ft_choose_export(t_user_input *ui);
-void	ft_export_arg(t_user_input *ui, char *var);
-void	ft_export_no_arg(t_user_input *ui);
-void	ft_make_export(t_env *search, char *to_set, t_user_input *ui);
-void	ft_changevar(t_env *env, char *var_to_split);
+void			ft_choose_export(t_user_input *ui);
+void			ft_export_arg(t_user_input *ui, char *var);
+void			ft_export_no_arg(t_user_input *ui);
+void			ft_make_export(t_env *search, char *to_set, t_user_input *ui);
+void			ft_changevar(t_env *env, char *var_to_split);
 
 /*
 **		export_utils
 */
 
-void	ft_free(char **to_free, int i);
-int	ft_var_length(char	*var);
-int	ft_valid_var(char *str);
-void	ft_concat_var(t_env *env, char *var_to_split);
-
+void			ft_free(char **to_free, int i);
+int				ft_var_length(char	*var);
+int				ft_valid_var(char *str);
+void			ft_concat_var(t_env *env, char *var_to_split);
 
 /*
 **		pwd
@@ -119,7 +109,7 @@ void	ft_pwd(t_user_input *ui);
 **		unset
 */
 
-void	ft_unset(t_user_input *ui);
+void			ft_unset(t_user_input *ui);
 
 /*
 **		pipex
@@ -187,6 +177,7 @@ int				get_word(char **token, char *str, int i);
 
 int				lexer(t_list *token, t_lexer **lexer);
 t_lexer			*synthax_checker(t_lexer **lexer, t_program_data *data);
+t_lexer			*synthax_error(t_lexer *lexer, t_program_data *data);
 
 /*
 **		Parsing
@@ -199,11 +190,14 @@ int				treat_usr_inputs(char *user_input,
 **		Heredoc
 */
 
+int				end_of_info(char *hd_content, int here_doc_fd,
+					t_lexer *lexer, int eof_type);
+int				eof_type(char *eof);
+int				wait_here_doc(pid_t pid, t_program_data *data);
 void			treat_eof(char *line, char *eof, t_program_data *data);
 void			init_child_hd(char *eof, t_lexer *travel,
 					t_program_data *data, t_lexer *save);
 int				__heredoc(t_user_input *ui, t_program_data *data);
-int				heredoc_join(char *adding_line, char **heredoc);
 int				get_usr_input(char **eof, t_program_data *data);
 int				read_from_stdin(char *eof, char **heredoc,
 					t_program_data *data);
@@ -225,7 +219,7 @@ void			__signal(int sig);
 
 char			**__free_tab(char **tab);
 void			__lexer_clear(t_lexer **lst);
-void	__lexer_clear2(t_lexer **lst, void (*del)(void*));
+void			__lexer_clear2(t_lexer **lst, void (*del)(void*));
 void			__clean_input(t_user_input *ui, char **inputs, char *line);
 void			destroy_env(t_program_data *data);
 int				__error_catcher(t_lexer **seq, t_program_data *data);
@@ -235,7 +229,7 @@ int				__error_after_expand(t_lexer **seq);
 **	Expand
 */
 
-int				sequence_launcher(t_lexer **seq, t_program_data *data);
+int				sequence_launcher(t_user_input *ui, t_program_data *data);
 char			*get_testing_wd(char *start_wd, int *offset);
 int				find_key(char *testing_wd, char *env_str,
 					t_program_data *data, int j);
@@ -244,13 +238,17 @@ int				get_value(char *testing_wd, char *env_str,
 					char **expanded_wd, char *key_value);
 int				__heredoc_expansion(char **token, t_program_data *data);
 void			update_token(char **token, char **new_token);
-int				parameter_expand(char *str, char **expanded_wd, t_program_data *data, int *offset);
+int				parameter_expand(char *str, char **expanded_wd,
+					t_program_data *data, int *offset);
 int				treat_final_rv(char **wd, int *offset, t_program_data *data);
 char			*get_key(char *str);
 int				is_valid_char(char c);
 int				lexer_remove_quote(t_lexer *lexer);
 int				__expand_var(t_lexer *seq, t_program_data *data);
 int				__split_token_after_expand(t_lexer *travel);
+int				in_quote(char *s, char *to_find);
+char			**unquoted_char_split(char *s, char *charset);
+int				is_operator_valid(char *cmp);
 
 /*
 **		Exit
