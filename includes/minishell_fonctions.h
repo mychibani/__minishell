@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_fonctions.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: caubry <caubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/06 13:32:01 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:23:15 by caubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	ft_cdpwd(char *cd);
 
 void	ft_echo(t_user_input *ui);
 char	*remove_quote(char *str);
+void	ft_echo_pipe(char	**cmd);
+char	*fill_print_echo_pipe(char **s);
 
 /*
 **		env
@@ -110,7 +112,8 @@ void	ft_concat_var(t_env *env, char *var_to_split);
 **		pwd
 */
 
-void	ft_pwd(void);
+char	*ft_getpwd(t_user_input *ui);
+void	ft_pwd(t_user_input *ui);
 
 /*
 **		unset
@@ -119,11 +122,41 @@ void	ft_pwd(void);
 void	ft_unset(t_user_input *ui);
 
 /*
+**		pipex
+*/
+
+int	ft_pipex(t_user_input *ui);
+int	open_infile(char *infile_name, t_pipe *data);
+int	_file_descriptors_duplicators(int _first, int _second);
+int	_close_file_descriptors(int _first, int _second);
+int	open_outfile(char *outfile_name, char *mode, t_pipe *data);
+void	clean(t_pipe *data);
+int	ft_execve(char *cmd, char **argvec, char **env);
+char	*find_command_path(t_pipe *data);
+void	_clean_char_tab(char **tab);
+void	__clean_env(t_env **env);
+int	ft_is_pipe(t_lexer *lexer);
+t_pipe	*ft_init_pipex(t_user_input *ui, t_pipe *pipe);
+t_cmd	*init_new_cmd(t_cmd *new);
+void	_error_prompt(char *str);
+int	__count_cmd(t_cmd *head);
+char	**get_path(char **envp);
+t_cmd	*ft_split_cmd(t_lexer **lexer, t_cmd *head);
+
+/*
+**		children_work
+*/
+
+void	exec_children_work(t_pipe *data, t_user_input *ui);
+
+
+/*
 **		exec
 */
 
 int				ft_cmd(t_user_input *ui);
 char	**ft_list_to_chr(t_env **env);
+int	ft_cmd_pipe(t_user_input *ui, char **cmd);
 
 
 
