@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:15:31 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/11 17:20:31 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:39:22 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,22 @@ int	treat_final_rv(char **wd, int *offset, t_program_data *data)
 int	parameter_expand(char *str, char **expanded_wd,
 						t_program_data *data, int *offset)
 {
-	int		j;
 	char	*env_str;
 	char	*testing_wd;
+	t_env	*env;
 
 	if (str[0] == '?')
 		return (treat_final_rv(expanded_wd, offset, data));
 	testing_wd = get_testing_wd(str, offset);
 	if (!testing_wd)
 		return (MALLOC_ERROR);
-	j = 0;
-	while (data->envp[j])
+	env = *(data->ui->test_env);
+	while (env)
 	{
-		if (data->envp[j][1][0] == '1' || data->envp[j][1][0] == '0')
-		{
-			env_str = get_key(data->envp[j][0]);
-			if (!env_str)
-				return (free(testing_wd), 0);
-			if (find_key(testing_wd, env_str, data, j))
-				return (get_value(testing_wd, env_str, expanded_wd,
-						(__strchr(data->envp[j][0], '=') + 1)));
-			free(env_str);
-		}
-		j++;
+		env_str = env->name;
+		if (find_key(testing_wd, env_str, data))
+			return (get_value(testing_wd, expanded_wd, env->value));
+		env = env->next;
 	}
 	return (free(testing_wd), 1);
 }

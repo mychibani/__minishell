@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 13:54:48 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/11 17:23:10 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:44:26 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	__usual_expansion(char **token, t_program_data *data)
 	expanded_wd = __strdup("");
 	while (str[++i])
 	{
-		if ((str[i] == '$' && is_valid_char(str[i + 1])
-				&& !dollars_status(str, &str[i])) || is_an_exception(str, i))
+		if ((str[i] == '$' && !dollars_status(str, &str[i]) && str[i + 1] != '$')
+			&& (is_valid_char(str[i + 1]) || is_an_exception(str, i)))
 		{
 			if (parameter_expand(str + i + 1,
 					&expanded_wd, data, &i) == MALLOC_ERROR)

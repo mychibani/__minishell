@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/13 17:10:44 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:32:15 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,9 +232,9 @@ int				__error_after_expand(t_lexer **seq);
 int				sequence_launcher(t_user_input *ui, t_program_data *data);
 char			*get_testing_wd(char *start_wd, int *offset);
 int				find_key(char *testing_wd, char *env_str,
-					t_program_data *data, int j);
+					t_program_data *data);
 char			*handle_quotes_in_env(char *str);
-int				get_value(char *testing_wd, char *env_str,
+int				get_value(char *testing_wd,
 					char **expanded_wd, char *key_value);
 int				__heredoc_expansion(char **token, t_program_data *data);
 void			update_token(char **token, char **new_token);

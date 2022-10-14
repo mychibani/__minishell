@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:43:21 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/13 18:20:36 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:45:37 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ int	treat_usr_inputs(char *arg, t_program_data *data, t_user_input *user_input)
 		return (__lexer_clear(&user_input->lexer), -1);
 	if (!sequence_launcher(user_input, data))
 		return (__lexer_clear(&user_input->lexer), -1);
-	// ft_pipex(user_input);
 	return (_SUCCESS_);
 }
