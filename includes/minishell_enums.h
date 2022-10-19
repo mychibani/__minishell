@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 17:06:56 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/10 16:46:54 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/17 14:12:06 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,13 @@ typedef enum e_token_pos
 	MIDDLE,
 	LAST
 }	t_token_pos;
+
+typedef enum e_redir_type
+{
+	HD,
+	GREAT,
+	LESS,
+	D_GREAT
+}	t_redir_type;
 
 #endif

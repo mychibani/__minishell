@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:33:40 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/04 10:39:42 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/19 08:25:31 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	destroy_env(t_program_data *data)
 
 void	__exit(t_program_data *data, t_user_input *ui, int rv)
 {
-	destroy_env(data);
+	__clean_env(ui->env);
 	(void)ui;
 	exit(rv);
 }

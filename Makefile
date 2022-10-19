@@ -6,7 +6,7 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by ychibani          #+#    #+#              #
-#    Updated: 2022/10/14 14:45:21 by ychibani         ###   ########.fr        #
+#    Updated: 2022/10/17 17:04:48 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/executor/builtin/export/export.c 		\
 						srcs/executor/builtin/export/export_utils.c \
 						srcs/executor/builtin/unset/unset.c			\
+						srcs/executor/exec_prep/execution_preparation.c		\
 						srcs/executor/builtin/exit/exit.c			\
 						srcs/executor/pipex/pipex.c					\
 						srcs/executor/pipex/children_work.c			\
@@ -71,7 +72,7 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3
+CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address -g3
 
 RM				=	rm -rf
 

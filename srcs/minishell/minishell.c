@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 21:46:01 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/13 17:07:07 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/19 08:25:42 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int	main(int ac, char **av, char **env)
 	__init_structs(&data, &ui, env);
 	if (ac > 1)
 		return (__putstr_fd("usage <./minishell>\n", 2), 2);
-	if (!get_env_var(&data, env, get_env_size(env)))
-		return (-1);
 	minishell(&data, &ui);
 	printf("exit\n");
 	__exit(&data, &ui, g_es);

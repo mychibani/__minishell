@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/13 16:09:10 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/19 10:21:05 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,20 @@ typedef struct s_lexer
 	struct s_lexer	*next;	
 }	t_lexer;
 
-// typedef struct s_cmd
-// {
-// 	int				redirection[2];
-// 	int				index;
-// 	char			**arg;
-// 	struct s_msh	*msh;
-// 	struct s_cmd	*next;
-
-// }	t_cmd;
+typedef struct s_cmd_list
+{
+	int							redirection[2];
+	int							pipe[2];
+	int							index;
+	int							nb_cmd;
+	char						*get_path;
+	int							hd_count;
+	t_list						*envp;
+	char						**arg;
+	struct s_program_data		*data;
+	struct s_cmd_list			*next;
+	struct s_redirect			*redirect;
+}	t_cmd_list;
 
 typedef struct s_cmd
 {
@@ -96,5 +101,12 @@ typedef struct s_program_data
 	char			***envp;
 	char			**env;
 }	t_program_data;
+
+typedef struct s_redirect
+{
+	int					type;
+	char				*file_name;
+	struct s_redirect	*next;
+}	t_redirect;
 
 #endif

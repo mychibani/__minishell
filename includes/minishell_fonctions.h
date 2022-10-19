@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 20:42:53 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/14 14:32:15 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/19 08:31:10 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,21 +115,21 @@ void			ft_unset(t_user_input *ui);
 **		pipex
 */
 
-int	ft_pipex(t_user_input *ui);
-int	open_infile(char *infile_name, t_pipe *data);
-int	_file_descriptors_duplicators(int _first, int _second);
-int	_close_file_descriptors(int _first, int _second);
-int	open_outfile(char *outfile_name, char *mode, t_pipe *data);
+int		ft_pipex(t_user_input *ui);
+int		open_infile(char *infile_name, t_pipe *data);
+int		_file_descriptors_duplicators(int _first, int _second);
+int		_close_file_descriptors(int _first, int _second);
+int		open_outfile(char *outfile_name, char *mode, t_pipe *data);
 void	clean(t_pipe *data);
-int	ft_execve(char *cmd, char **argvec, char **env);
+int		ft_execve(char *cmd, char **argvec, char **env);
 char	*find_command_path(t_pipe *data);
 void	_clean_char_tab(char **tab);
 void	__clean_env(t_env **env);
-int	ft_is_pipe(t_lexer *lexer);
+int		ft_is_pipe(t_lexer *lexer);
 t_pipe	*ft_init_pipex(t_user_input *ui, t_pipe *pipe);
 t_cmd	*init_new_cmd(t_cmd *new);
 void	_error_prompt(char *str);
-int	__count_cmd(t_cmd *head);
+int		__count_cmd(t_cmd *head);
 char	**get_path(char **envp);
 t_cmd	*ft_split_cmd(t_lexer **lexer, t_cmd *head);
 
@@ -249,6 +249,16 @@ int				__split_token_after_expand(t_lexer *travel);
 int				in_quote(char *s, char *to_find);
 char			**unquoted_char_split(char *s, char *charset);
 int				is_operator_valid(char *cmp);
+
+
+
+
+/*
+**		Command
+*/
+
+
+t_cmd_list	*create_cmd_list(t_lexer *lexer, t_program_data *data);
 
 /*
 **		Exit
