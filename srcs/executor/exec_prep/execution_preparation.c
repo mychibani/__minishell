@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 18:12:15 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/18 13:13:25 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:28:50 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	get_nb_cmd(t_lexer *lexer)
 	return (size);
 }
 
-t_cmd_list *cmd_new(int	nb_cmd, t_program_data *data, int index, t_user_input *ui)
+t_cmd *cmd_new(int	nb_cmd, t_program_data *data, int index, t_user_input *ui)
 {
-	t_cmd_list *cmd;
+	t_cmd *cmd;
 
-	cmd = (t_cmd_list *)malloc(sizeof(t_cmd_list));
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (0);
 	cmd->redirection[0] = -1;
@@ -45,7 +45,7 @@ t_cmd_list *cmd_new(int	nb_cmd, t_program_data *data, int index, t_user_input *u
 	cmd->redirect = NULL;
 	cmd->nb_cmd = nb_cmd;
 	cmd->arg = (char **)malloc(sizeof(char *) * nb_cmd);
-	cmd->envp = ui->test_env;
+	cmd->envp = (*ui->test_env);
 	cmd->next = NULL;
 	if (!cmd->arg)
 		return (0);
@@ -87,7 +87,7 @@ void	redirect_add_back(t_redirect **start, t_redirect *new)
 	tmp->next = new;
 }
 
-int	add_redirect(t_cmd_list *elem, t_lexer *lexer)
+int	add_redirect(t_cmd *elem, t_lexer *lexer)
 {
 	t_redirect *new_redir;
 
@@ -113,7 +113,7 @@ void	redirect_clear(t_redirect *to_clean)
 	}
 }
 
-int	setup_arg_and_redirect(t_cmd_list *elem, t_lexer **lexer)
+int	setup_arg_and_redirect(t_cmd *elem, t_lexer **lexer)
 {
 	int	i;
 
@@ -134,9 +134,9 @@ int	setup_arg_and_redirect(t_cmd_list *elem, t_lexer **lexer)
 	return (1);
 }
 
-void	cmd_add_back(t_cmd_list **start, t_cmd_list *new)
+void	cmd_add_back(t_cmd **start, t_cmd *new)
 {
-	t_cmd_list *travel;
+	t_cmd *travel;
 
 	if (!*start)
 		*start = new;
@@ -149,11 +149,11 @@ void	cmd_add_back(t_cmd_list **start, t_cmd_list *new)
 	}
 }
 
-int	cmd_list_creator(t_cmd_list **cmd_list, t_lexer **lexer, t_program_data *data, int index)
+int	cmd_list_creator(t_cmd **cmd_list, t_lexer **lexer, t_program_data *data, int index)
 {  
-	t_cmd_list *new;
+	t_cmd *new;
 
-	new = cmd_new(get_nb_cmd(*lexer), data, index);
+	new = cmd_new(get_nb_cmd(*lexer), data, index, data->ui);
 	if (!new)
 		return (0);
 	if (!setup_arg_and_redirect(new, lexer))
@@ -162,9 +162,9 @@ int	cmd_list_creator(t_cmd_list **cmd_list, t_lexer **lexer, t_program_data *dat
 	return (1);
 }
 
-void	cmd_list_free(t_cmd_list **cmd_list_free)
+void	cmd_list_free(t_cmd **cmd_list_free)
 {
-	t_cmd_list *next_to_free;
+	t_cmd *next_to_free;
 	
 	while ((*cmd_list_free))
 	{
@@ -173,14 +173,14 @@ void	cmd_list_free(t_cmd_list **cmd_list_free)
 			redirect_clear((*cmd_list_free)->redirect);
 		if ((*cmd_list_free)->arg)
 			__free_tab((*cmd_list_free)->arg);
-		free((*cmd_list_free);
+		free((*cmd_list_free));
 		*cmd_list_free = next_to_free;
 	}
 }
 
-t_cmd_list	*create_cmd_list(t_lexer *lexer, t_program_data *data)
+t_cmd	*create_cmd_list(t_lexer *lexer, t_program_data *data)
 {
-	t_cmd_list	*cmd_list_start;
+	t_cmd	*cmd_list_start;
 	t_lexer		**save;
 	int			index;
 
@@ -190,7 +190,7 @@ t_cmd_list	*create_cmd_list(t_lexer *lexer, t_program_data *data)
 	while (lexer)
 	{
 		if (!cmd_list_creator(&cmd_list_start, &lexer, data, index))
-			return (cmd_list_free(cmd_list_start), NULL);
+			return (cmd_list_free(&cmd_list_start), NULL);
 		if (lexer)
 			lexer = lexer->next;
 		index++;

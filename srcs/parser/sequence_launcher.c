@@ -6,39 +6,16 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:24:27 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/18 13:59:39 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:40:11 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_redir_list_of_cmd(t_redirect *redir_list)
-{
-	while (redir_list)
-	{
-		printf("||%s||\n", redir_list->file_name);
-		printf("[%d]\n", redir_list->type);
-		redir_list = redir_list->next;
-	}
-}
-
-void	print_command_list(t_cmd_list *cmd_list)
-{
-	while (cmd_list)
-	{
-		printf("%d\n", cmd_list->redirection[0]);
-		printf("%d\n", cmd_list->redirection[1]);
-		printf("%d\n", cmd_list->index);
-		printf("%d\n", cmd_list->nb_cmd);
-		print_redir_list_of_cmd(cmd_list->redirect);
-		cmd_list = cmd_list->next;
-	}
-}
-
 int	sequence_launcher(t_user_input *ui, t_program_data *data)
 {
 	t_lexer **seq;
-	t_cmd_list	*cmd_list;
+	t_cmd	*cmd_list;
 
 	seq = &ui->lexer;
 	data->ui = ui;
@@ -53,6 +30,6 @@ int	sequence_launcher(t_user_input *ui, t_program_data *data)
 	cmd_list = create_cmd_list(*seq, data);
 	if (!cmd_list)
 		return (0);
-	__execute_sequence(cmd_list, data, ui);
+	data->rv = __execute_sequence(cmd_list, data);
 	return (data->rv);
 }

@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:26:09 by caubry            #+#    #+#             */
-/*   Updated: 2022/10/19 10:20:40 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:26:45 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,14 @@ t_pipe	*ft_init_pipex(t_user_input *ui, t_pipe *pipe)
 	return (pipe);
 }
 
-int		init_seq(t_cmd_list *cmd, t_program_data *data, int fds[2], t_user_input *ui)
+int		init_seq(t_cmd *cmd, t_program_data *data, int fds[2], t_user_input *ui)
 {
 	cmd->envp = ui->env;
 	cmd->pipe[0] = -1;
 	cmd->pipe[1] = -1;
 	cmd->index = 0;
 	cmd->path = get_path(data->envp);
+	if (!cmd->path)
+		return (0);
+	return (1);
 }

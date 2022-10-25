@@ -6,7 +6,7 @@
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 14:03:48 by ychibani          #+#    #+#              #
-#    Updated: 2022/10/17 17:04:48 by ychibani         ###   ########.fr        #
+#    Updated: 2022/10/25 19:49:19 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/expander/expander3.c					\
 						srcs/expander/expander4.c					\
 						srcs/expander/heredoc_expand.c				\
-						srcs/executor/exec.c						\
 						srcs/executor/builtin/echo/echo.c			\
 						srcs/executor/builtin/env/env.c				\
 						srcs/executor/builtin/env/env_utils.c		\
@@ -49,14 +48,10 @@ SRCS_FILES		=		srcs/minishell/minishell.c					\
 						srcs/executor/builtin/export/export_utils.c \
 						srcs/executor/builtin/unset/unset.c			\
 						srcs/executor/exec_prep/execution_preparation.c		\
+						srcs/executor/exec_prep/handle_redirect.c		\
+						srcs/executor/exec.c						\
+						srcs/executor/launcher_fork.c				\
 						srcs/executor/builtin/exit/exit.c			\
-						srcs/executor/pipex/pipex.c					\
-						srcs/executor/pipex/children_work.c			\
-						srcs/executor/pipex/cmd_utils.c			\
-						srcs/executor/pipex/fd_utils.c			\
-						srcs/executor/pipex/init.c			\
-						srcs/executor/pipex/pipex_clean.c			\
-						srcs/executor/pipex/pipex_utils.c			\
 
 
 

@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 16:28:32 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/19 10:21:05 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:30:04 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,44 +39,21 @@ typedef struct s_lexer
 	struct s_lexer	*next;	
 }	t_lexer;
 
-typedef struct s_cmd_list
+typedef struct s_cmd
 {
 	int							redirection[2];
 	int							pipe[2];
 	int							index;
 	int							nb_cmd;
-	char						*get_path;
+	char						*path;
+	char						**all_path;
 	int							hd_count;
-	t_list						*envp;
+	t_env						*envp;
 	char						**arg;
 	struct s_program_data		*data;
-	struct s_cmd_list			*next;
+	struct s_cmd				*next;
 	struct s_redirect			*redirect;
-}	t_cmd_list;
-
-typedef struct s_cmd
-{
-	t_bool			mode;
-	int				outfile;
-	char			**cmd;
-	char			**infile_name;
-	char			**outfile_name;
-	char			**infile_type;
-	char			**outfile_type;
-	struct s_cmd	*next;
 }	t_cmd;
-
-typedef struct s_pipe
-{
-	int			*pid;
-	int			pipe[2];
-	int			prev_read;
-	char		**path;
-	t_cmd		*head;
-	t_cmd		*elem;
-	size_t		ninst;
-	size_t		index;
-}	t_pipe;
 
 typedef struct s_user_input
 {
@@ -84,7 +61,6 @@ typedef struct s_user_input
 	t_lexer		*lexer;
 	t_lexer		*error_delim;
 	t_env		**test_env;
-	t_pipe		*pipe;
 	char		**env;
 	char		*to_tokenize;
 	int			ret_token;
