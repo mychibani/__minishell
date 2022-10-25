@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 15:07:31 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/02 18:10:12 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:11:54 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ int	get_env_var(t_program_data *data, char **env, int size)
 	data->envp[i] = NULL;
 	return (_SUCCESS_);
 }
-

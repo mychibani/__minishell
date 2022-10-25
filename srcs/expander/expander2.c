@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:08:42 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/03 13:32:59 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:30:33 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ char	*get_testing_wd(char *start_wd, int *offset)
 	return (testing_wd);
 }
 
-int	find_key(char *testing_wd, char *env_str, t_program_data *data, int j)
+int	find_key(char *testing_wd, char *env_str, t_program_data *data)
 {
-	if (!strcmp(testing_wd, env_str) && data->envp[j][1][0] == '1' &&
-		__strchr(data->envp[j][0], '='))
+	if (!strcmp(testing_wd, env_str) && data->ui->test_env)
 		return (1);
 	return (0);
 }
@@ -58,13 +57,11 @@ char	*handle_quotes_in_env(char *str)
 	return (tmp);
 }
 
-int	get_value(char *testing_wd, char *env_str,
-			char **expanded_wd, char *key_value)
+int	get_value(char *testing_wd, char **expanded_wd, char *key_value)
 {
 	char	*final_str;
 
 	free(testing_wd);
-	free(env_str);
 	final_str = handle_quotes_in_env(key_value);
 	if (!final_str)
 		return (MALLOC_ERROR);

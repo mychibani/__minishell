@@ -5,31 +5,55 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/04 14:03:48 by jroux-fo          #+#    #+#              #
-#    Updated: 2022/09/15 11:50:13by ychibani         ###   ########.fr        #
+#    Created: 2022/05/04 14:03:48 by ychibani          #+#    #+#              #
+#    Updated: 2022/10/25 19:49:19 by ychibani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_FILES		=		srcs/minishell/minishell.c			\
-						srcs/init/init_structs.c			\
-						srcs/init/env.c						\
-						srcs/parser/parsing.c				\
-						srcs/parser/synthax_checker.c		\
-						srcs/token/tokenizer.c				\
-						srcs/token/word_operator_fct.c		\
-						srcs/token/tokenizer_utils_fct.c	\
-						srcs/lexer/lexer.c					\
-						srcs/lexer/lexer_utils.c			\
-						srcs/utils/utils.c					\
-						srcs/clean/cleaner_prog.c			\
-						srcs/clean/clean_exit.c				\
-						srcs/executor/signals/signal.c		\
-						srcs/here_doc/here_doc.c			\
-						srcs/here_doc/here_doc_utils.c		\
-						srcs/expander/expander.c			\
-						srcs/expander/expander2.c			\
-						srcs/expander/dq_expander.c			\
-						srcs/expander/heredoc_expand.c		\
+SRCS_FILES		=		srcs/minishell/minishell.c					\
+						srcs/init/init_structs.c					\
+						srcs/init/env.c								\
+						srcs/parser/parsing.c						\
+						srcs/parser/synthax_checker.c				\
+						srcs/parser/synthax_checker_utils.c			\
+						srcs/parser/clean_token.c					\
+						srcs/parser/resplit_after_expand.c			\
+						srcs/parser/remove_quotes.c					\
+						srcs/parser/sequence_launcher.c				\
+						srcs/token/tokenizer.c						\
+						srcs/token/word_operator_fct.c				\
+						srcs/token/tokenizer_utils_fct.c			\
+						srcs/lexer/lexer.c							\
+						srcs/lexer/lexer_utils.c					\
+						srcs/utils/utils.c							\
+						srcs/utils/test_utils.c						\
+						srcs/clean/cleaner_prog.c					\
+						srcs/clean/clean_exit.c						\
+						srcs/executor/signals/signal.c				\
+						srcs/here_doc/here_doc.c					\
+						srcs/here_doc/here_doc_utils.c				\
+						srcs/here_doc/here_doc_utils2.c				\
+						srcs/expander/expander.c					\
+						srcs/expander/expander2.c					\
+						srcs/expander/expander3.c					\
+						srcs/expander/expander4.c					\
+						srcs/expander/heredoc_expand.c				\
+						srcs/executor/builtin/echo/echo.c			\
+						srcs/executor/builtin/env/env.c				\
+						srcs/executor/builtin/env/env_utils.c		\
+						srcs/executor/builtin/pwd/pwd.c				\
+						srcs/executor/builtin/cd/cd.c				\
+						srcs/executor/builtin/cd/cd_utils.c			\
+						srcs/executor/builtin/export/export.c 		\
+						srcs/executor/builtin/export/export_utils.c \
+						srcs/executor/builtin/unset/unset.c			\
+						srcs/executor/exec_prep/execution_preparation.c		\
+						srcs/executor/exec_prep/handle_redirect.c		\
+						srcs/executor/exec.c						\
+						srcs/executor/launcher_fork.c				\
+						srcs/executor/builtin/exit/exit.c			\
+
+
 
 NAME			= 	minishell
 
@@ -43,14 +67,14 @@ LIBFT			=	libft/libft.a
 
 CC				=	gcc 
 
-CFLAGS			=  	-Wall -Werror -Wextra -g3 
+CFLAGS			=  	-Wall -Werror -Wextra -fsanitize=address -g3
 
 RM				=	rm -rf
 
 _END=$'\e[0m
 _BOLD=$'\e[1m
 _UNDER=$'\e[4m
-_REV=$'\e[7m:
+_REV=$'\e[7m
 _GREY=$'\e[30m
 _RED=$'\e[0;31m
 _GREEN=$'\e[32m
@@ -97,7 +121,7 @@ re:				fclean
 git:		
 			git add .
 			git commit -m "$m"
-			git push origin master
+			git push
 
 -include	${DEPS_FILES}
 

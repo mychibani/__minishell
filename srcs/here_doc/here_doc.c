@@ -6,51 +6,13 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:18:34 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/25 14:32:26y ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:23:36 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern int	g_es;
-
-int	wait_here_doc(pid_t pid, t_program_data *data)
-{
-	int	status;
-	int	ret;
-
-	ret = 0;
-	status = 0;
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status) > 0)
-		ret = (WEXITSTATUS(status));
-	if (WIFSIGNALED(status) > 0)
-		ret = (WTERMSIG(status) + 128);
-	if (ret == 130)
-		data->rv = 130;
-	return (ret);
-}
-
-int	eof_type(char *eof)
-{
-	if (eof[0] == '\'' && eof[__strlen(eof) - 1] == '\'')
-		return (1);
-	if (eof[0] == '\"' && eof[__strlen(eof) - 1] == '\"')
-		return (2);
-	return (3);
-}
-
-int	end_of_info(char *hd_content, int here_doc_fd, t_lexer *lexer, int eof_type)
-{
-	if (close(here_doc_fd) < 0)
-		return (free(hd_content), 0);
-	if (unlink(".hd_file") < 0)
-		return (free(hd_content), 0);
-	free(lexer->next->token);
-	lexer->next->token = hd_content;
-	lexer->next->hd_type = eof_type;
-	return (_SUCCESS_);
-}
 
 int	get_child_info(t_lexer *lexer, int eof)
 {
@@ -68,7 +30,8 @@ int	get_child_info(t_lexer *lexer, int eof)
 	{
 		ret = read(here_doc_fd, buffer, 31);
 		if (ret < 0)
-			return (free(hd_content), close(here_doc_fd), unlink(".hd_file"), 0);
+			return (free(hd_content),
+				close(here_doc_fd), unlink(".hd_file"), 0);
 		buffer[ret] = '\0';
 		hd_content = __strjoin(hd_content, buffer);
 		if (!hd_content)
@@ -90,8 +53,6 @@ int	__handle_here_doc(t_lexer *travel, t_lexer *end, t_program_data *data)
 		{
 			eof = travel->next->token;
 			pid = fork();
-			if (pid < 0)
-				return (0);
 			if (pid == 0)
 				init_child_hd(eof, travel, data, save);
 			else

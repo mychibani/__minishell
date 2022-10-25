@@ -6,7 +6,7 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:52:55 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/19 10:05:20by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:59:28 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	redir_type(char *to_cmp)
 
 int	__get_type(char *to_cmp)
 {
-	if (!__strcmp(to_cmp, "|"))
-		return (PIPE);
 	if (!__strcmp(to_cmp, "\n"))
 		return (NEW_LINE);
+	if (!__strcmp(to_cmp, "|"))
+		return (PIPE);
 	if (redir_type(to_cmp) == 1)
 		return (REDIRECTION);
 	if (redir_type(to_cmp) == 2)
@@ -61,7 +61,7 @@ void	lexer_add_back(t_lexer **lexer, t_lexer *new)
 {
 	t_lexer	*travel;
 
-	if (!*lexer)	
+	if (!*lexer)
 	{
 		*lexer = new;
 		return ;
@@ -78,9 +78,9 @@ int	lexer(t_list *token, t_lexer **lexer)
 	t_lexer	*to_add;
 
 	temp = token;
-	if (!temp)	
+	if (!temp)
 		return (0);
-	while (temp)	
+	while (temp)
 	{
 		to_add = lst_lexer_new((char *)temp->content);
 		if (!lexer)

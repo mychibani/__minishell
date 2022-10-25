@@ -6,47 +6,105 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:36:37 by ychibani          #+#    #+#             */
-/*   Updated: 2022/09/18 15:39:36by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:09:27 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_linked_list(t_list *list)
+int	in_quote(char *s, char *to_find)
 {
-	while (list)
+	int		i;
+	t_state	q_state;
+
+	q_state = 0;
+	i = 0;
+	while (s[i] && &s[i] != to_find)
 	{
-		__printf("[%s] ", (char *)list->content);
-		list = list->next;
+		q_state = return_quoted_state(s[i], q_state, 0);
+		i++;
 	}
-	__printf("\n");
+	if (__strchr("\'\"", s[i]))
+		q_state = return_quoted_state(s[i], q_state, 0);
+	return (q_state != UNQUOTED);
 }
 
-void	print_lexer_list(t_lexer *lexer)
+int	get_strs_size(char *s, char *charset)
 {
-	while (lexer)
+	int	size;
+	int	i;
+
+	i = 0;
+	size = 0;
+	while (s[i])
 	{
-		__printf("[%s]\n", (char *)lexer->token);
-		__printf("[%d]\n", lexer->type);
-		__printf("[%d]\n", lexer->hd_type);
-		lexer = lexer->next;
+		if (!is_charset(s[i], charset))
+		{
+			while ((s[i]) && (!is_charset(s[i], charset)
+					|| in_quote(s, &s[i])))
+				i++;
+			size++;
+		}
+		else
+			i++;
 	}
-	__printf("\n");
+	return (size);
 }
 
-void	print_token_list(t_token *token)
+char	**strs_malloc(int size)
 {
-	while (token)
-	{
-		__printf("[%s] ", (char *)token->content);
-		token = token->next;
-	}
-	__printf("\n");
+	char	**final_tab;
+
+	final_tab = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!(final_tab))
+		return (0);
+	final_tab[0] = 0;
+	return (final_tab);
 }
 
-
-void	print_data(t_program_data *data, t_user_input *ui)
+char	*unquoted_dup(char *s, char *charset)
 {
-	printf("[%s]\n", data->all_inputs[0]);
-	print_lexer_list(ui->lexer);
+	int		i;
+	char	*final_str;
+
+	i = 0;
+	while (s[i] && (!is_charset(s[i], charset) || in_quote(s, &s[i])))
+		i++;
+	final_str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!final_str)
+		return (NULL);
+	i = 0;
+	while (s[i] && (!is_charset(s[i], charset) || in_quote(s, &s[i])))
+	{
+		final_str[i] = s[i];
+		i++;
+	}
+	final_str[i] = '\0';
+	return (final_str);
+}
+
+char	**unquoted_char_split(char *s, char *charset)
+{
+	int		i;
+	int		j;
+	int		size;
+	char	**strs;
+
+	i = 0;
+	j = 0;
+	size = get_strs_size(s, charset);
+	strs = strs_malloc(size);
+	while (j < size)
+	{
+		if (s[i] && (!is_charset(s[i], charset) || in_quote(s, &s[i])))
+		{
+			strs[j++] = unquoted_dup(s + i, charset);
+			while ((in_quote(s, &s[i]) || !is_charset(s[i], charset)) && s[i])
+				i++;
+		}
+		while ((is_charset(s[i], charset) || in_quote(s, &s[i])) && s[i])
+			i++;
+	}
+	strs[j] = 0;
+	return (strs);
 }

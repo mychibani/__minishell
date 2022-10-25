@@ -19,6 +19,7 @@ SRCS_FILES =	char/ft_isdigit.c			\
 				string/ft_strmapi.c			\
 				string/ft_strnstr.c			\
 				string/ft_split.c			\
+				string/ft_split_pool.c		\
 				string/ft_striteri.c		\
 				string/ft_strjoin.c			\
 				stdlib/ft_atoi.c			\

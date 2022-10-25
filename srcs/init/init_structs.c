@@ -6,18 +6,20 @@
 /*   By: ychibani <ychibani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:33:33 by ychibani          #+#    #+#             */
-/*   Updated: 2022/10/03 10:54:29 by ychibani         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:45:29 by ychibani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_program_data	*init_data_struct(t_program_data *data)
+t_program_data	*init_data_struct(t_program_data *data, char **env)
 {
 	data->all_inputs = NULL;
 	data->token = NULL;
 	data->ui = NULL;
 	data->synthax_error = 0;
+	data->envp = NULL;
+	data->env = env;
 	return (data);
 }
 
@@ -32,10 +34,15 @@ t_user_input	*init_user_input_struct(t_user_input *ui)
 	return (ui);
 }
 
-void	__init_structs(t_program_data *data, t_user_input *ui)
+void	__init_structs(t_program_data *data, t_user_input *ui, char **env)
 {
-	init_data_struct(data);
-	__memset(&data, 0, sizeof(data));
+	int	no_env;
+
+	no_env = 0;
+	init_data_struct(data, env);
 	init_user_input_struct(ui);
+	ui->env = ft_collect_env(&no_env, ui, data->env);
+	if (!no_env)
+		ui->test_env = ft_split_env(data->env);
 	__memset(&data, 0, sizeof(data));
 }
